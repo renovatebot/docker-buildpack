@@ -42,7 +42,7 @@ jobs:
           cache_from=$([ -d .cache ] && echo -n '--cache-from=type=local,src=.cache' || echo -n '')
           docker buildx build \
             --load \
-            --tag ${DOCKER_REPO} --tag ${DOCKER_REPO}:18.04 \
+            --tag ${DOCKER_REPO} \
             --cache-to=type=registry,ref=renovate/docker-build-cache:${DOCKER_CACHE},mode=max \
             --cache-from=renovate/docker-build-cache:${DOCKER_CACHE} \
             $cache_from \
@@ -56,5 +56,5 @@ jobs:
         with:
           command: "publish-docker"
           image: ${{ env.DOCKER_REPO }}
-          tags: latest;18.04
+          tags: latest
           dry-run: ${{github.ref != 'refs/heads/master'}}
