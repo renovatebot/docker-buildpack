@@ -2,18 +2,18 @@
 
 set -e
 
-if [ -z ${JAVA_VERSION+x} ]; then echo "No JAVA_VERSION defined - skipping" && exit; else echo "Installing java $JAVA_VERSION"; fi
 if [ -z ${GRADLE_VERSION+x} ]; then echo "No GRADLE_VERSION defined - skipping" && exit; else echo "Installing gradle $GRADLE_VERSION"; fi
 
-apt-get update 
-apt-get install -y openjdk-${JAVA_VERSION}-jre-headless
-rm -rf /var/lib/apt/lists/*
+if [ -z ${JAVA_VERSION+x} ]; then
+  export JAVA_VERSION=8
+  DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+  . $DIR/java.sh
+fi
 
-java -version
-
-mkdir /opt/gradle
 curl -sL -o gradle.zip https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip
-unzip -d /opt/gradle gradle.zip && \
-rm /tmp/gradle.zip
+unzip -d /usr/local gradle.zip
+rm gradle.zip
+
+ln -sf /usr/local/gradle-$GRADLE_VERSION/bin/gradle /usr/local/bin/
 
 gradle --version
