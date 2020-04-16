@@ -10,7 +10,21 @@ env:
   FORCE_COLOR: true
 
 jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: github-cleanup
+        uses: renovatebot/gh-action@v0
+        continue-on-error: true
+        with:
+          command: github-cleanup
+          token: ${{ secrets.GH_TOKEN }}
+          dry-run: ${{github.ref == 'refs/heads/master'}}
+
   build:
+    needs: [cleanup]
     runs-on: ubuntu-latest
 
     timeout-minutes: 10
