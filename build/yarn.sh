@@ -12,8 +12,7 @@ fi
 
 echo "Installing yarn $YARN_VERSION"
 
-curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
-
+npm install -g yarn@${YARN_VERSION}
 echo PATH="/home/ubuntu/.yarn/bin:\$PATH" >> /usr/local/docker/env
 
 yarn --version
