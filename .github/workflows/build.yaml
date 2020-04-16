@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: github-cleanup
-        uses: renovatebot/gh-action@v0
+        uses: renovatebot/internal-tools@v0
         continue-on-error: true
         with:
           command: github-cleanup
@@ -67,7 +67,7 @@ jobs:
         run: docker run --rm -t ${DOCKER_REPO} git --version
 
       - name: Publish
-        uses: renovatebot/gh-action@v0
+        uses: renovatebot/internal-tools@v0
         with:
           command: "docker-publish"
           image: ${{ env.DOCKER_REPO }}
