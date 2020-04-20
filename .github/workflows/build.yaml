@@ -3,9 +3,6 @@ name: build
 on: [push, pull_request]
 
 env:
-  PLATFORM: linux/amd64
-  DOCKER_REPO: renovate/buildpack
-  DOCKER_CACHE: buildpack
   BUILDX_VERSION: v0.3.1
   # https://github.com/chalk/supports-color/issues/106
   FORCE_COLOR: true
@@ -22,7 +19,6 @@ jobs:
         with:
           command: github-cleanup
           token: ${{ secrets.GH_TOKEN }}
-          dry-run: ${{github.ref == 'refs/heads/master'}}
 
   build:
     needs: [cleanup]
@@ -38,38 +34,11 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: docker cache
-        id: docker-cache
-        uses: actions/cache@v1
-        with:
-          path: .cache
-          key: ${{ runner.os }}-docker-${{ hashFiles('Dockerfile') }}
-
       - name: Docker registry login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
-      - name: Set cache_to
-        if: github.ref == 'refs/heads/master'
-        run: echo "::set-env name=CACHE_TO::--cache-to=type=registry,ref=renovate/docker-build-cache:${DOCKER_CACHE},mode=max"
-
-      - name: Build the Docker images
-        run: |
-          cache_from=$([ -d .cache ] && echo -n '--cache-from=type=local,src=.cache' || echo -n '')
-          docker buildx build \
-            --load \
-            --tag ${DOCKER_REPO} \
-            ${CACHE_TO} \
-            --cache-from=renovate/docker-build-cache:${DOCKER_CACHE} \
-            $cache_from \
-            .
-
-      - name: Test the Docker images
-        run: docker run --rm -t ${DOCKER_REPO} git --version
-
-      - name: Publish
+      - name: Build and Publish
         uses: renovatebot/internal-tools@v0
         with:
-          command: "docker-publish"
-          image: ${{ env.DOCKER_REPO }}
-          tags: latest
+          command: "docker-builder"
           dry-run: ${{github.ref != 'refs/heads/master'}}
