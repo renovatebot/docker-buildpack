@@ -5,7 +5,6 @@ LABEL org.opencontainers.image.source="https://github.com/renovatebot/docker-bui
 ADD build/ /usr/local/build/
 ADD docker/ /usr/local/docker/
 
-
 ENTRYPOINT ["/usr/local/docker/entrypoint.sh"]
 
 USER root
