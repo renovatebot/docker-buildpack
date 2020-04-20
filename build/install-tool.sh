@@ -1,11 +1,14 @@
 #!/bin/bash
 
-DIR="/usr/local/build"
+. /usr/local/build/util.sh
 
-TOOL="${DIR}/${1}.sh"
+TOOL="/usr/local/build/${1}.sh"
+shift;
+
+refreshenv
 
 if [ -f "$TOOL" ]; then
-  . $TOOL
+  $TOOL $@
 else
    echo "No tool defined - skipping"
    echo $TOOL

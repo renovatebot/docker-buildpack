@@ -2,12 +2,13 @@
 
 set -e
 
+if [ -z ${1+x} ]; then export YARN_VERSION=${1}; fi
+
 if [ -z ${YARN_VERSION+x} ]; then echo "No YARN_VERSION defined - skipping" && exit; fi
 
-if [ -z ${NODE_VERSION+x} ]; then
-  export NODE_VERSION=12
-  DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-  . $DIR/node.sh
+if ! [ -x "$(command -v node)" ]; then
+  echo "No node found - abborting"
+  exit 1
 fi
 
 echo "Installing yarn $YARN_VERSION"

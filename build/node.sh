@@ -2,6 +2,8 @@
 
 set -e
 
+if ! [ -z ${1+x} ]; then export NODE_VERSION=${1}; fi
+
 if [ -z ${NODE_VERSION+x} ]; then echo "No NODE_VERSION defined - skipping" && exit; fi
 
 SEMVER_REGEX="^(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?$"
@@ -13,10 +15,17 @@ fi
 
 echo "Installing node $NODE_VERSION";
 
-curl -sL https://deb.nodesource.com/setup_${BASH_REMATCH[1]}.x | bash
+NODE_DISTRO=linux-x64
 
-apt-get update
-apt-get install -y nodejs
-rm -rf /var/lib/apt/lists/*
+curl -sLo node.tar.xz https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-${NODE_DISTRO}.tar.xz
+tar -C /usr/local -xf node.tar.xz
+rm node.tar.xz
 
-node --version
+echo PATH="/usr/local/node-v${NODE_VERSION}-${NODE_DISTRO}/bin:\$PATH" >> /usr/local/docker/env
+export PATH="/usr/local/node-v${NODE_VERSION}-${NODE_DISTRO}/bin:$PATH"
+
+# update to latest node-gyp to fully support python3
+npm explore npm -g -- npm install node-gyp@latest
+
+echo node: $(node --version)
+echo npm: $(npm --version)
