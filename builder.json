@@ -1,0 +1,8 @@
+{
+  "image": "buildpack",
+  "versioning": "docker",
+  "startVersion": "1",
+  "latestVersion": "1",
+  "cache": "docker-build-cache",
+  "versions": ["1"]
+}

@@ -2,12 +2,13 @@
 
 set -e
 
+if ! [ -z ${1+x} ]; then export GRADLE_VERSION=${1}; fi
+
 if [ -z ${GRADLE_VERSION+x} ]; then echo "No GRADLE_VERSION defined - skipping" && exit; fi
 
-if [ -z ${JAVA_VERSION+x} ]; then
-  export JAVA_VERSION=8
-  DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-  . $DIR/java.sh
+if ! [ -x "$(command -v java)" ]; then
+  echo "No java found - abborting"
+  exit 1
 fi
 
 echo "Installing gradle $GRADLE_VERSION"
