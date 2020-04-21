@@ -2,7 +2,6 @@
 
 set -e
 
-check_version NPM_VERSION
 check_command node
 
 echo "Installing npm $NPM_VERSION"

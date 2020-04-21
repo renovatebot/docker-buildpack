@@ -38,14 +38,24 @@ function link_wrapper () {
 
 function check_version () {
   if [ -z ${!1+x} ]; then
-    echo "No ${1} defined - aborting"
+    echo "No ${1} defined - aborting: ${!1}"
     exit 1
   fi
 }
 
 function check_command () {
-  if  ! [ -x "$(command -v ${1})" ]; then
+  if  [ ! -x "$(command -v ${1})" ]; then
     echo "No ${1} defined - aborting"
+    exit 1
+  fi
+}
+
+
+SEMVER_REGEX="^(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?$"
+
+function check_semver () {
+  if [[ ! "${1}" =~ ${SEMVER_REGEX} ]]; then
+    echo Not a semver like version - aborting: ${1}
     exit 1
   fi
 }

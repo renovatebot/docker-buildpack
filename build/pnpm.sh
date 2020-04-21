@@ -2,7 +2,6 @@
 
 set -e
 
-check_version PNPM_VERSION
 check_command node
 
 echo "Installing pnpm $PNPM_VERSION"

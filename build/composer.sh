@@ -2,7 +2,6 @@
 
 set -e
 
-check_version COMPOSER_VERSION
 check_command php
 
 echo "Installing Composer $COMPOSER_VERSION";

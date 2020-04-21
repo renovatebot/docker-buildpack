@@ -2,15 +2,6 @@
 
 set -e
 
-check_version NODE_VERSION
-
-SEMVER_REGEX="^(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?$"
-
-if ! [[ "$NODE_VERSION" =~ $SEMVER_REGEX ]]; then
-  echo Not a semver tag - skipping: ${NODE_VERSION}
-  exit
-fi
-
 echo "Installing node $NODE_VERSION";
 
 NODE_DISTRO=linux-x64
