@@ -17,7 +17,7 @@ function  refreshenv () {
 refreshenv
 
 # use this if custom env is required, creates a shell wrapper to /usr/local/bin
-function create_wrapper () {
+function shell_wrapper () {
   local FILE="/usr/local/bin/${1}"
   cat > $FILE <<- EOM
 #!/bin/bash

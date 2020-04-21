@@ -24,6 +24,6 @@ echo GOSUMDB=off >> /usr/local/docker/env
 echo PATH="/usr/local/go/bin:$GOPATH/bin:\$PATH" >> /usr/local/docker/env
 
 refreshenv
-create_wrapper go
+shell_wrapper go
 
 go version
