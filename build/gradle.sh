@@ -10,7 +10,7 @@ curl -sL -o gradle.zip https://services.gradle.org/distributions/gradle-${GRADLE
 unzip -d /usr/local gradle.zip
 rm gradle.zip
 
-echo "/usr/local/gradle-${GRADLE_VERSION}/bin/:\$PATH" >> /usr/local/docker/env
+echo PATH="/usr/local/gradle-${GRADLE_VERSION}/bin:\$PATH" >> /usr/local/docker/env
 
 refreshenv
 link_wrapper gradle
