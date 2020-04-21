@@ -6,17 +6,21 @@ TOOLNAME=${1^^}
 TOOL="/usr/local/build/${1}.sh"
 shift;
 
+if [ ! -f "$TOOL" ]; then
+  echo "No tool defined - skipping"
+  echo $TOOL
+  exit;
+fi
+
 VERSION=${1}
 shift;
 
-export ${TOOLNAME}_VERSION=$VERSION
+ENVNAME=${TOOLNAME}_VERSION
+
+if [ -z ${!ENVNAME+x} ]; then
+  export $ENVNAME=$VERSION
+fi
 
 refreshenv
 
-if [ -f "$TOOL" ]; then
-  $TOOL $@
-else
-   echo "No tool defined - skipping"
-   echo $TOOL
-   exit;
-fi
+$TOOL $@
