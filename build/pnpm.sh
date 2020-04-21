@@ -2,12 +2,8 @@
 
 set -e
 
-if ! [ -z ${PNPM_VERSION+x} ]; then echo "No PNPM_VERSION defined - skipping" && exit; fi
-
-if ! [ -x "$(command -v node)" ]; then
-  echo "No node found - abborting"
-  exit 1
-fi
+check_version PNPM_VERSION
+check_command node
 
 echo "Installing pnpm $PNPM_VERSION"
 

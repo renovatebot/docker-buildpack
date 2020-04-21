@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 function  refreshenv () {
   while IFS="=" read -r key value; do
   case "$key" in
@@ -26,7 +25,7 @@ function shell_wrapper () {
 
 ${1} \${@}
 EOM
-chmod +x $FILE
+  chmod +x $FILE
 }
 
 # use this for simple symlink to /usr/local/bin
@@ -34,4 +33,19 @@ function link_wrapper () {
   local TARGET="/usr/local/bin/${1}"
   local SOURCE=$(command -v ${1})
   ln -sf $SOURCE $TARGET
+}
+
+
+function check_version () {
+  if [ -z ${!1+x} ]; then
+    echo "No ${1} defined - aborting"
+    exit 1
+  fi
+}
+
+function check_command () {
+  if  ! [ -x "$(command -v ${1})" ]; then
+    echo "No ${1} defined - aborting"
+    exit 1
+  fi
 }

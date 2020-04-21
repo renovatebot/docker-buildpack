@@ -2,9 +2,7 @@
 
 set -e
 
-if ! [ -z ${1+x} ]; then export GOLANG_VERSION=${1}; fi
-
-if [ -z ${GOLANG_VERSION+x} ]; then echo "No GOLANG_VERSION defined - skipping" && exit; else echo "Installing Golang $GOLANG_VERSION"; fi
+check_version GOLANG_VERSION
 
 apt-get update && apt-get install -y bzr mercurial && rm -rf /var/lib/apt/lists/*
 

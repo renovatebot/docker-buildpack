@@ -2,9 +2,7 @@
 
 set -e
 
-if ! [ -z ${1+x} ]; then export NODE_VERSION=${1}; fi
-
-if [ -z ${NODE_VERSION+x} ]; then echo "No NODE_VERSION defined - skipping" && exit; fi
+check_version NODE_VERSION
 
 SEMVER_REGEX="^(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?$"
 

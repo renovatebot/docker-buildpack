@@ -2,14 +2,8 @@
 
 set -e
 
-if ! [ -z ${1+x} ]; then export GRADLE_VERSION=${1}; fi
-
-if [ -z ${GRADLE_VERSION+x} ]; then echo "No GRADLE_VERSION defined - skipping" && exit; fi
-
-if ! [ -x "$(command -v java)" ]; then
-  echo "No java found - abborting"
-  exit 1
-fi
+check_version GOLANG_VERSION
+check_command java
 
 echo "Installing gradle $GRADLE_VERSION"
 
