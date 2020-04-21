@@ -2,7 +2,7 @@
 
 set -e
 
-check_version GOLANG_VERSION
+check_version GRADLE_VERSION
 check_command java
 
 echo "Installing gradle $GRADLE_VERSION"

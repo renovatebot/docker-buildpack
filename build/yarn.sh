@@ -5,7 +5,6 @@ set -e
 check_version YARN_VERSION
 check_command node
 
-
 echo "Installing yarn $YARN_VERSION"
 
 npm install -g yarn@${YARN_VERSION}
