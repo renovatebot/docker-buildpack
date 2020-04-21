@@ -1,5 +1,5 @@
 #!/bin/bash
 
-. /usr/local/build/util.sh
+. /usr/local/docker/env
 
 exec "$@"

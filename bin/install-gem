@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+. /usr/local/build/util.sh
+
+TOOLNAME=${1}
+shift;
+
+if [[ ! "$TOOLNAME" ]]; then
+  echo "No gem defined - skipping: ${TOOLNAME}"
+  exit 1;
+fi
+
+ENVNAME=${TOOLNAME^^}_VERSION
+
+if [[ "${1}" ]]; then
+  export $ENVNAME=$1
+  shift;
+fi
+
+
+check_version ${ENVNAME}
+check_command gem
+
+echo "Installing ${TOOLNAME} ${!ENVNAME}"
+echo gem install --no-rdoc --no-ri ${TOOLNAME} -v ${!ENVNAME}
+gem install --no-rdoc --no-ri ${TOOLNAME} -v ${!ENVNAME}

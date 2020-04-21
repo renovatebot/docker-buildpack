@@ -2,24 +2,20 @@
 
 set -e
 
-apt-get update && apt-get install -y bzr mercurial && rm -rf /var/lib/apt/lists/*
+apt_install bzr mercurial
 
-curl -s https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz --output go.tgz
+curl -sSL https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz --output go.tgz
 tar -C /usr/local -xzf go.tgz
 rm go.tgz
 
-GOPATH=/go
+export_env GOPATH /go
+export_env CGO_ENABLED 0
+export_env GOPROXY direct
+export_env GOSUMDB off
+export_path "/usr/local/go/bin:$GOPATH/bin"
 
 mkdir -p "$GOPATH/src" "$GOPATH/bin"
 chmod -R 777 "$GOPATH"
 
-echo GOPATH=$GOPATH>> /usr/local/docker/env
-echo CGO_ENABLED=0 >> /usr/local/docker/env
-echo GOPROXY=direct >> /usr/local/docker/env
-echo GOSUMDB=off >> /usr/local/docker/env
-echo PATH="/usr/local/go/bin:$GOPATH/bin:\$PATH" >> /usr/local/docker/env
-
-refreshenv
-shell_wrapper go
-
 go version
+go env
