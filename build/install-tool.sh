@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# . /usr/local/build/util.sh
+ . /usr/local/build/util.sh
 
 TOOLNAME=${1^^}
 TOOL="/usr/local/build/${1}.sh"
