@@ -23,4 +23,4 @@ fi
 
 refreshenv
 
-$TOOL $@
+. $TOOL $@
