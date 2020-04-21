@@ -2,12 +2,7 @@
 
 set -e
 
-if [ -z ${NPM_VERSION+x} ]; then echo "No NPM_VERSION defined - skipping" && exit; fi
-
-if ! [ -x "$(command -v node)" ]; then
-  echo "No node found - abborting"
-  exit 1
-fi
+check_command node
 
 echo "Installing npm $NPM_VERSION"
 

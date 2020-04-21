@@ -2,21 +2,15 @@
 
 set -e
 
-if ! [ -z ${1+x} ]; then export GRADLE_VERSION=${1}; fi
-
-if [ -z ${GRADLE_VERSION+x} ]; then echo "No GRADLE_VERSION defined - skipping" && exit; fi
-
-if ! [ -x "$(command -v java)" ]; then
-  echo "No java found - abborting"
-  exit 1
-fi
+check_command java
 
 echo "Installing gradle $GRADLE_VERSION"
 
-curl -sL -o gradle.zip https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip
+curl -sL -o gradle.zip https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip
 unzip -d /usr/local gradle.zip
 rm gradle.zip
 
-ln -sf /usr/local/gradle-$GRADLE_VERSION/bin/gradle /usr/local/bin/
+refreshenv
+link_wrapper gradle
 
 gradle --version

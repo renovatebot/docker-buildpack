@@ -2,6 +2,4 @@
 
 . /usr/local/build/util.sh
 
-refreshenv
-
 exec "$@"
