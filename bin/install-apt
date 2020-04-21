@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+. /usr/local/build/util.sh
+
+apt_install $@
+
+# cleanup
+rm -rf /var/lib/apt/lists/*

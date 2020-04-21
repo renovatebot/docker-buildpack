@@ -4,11 +4,9 @@ set -e
 
 check_command node
 
-echo "Installing yarn $YARN_VERSION"
-
 npm install -g yarn@${YARN_VERSION}
-echo PATH="/home/ubuntu/.yarn/bin:\$PATH" >> /usr/local/docker/env
 
-link_wrapper yarn
+# do we really need this?
+export_path "/home/ubuntu/.yarn/bin"
 
 yarn --version
