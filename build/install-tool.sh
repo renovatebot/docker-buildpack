@@ -9,7 +9,7 @@ shift;
 if [ ! -f "$TOOL" ]; then
   echo "No tool defined - skipping"
   echo $TOOL
-  exit;
+  exit 1;
 fi
 
 VERSION=${1}
