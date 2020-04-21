@@ -17,6 +17,7 @@ curl -sL -o gradle.zip https://services.gradle.org/distributions/gradle-$GRADLE_
 unzip -d /usr/local gradle.zip
 rm gradle.zip
 
-ln -sf /usr/local/gradle-$GRADLE_VERSION/bin/gradle /usr/local/bin/
+refreshenv
+link_wrapper gradle
 
 gradle --version

@@ -5,10 +5,8 @@
 TOOL="/usr/local/build/${1}.sh"
 shift;
 
-refreshenv
-
 if [ -f "$TOOL" ]; then
-  $TOOL $@
+  . $TOOL $@
 else
    echo "No tool defined - skipping"
    echo $TOOL

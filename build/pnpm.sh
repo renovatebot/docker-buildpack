@@ -2,7 +2,7 @@
 
 set -e
 
-if [ -z ${PNPM_VERSION+x} ]; then echo "No PNPM_VERSION defined - skipping" && exit; fi
+if ! [ -z ${PNPM_VERSION+x} ]; then echo "No PNPM_VERSION defined - skipping" && exit; fi
 
 if ! [ -x "$(command -v node)" ]; then
   echo "No node found - abborting"
@@ -12,5 +12,7 @@ fi
 echo "Installing pnpm $PNPM_VERSION"
 
 npm install -g pnpm@${PNPM_VERSION}
+
+link_wrapper yarn
 
 pnpm --version

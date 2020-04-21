@@ -22,3 +22,8 @@ echo CGO_ENABLED=0 >> /usr/local/docker/env
 echo GOPROXY=direct >> /usr/local/docker/env
 echo GOSUMDB=off >> /usr/local/docker/env
 echo PATH="/usr/local/go/bin:$GOPATH/bin:\$PATH" >> /usr/local/docker/env
+
+refreshenv
+create_wrapper go
+
+go version
