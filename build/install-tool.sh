@@ -1,9 +1,15 @@
 #!/bin/bash
 
-. /usr/local/build/util.sh
+# . /usr/local/build/util.sh
 
+TOOLNAME=${1^^}
 TOOL="/usr/local/build/${1}.sh"
 shift;
+
+VERSION=${1}
+shift;
+
+export ${TOOLNAME}_VERSION=$VERSION
 
 refreshenv
 
