@@ -18,6 +18,7 @@ refreshenv
 # use this if custom env is required, creates a shell wrapper to /usr/local/bin
 function shell_wrapper () {
   local FILE="/usr/local/bin/${1}"
+  check_command $1
   cat > $FILE <<- EOM
 #!/bin/bash
 
@@ -32,6 +33,7 @@ EOM
 function link_wrapper () {
   local TARGET="/usr/local/bin/${1}"
   local SOURCE=$(command -v ${1})
+  check_command $1
   ln -sf $SOURCE $TARGET
 }
 

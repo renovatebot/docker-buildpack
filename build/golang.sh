@@ -4,7 +4,7 @@ set -e
 
 apt-get update && apt-get install -y bzr mercurial && rm -rf /var/lib/apt/lists/*
 
-curl -s https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz --output go.tgz
+curl -sSL https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz --output go.tgz
 tar -C /usr/local -xzf go.tgz
 rm go.tgz
 
