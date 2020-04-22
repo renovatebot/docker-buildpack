@@ -11,3 +11,5 @@ if [[ ! "${MAJOR}" || ! "${MINOR}" ]]; then
 fi
 
 apt_install python3-distutils python3-venv python${PYTHON_VERSION}-venv
+
+export_path "\$HOME/.local/bin"

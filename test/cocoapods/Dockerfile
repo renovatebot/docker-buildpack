@@ -2,7 +2,10 @@ FROM renovate/buildpack
 
 # CocoaPods
 
-RUN install-tool ruby 2.5
+# renovate: datasource=docker depName=ruby versioning=docker
+ENV RUBY_VERSION 2.5.8
+RUN install-tool ruby
+
 
 # renovate: datasource=rubygems depName=cocoapods versioning=ruby
 ENV COCOAPODS_VERSION 1.9.1
