@@ -20,12 +20,6 @@ jobs:
           command: github-cleanup
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: test
-        run: |
-          export DOCKER_BUILDKIT=1
-          export DOCKER_CLI_EXPERIMENTAL=enabled
-          docker info
-
   test:
     needs: [cleanup]
     runs-on: ubuntu-latest
@@ -36,6 +30,10 @@ jobs:
 
     timeout-minutes: 10
 
+    env:
+      DOCKER_BUILDKIT: 1
+      IMAGE: buildpack
+
     steps:
       - name: Set up Docker Buildx ${{ env.BUILDX_VERSION }}
         uses: crazy-max/ghaction-docker-buildx@v1
@@ -45,16 +43,10 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: build
-        uses: renovatebot/internal-tools@v0
-        with:
-          command: "docker-builder"
-          dry-run: true
-          last-only: true
+        run: docker build -t ${IMAGE} .
 
       - name: test
-        run: |
-          export DOCKER_BUILDKIT=1
-          docker build ./test/${{ matrix.test }}
+        run: docker build --build-arg IMAGE ./test/${{ matrix.test }}
 
   release:
     needs: [test]
