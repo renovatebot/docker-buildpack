@@ -38,7 +38,7 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - run: docker buildx create --help
+      - run: docker buildx create --use --name test-builder --driver docker
 
       - name: build
         uses: renovatebot/internal-tools@v0
