@@ -47,9 +47,9 @@ jobs:
 
       - name: test
         run: |
-          docker image ls
-          export IMAGE="renovate/buildpack@$(docker inspect --format='{{.Id}}' renovate/buildpack)"
-          docker buildx build --build-arg IMAGE ./test/${{ matrix.test }}
+          docker buildx create --name test-builder --driver docker --use
+          docker buildx inspect --bootstrap
+          docker buildx build ./test/${{ matrix.test }}
 
   release:
     needs: [test]
