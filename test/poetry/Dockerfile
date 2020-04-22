@@ -3,7 +3,9 @@ FROM ${IMAGE}
 
 # Python
 
-RUN install-tool python 3.8
+# renovate: datasource=docker depName=python
+ENV PYTHON_VERSION=3.8.2
+RUN install-tool python
 
 # Poetry
 
