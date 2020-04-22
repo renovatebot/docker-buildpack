@@ -11,7 +11,7 @@ if [[ ! "${MAJOR}" || ! "${MINOR}" || ! "${PATCH}" ]]; then
 fi
 
 
-apt_install build-essential libssl-dev libreadline-dev zlib1g-dev
+apt_install build-essential libssl-dev libreadline-dev zlib1g-dev libffi-dev
 
 if [[ ! -x "$(command -v pyenv)" ]]; then
   git clone https://github.com/pyenv/pyenv.git /usr/local/pyenv
