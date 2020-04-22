@@ -1,5 +1,5 @@
-ARG SHA=
-FROM renovate/buildpack${SHA}
+ARG IMAGE=renovate/buildpack
+FROM ${IMAGE}
 
 # Python
 
