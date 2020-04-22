@@ -38,12 +38,8 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Build and Publish
-        uses: renovatebot/internal-tools@v0
-        with:
-          command: "docker-builder"
-          last-only: true
-          dry-run: true
+      - name: build
+        run: docker buildx build -t renovate/buildpack --load .
 
       - name: test
         run: docker buildx build ./test/${{ matrix.test }}
