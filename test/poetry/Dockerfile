@@ -1,4 +1,5 @@
-FROM renovate/buildpack
+ARG SHA=
+FROM renovate/buildpack${SHA}
 
 # Python
 

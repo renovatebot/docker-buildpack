@@ -47,8 +47,8 @@ jobs:
 
       - name: test
         run: |
-          docker image ls
-          docker buildx build ./test/${{ matrix.test }}
+          SHA="@$(docker inspect --format='{{.Id}}' renovate/buildpack)"
+          docker buildx build --build-arg SHA ./test/${{ matrix.test }}
 
   release:
     needs: [test]
