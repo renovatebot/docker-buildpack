@@ -10,7 +10,4 @@ if [[ ! "${MAJOR}" || ! "${MINOR}" ]]; then
   exit 1
 fi
 
-apt_install python${PYTHON_VERSION}
-
-ln -sf /usr/bin/python${MAJOR}.${MINOR} /usr/bin/python${MAJOR}
-ln -sf /usr/bin/python${MAJOR}.${MINOR} /usr/bin/python
+apt_install python3-distutils python3-venv python${PYTHON_VERSION}-venv

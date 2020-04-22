@@ -20,8 +20,36 @@ jobs:
           command: github-cleanup
           token: ${{ secrets.GH_TOKEN }}
 
-  build:
+  test:
     needs: [cleanup]
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        test: [poetry, cocoapods]
+
+    timeout-minutes: 10
+
+    steps:
+      - name: Set up Docker Buildx ${{ env.BUILDX_VERSION }}
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: ${{ env.BUILDX_VERSION }}
+
+      - uses: actions/checkout@v2
+
+      - name: Build and Publish
+        uses: renovatebot/internal-tools@v0
+        with:
+          command: "docker-builder"
+          last-only: true
+          dry-run: true
+
+      - name: test
+        run: docker buildx build ./test/${{ matrix.test }}
+
+  release:
+    needs: [test]
     runs-on: ubuntu-latest
 
     timeout-minutes: 10
