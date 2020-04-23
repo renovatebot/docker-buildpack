@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ -f /usr/local/etc/env ]]; then
-  . /usr/local/etc/env
+if [[ -f $BASH_ENV ]]; then
+  . $BASH_ENV
 fi
 
 exec dumb-init -- $@
