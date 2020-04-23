@@ -3,15 +3,13 @@ FROM ${IMAGE}
 
 # Python
 
-# renovate: datasource=docker depName=python
-ENV PYTHON_VERSION=3.8.2
-RUN install-tool python
+# renovate: datasource=docker
+RUN install-tool python 3.8.2
 
 # Poetry
 
 # renovate: datasource=github-releases depName=python-poetry/poetry
-ENV POETRY_VERSION=1.0.5
-RUN install-tool poetry
+RUN install-tool poetry 1.0.5
 
 USER ubuntu
 

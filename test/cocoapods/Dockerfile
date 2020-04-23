@@ -3,14 +3,12 @@ FROM ${IMAGE}
 
 # CocoaPods
 
-# renovate: datasource=docker depName=ruby versioning=docker
-ENV RUBY_VERSION 2.5.8
-RUN install-tool ruby
+# renovate: datasource=docker versioning=docker
+RUN install-tool ruby 2.5.8
 
 
-# renovate: datasource=rubygems depName=cocoapods versioning=ruby
-ENV COCOAPODS_VERSION 1.9.1
-RUN install-gem cocoapods
+# renovate: datasource=rubygems versioning=ruby
+RUN install-gem cocoapods 1.9.1
 
 USER ubuntu
 

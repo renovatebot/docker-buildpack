@@ -3,14 +3,13 @@ FROM ${IMAGE}
 
 # Python
 
-# renovate: datasource=docker depName=python
-ENV PYTHON_VERSION=3.8.2
-RUN install-tool python
+# renovate: datasource=docker
+RUN install-tool python 3.8.2
 
 
 # Pipenv
 
-# renovate: datasource=pypi depName=pipenv
+# renovate: datasource=pypi
 ENV PIPENV_VERSION=2018.11.26
 RUN install-pip pipenv
 

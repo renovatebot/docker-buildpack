@@ -6,9 +6,8 @@ FROM ${IMAGE}
 # go suggests: git svn bzr mercurial
 # git already installed
 
-# renovate: datasource=docker depName=golang versioning=docker
-ENV GOLANG_VERSION=1.14.2
-RUN install-tool golang
+# renovate: datasource=docker versioning=docker
+RUN install-tool golang 1.14.2
 
 USER ubuntu
 
