@@ -21,7 +21,7 @@ fi
 
 
 check_version ${ENVNAME}
-check_command gem
+check_command pip
 
-echo "Installing gem ${TOOLNAME} v${!ENVNAME}"
-gem install ${TOOLNAME} -v ${!ENVNAME}
+echo "Installing pip ${TOOLNAME} v${!ENVNAME}"
+pip install ${TOOLNAME}==${!ENVNAME}

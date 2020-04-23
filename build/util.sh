@@ -62,6 +62,7 @@ function check_semver () {
   fi
   export MAJOR=${BASH_REMATCH[1]}
   export MINOR=${BASH_REMATCH[3]}
+  export PATCH=${BASH_REMATCH[5]}
 }
 
 

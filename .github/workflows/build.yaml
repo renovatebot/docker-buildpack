@@ -20,8 +20,31 @@ jobs:
           command: github-cleanup
           token: ${{ secrets.GH_TOKEN }}
 
-  build:
+  test:
     needs: [cleanup]
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        test: [poetry, cocoapods, pipenv, golang]
+
+    timeout-minutes: 10
+
+    env:
+      DOCKER_BUILDKIT: 1
+      IMAGE: buildpack
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build
+        run: docker build -t ${IMAGE} .
+
+      - name: test
+        run: docker build --build-arg IMAGE ./test/${{ matrix.test }}
+
+  release:
+    needs: [test]
     runs-on: ubuntu-latest
 
     timeout-minutes: 10

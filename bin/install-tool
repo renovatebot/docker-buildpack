@@ -20,7 +20,7 @@ fi
 
 check_version ${ENVNAME}
 
-echo "Installing ${TOOLNAME} ${!ENVNAME}"
+echo "Installing tool ${TOOLNAME} v${!ENVNAME}"
 . $TOOL $@
 
 # cleanup
