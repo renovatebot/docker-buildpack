@@ -1,16 +1,18 @@
 #!/bin/bash
 
 function refreshenv () {
-  . /usr/local/docker/env
+  if [[ -f /usr/local/etc/env ]]; then
+    . /usr/local/etc/env
+  fi
 }
 
 function export_env () {
   export ${1}=${2}
-  echo export ${1}=\${${1}-${2}} >> /usr/local/docker/env
+  echo export ${1}=\${${1}-${2}} >> /usr/local/etc/env
 }
 function export_path () {
   export PATH="$1:$PATH"
-  echo export PATH="$1:\$PATH" >> /usr/local/docker/env
+  echo export PATH="$1:\$PATH" >> /usr/local/etc/env
 }
 
 refreshenv

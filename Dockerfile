@@ -10,11 +10,10 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # loading env
-ENV BASH_ENV=/usr/local/docker/env
+ENV BASH_ENV=/usr/local/etc/env
 SHELL ["/bin/bash" , "-c"]
 
-ENTRYPOINT [ "/usr/bin/dumb-init", "--", "/usr/local/docker/entrypoint.sh" ]
+ENTRYPOINT [ "docker-entrypoint.sh" ]
 
 ADD build/ /usr/local/build/
-ADD docker/ /usr/local/docker/
 ADD bin/ /usr/local/bin/
