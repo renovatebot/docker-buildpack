@@ -8,7 +8,7 @@ RUN install-tool python 3.8.2
 
 # Poetry
 
-# renovate: datasource=github-releases depName=python-poetry/poetry
+# renovate: datasource=github-releases lookupName=python-poetry/poetry
 RUN install-tool poetry 1.0.5
 
 USER ubuntu
