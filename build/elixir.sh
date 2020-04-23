@@ -13,3 +13,6 @@ export_path "/usr/local/elixir/bin"
 
 elixir --version
 mix --version
+
+su -c 'mix local.hex --force' ubuntu
+su -c 'mix local.rebar --force' ubuntu

@@ -26,7 +26,7 @@ jobs:
 
     strategy:
       matrix:
-        test: [poetry, cocoapods, pipenv, golang]
+        test: [poetry, cocoapods, pipenv, golang, mix]
 
     timeout-minutes: 10
 
