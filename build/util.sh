@@ -1,7 +1,9 @@
 #!/bin/bash
 
 function refreshenv () {
-  . /usr/local/etc/env
+  if [[ -f /usr/local/etc/env ]]; then
+    . /usr/local/etc/env
+  fi
 }
 
 function export_env () {

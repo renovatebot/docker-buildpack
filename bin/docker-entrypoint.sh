@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[-f /usr/local/etc/env ]]; then
+if [[ -f /usr/local/etc/env ]]; then
   . /usr/local/etc/env
 fi
 
