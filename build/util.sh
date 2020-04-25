@@ -6,16 +6,18 @@ function refreshenv () {
   fi
 }
 
+refreshenv
+
 function export_env () {
   export ${1}=${2}
   echo export ${1}=\${${1}-${2}} >> $BASH_ENV
 }
+
 function export_path () {
   export PATH="$1:$PATH"
   echo export PATH="$1:\$PATH" >> $BASH_ENV
 }
 
-refreshenv
 
 # use this if custom env is required, creates a shell wrapper to /usr/local/bin
 function shell_wrapper () {
@@ -24,7 +26,9 @@ function shell_wrapper () {
   cat > $FILE <<- EOM
 #!/bin/bash
 
-. /usr/local/build/util.sh
+if [[ -f \$BASH_ENV ]]; then
+  . \$BASH_ENV
+fi
 
 ${1} \${@}
 EOM
