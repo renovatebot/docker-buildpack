@@ -15,3 +15,6 @@ npm explore npm -g -- npm install node-gyp@latest
 
 echo node: $(node --version)
 echo npm: $(npm --version)
+
+# backward compatibillity
+shell_wrapper node

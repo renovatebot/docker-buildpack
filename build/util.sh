@@ -1,21 +1,23 @@
 #!/bin/bash
 
 function refreshenv () {
-  if [[ -f /usr/local/etc/env ]]; then
-    . /usr/local/etc/env
+  if [[ -f $BASH_ENV ]]; then
+    . $BASH_ENV
   fi
 }
 
+refreshenv
+
 function export_env () {
   export ${1}=${2}
-  echo export ${1}=\${${1}-${2}} >> /usr/local/etc/env
-}
-function export_path () {
-  export PATH="$1:$PATH"
-  echo export PATH="$1:\$PATH" >> /usr/local/etc/env
+  echo export ${1}=\${${1}-${2}} >> $BASH_ENV
 }
 
-refreshenv
+function export_path () {
+  export PATH="$1:$PATH"
+  echo export PATH="$1:\$PATH" >> $BASH_ENV
+}
+
 
 # use this if custom env is required, creates a shell wrapper to /usr/local/bin
 function shell_wrapper () {
@@ -24,7 +26,9 @@ function shell_wrapper () {
   cat > $FILE <<- EOM
 #!/bin/bash
 
-. /usr/local/build/util.sh
+if [[ -f \$BASH_ENV ]]; then
+  . \$BASH_ENV
+fi
 
 ${1} \${@}
 EOM
