@@ -14,15 +14,18 @@ fi
 apt_install build-essential libssl-dev libreadline-dev zlib1g-dev libffi-dev
 
 if [[ ! -x "$(command -v pyenv)" ]]; then
-  git clone https://github.com/pyenv/pyenv.git /usr/local/pyenv
-  export_env PYENV_ROOT /usr/local/pyenv
+  su -c "git clone https://github.com/pyenv/pyenv.git /home/ubuntu/.pyenv" ubuntu
+  export_env PYENV_ROOT /home/ubuntu/.pyenv
   export_path "$PYENV_ROOT/bin:$PYENV_ROOT/shims"
 fi
 
-pyenv --version
+export_path "/home/ubuntu/.local/bin"
 
-pyenv install $PYTHON_VERSION
+PYENV=$PYENV_ROOT/bin/pyenv
 
-export_path "\$HOME/.local/bin:/usr/local/pyenv/versions/$PYTHON_VERSION/bin"
+su -c "$PYENV --version" ubuntu
 
-python --version
+su -c "$PYENV install $PYTHON_VERSION" ubuntu
+su -c "$PYENV global $PYTHON_VERSION" ubuntu
+
+su -c "$PYENV_ROOT/shims/python --version" ubuntu
