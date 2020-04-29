@@ -22,6 +22,7 @@ fi
 pyenv --version
 
 pyenv install $PYTHON_VERSION
-pyenv global $PYTHON_VERSION
+
+export_path "\$HOME/.local/bin:/usr/local/pyenv/versions/$PYTHON_VERSION/bin"
 
 python --version
