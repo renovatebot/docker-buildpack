@@ -23,7 +23,15 @@ SHELL ["/bin/bash" , "-c"]
 
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 
-ADD src/base/ /usr/local/
+COPY src/base/ /usr/local/
+
+
+#--------------------------------------
+# Image: erlang
+#--------------------------------------
+FROM base as erlang
+
+COPY src/erlang/ /usr/local/
 
 
 #--------------------------------------
@@ -31,7 +39,7 @@ ADD src/base/ /usr/local/
 #--------------------------------------
 FROM base as golang
 
-ADD src/golang/ /usr/local/
+COPY src/golang/ /usr/local/
 
 
 #--------------------------------------
@@ -39,7 +47,7 @@ ADD src/golang/ /usr/local/
 #--------------------------------------
 FROM base as java
 
-ADD src/java/ /usr/local/
+COPY src/java/ /usr/local/
 
 
 #--------------------------------------
@@ -47,7 +55,15 @@ ADD src/java/ /usr/local/
 #--------------------------------------
 FROM base as node
 
-ADD src/node/ /usr/local/
+COPY src/node/ /usr/local/
+
+
+#--------------------------------------
+# Image: php
+#--------------------------------------
+FROM base as php
+
+COPY src/php/ /usr/local/
 
 
 #--------------------------------------
@@ -55,7 +71,7 @@ ADD src/node/ /usr/local/
 #--------------------------------------
 FROM base as python
 
-ADD src/python/ /usr/local/
+COPY src/python/ /usr/local/
 
 
 #--------------------------------------
@@ -63,7 +79,15 @@ ADD src/python/ /usr/local/
 #--------------------------------------
 FROM base as ruby
 
-ADD src/ruby/ /usr/local/
+COPY src/ruby/ /usr/local/
+
+
+#--------------------------------------
+# Image: rust
+#--------------------------------------
+FROM base as rust
+
+COPY src/rust/ /usr/local/
 
 
 #--------------------------------------
@@ -71,15 +95,15 @@ ADD src/ruby/ /usr/local/
 #--------------------------------------
 FROM base as latest
 
-ADD src/docker/ /usr/local/
-ADD src/erlang/ /usr/local/
-ADD src/golang/ /usr/local/
-ADD src/java/ /usr/local/
-ADD src/node/ /usr/local/
-ADD src/php/ /usr/local/
-ADD src/python/ /usr/local/
-ADD src/ruby/ /usr/local/
-ADD src/rust/ /usr/local/
+COPY src/docker/ /usr/local/
+COPY src/erlang/ /usr/local/
+COPY src/golang/ /usr/local/
+COPY src/java/ /usr/local/
+COPY src/node/ /usr/local/
+COPY src/php/ /usr/local/
+COPY src/python/ /usr/local/
+COPY src/ruby/ /usr/local/
+COPY src/rust/ /usr/local/
 
 
 #--------------------------------------
