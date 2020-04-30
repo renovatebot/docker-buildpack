@@ -1,5 +1,3 @@
 *
 !Dockerfile
-!build
-!docker
-!bin
+!src
