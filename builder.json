@@ -4,6 +4,6 @@
   "startVersion": "2",
   "latestVersion": "1",
   "cache": "docker-build-cache",
-  "versions": ["2"],
+  "versions": ["1", "2"],
   "forceUnstable": true
 }
