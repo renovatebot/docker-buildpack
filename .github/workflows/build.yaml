@@ -56,7 +56,7 @@ jobs:
 
     strategy:
       matrix:
-        tag: [erlang, golang, java, node, php, python, ruby, rust]
+        tag: [erlang, golang, java, node, php, python, ruby, rust, latest]
 
     env:
       IMAGE: ${{ matrix.tag }}
