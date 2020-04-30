@@ -59,8 +59,8 @@ jobs:
         tag: [latest, python, node, golang, java]
 
     env:
-      - IMAGE: ${{ matrix.tag }}
-      - TAG: ${{ matrix.tag }}
+      IMAGE: ${{ matrix.tag }}
+      TAG: ${{ matrix.tag }}
 
     steps:
 
