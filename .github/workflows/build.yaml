@@ -84,6 +84,5 @@ jobs:
         with:
           command: "docker-builder"
           build-args: IMAGE
-          last-only: true
           tag-suffix: ${{ env.TAG }}
           dry-run: ${{github.ref != 'refs/heads/master'}}
