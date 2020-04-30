@@ -6,14 +6,12 @@ FROM ${IMAGE}
 # renovate: datasource=docker
 RUN install-tool python 3.8.2
 
-# Poetry
-
-# renovate: datasource=github-releases lookupName=python-poetry/poetry
-RUN install-tool poetry 1.0.5
 
 USER ubuntu
 
 COPY --chown=ubuntu:0 test test
+
+RUN set -ex; pip install poetry==1.0.5
 
 RUN set -ex; cd test/a && poetry update --lock --no-interaction
 

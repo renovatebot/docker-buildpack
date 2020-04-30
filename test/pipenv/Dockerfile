@@ -12,6 +12,6 @@ USER ubuntu
 COPY --chown=ubuntu:0 test test
 
 RUN set -ex; \
-    pip install --user pipenv; \
+    pip install pipenv==2018.11.26; \
     cd test/a; \
     pipenv lock;

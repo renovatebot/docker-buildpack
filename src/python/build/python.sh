@@ -25,4 +25,8 @@ pyenv install $PYTHON_VERSION
 
 export_path "\$HOME/.local/bin:/usr/local/pyenv/versions/$PYTHON_VERSION/bin"
 
+pip install -U pip
+
+export_env PIP_USER yes
+
 python --version
