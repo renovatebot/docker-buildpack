@@ -10,7 +10,7 @@ if [[ ! "${MAJOR}" || ! "${MINOR}" || ! "${PATCH}" ]]; then
   exit 1
 fi
 
-if [[ -d "/usr/local/python/${PYTHON_VERSION}"]]; then
+if [[ -d "/usr/local/python/${PYTHON_VERSION}" ]]; then
   echo "Skipping, already installed"
   exit 0
 fi
