@@ -4,6 +4,8 @@ set -e
 
 check_semver ${PYTHON_VERSION}
 
+PYTHON_URL="https://docs.renovatebot.com/python"
+
 
 if [[ ! "${MAJOR}" || ! "${MINOR}" || ! "${PATCH}" ]]; then
   echo Invalid version: ${PYTHON_VERSION}
@@ -19,7 +21,7 @@ fi
 
 mkdir -p /usr/local/python
 
-curl -sSfLo python.tar.xz https://viceice.github.io/python-builds/${DISTRIB_RELEASE}/python-${PYTHON_VERSION}.tar.xz || echo 'Ignore download error'
+curl -sSfLo python.tar.xz ${PYTHON_URL}/${DISTRIB_RELEASE}/python-${PYTHON_VERSION}.tar.xz || echo 'Ignore download error'
 
 if [[ -f python.tar.xz ]]; then
   echo 'Using prebuild python'
