@@ -55,8 +55,8 @@ USER root
 
 RUN touch /.dummy
 
-COPY --from=renovate/buildpack:2 /usr/local/build /usr/local/build
-COPY --from=renovate/buildpack:2 /usr/local/bin /usr/local/bin
+COPY --from=build /usr/local/build /usr/local/build
+COPY --from=build /usr/local/bin /usr/local/bin
 
 # loading env
 ENV BASH_ENV=/usr/local/etc/env
