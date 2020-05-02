@@ -4,7 +4,7 @@ set -e
 
 check_semver ${PYTHON_VERSION}
 
-PYTHON_URL="https://docs.renovatebot.com/python"
+PYTHON_URL="https://raw.githubusercontent.com/renovatebot/python/releases"
 
 
 if [[ ! "${MAJOR}" || ! "${MINOR}" || ! "${PATCH}" ]]; then
