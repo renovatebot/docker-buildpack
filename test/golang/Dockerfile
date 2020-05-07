@@ -1,11 +1,6 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE}
 
-# Golang
-
-# go suggests: git svn bzr mercurial
-# git already installed
-RUN install-apt bzr mercurial
 
 # renovate: datasource=docker versioning=docker
 RUN install-tool golang 1.14.2
