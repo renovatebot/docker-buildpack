@@ -2,6 +2,9 @@
 
 set -e
 
+# go suggests: git svn bzr mercurial
+apt_install bzr mercurial
+
 curl -sSL https://dl.google.com/go/go${GOLANG_VERSION}.linux-amd64.tar.gz --output go.tgz
 tar -C /usr/local -xzf go.tgz
 rm go.tgz
