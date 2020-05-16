@@ -4,7 +4,7 @@ FROM ${IMAGE}
 # Python
 
 # renovate: datasource=docker
-RUN install-tool python 3.8.2
+RUN install-tool python 3.8.3
 
 
 USER ubuntu

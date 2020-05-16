@@ -4,7 +4,7 @@ FROM ${IMAGE} as build
 # Python
 
 # renovate: datasource=docker
-RUN install-tool python 3.8.2
+RUN install-tool python 3.8.3
 
 #--------------------------------------
 # test a
@@ -14,7 +14,7 @@ FROM build as testa
 RUN touch /.dummy
 
 # try install again, sould skip
-RUN install-tool python 3.8.2
+RUN install-tool python 3.8.3
 
 USER ubuntu
 
@@ -35,7 +35,7 @@ USER root
 
 RUN touch /.dummy
 
-RUN install-tool python 3.8.0
+RUN install-tool python 3.8.3
 
 USER ubuntu
 
@@ -68,7 +68,7 @@ ENTRYPOINT [ "docker-entrypoint.sh" ]
 RUN install-apt dumb-init
 
 # renovate: datasource=github lookupName=viceice/python-builds
-RUN install-tool python 3.8.2
+RUN install-tool python 3.8.3
 
 
 USER ubuntu
