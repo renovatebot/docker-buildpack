@@ -29,7 +29,16 @@ if [[ -f python.tar.xz ]]; then
   rm python.tar.xz
 else
   echo 'No prebuild python found, building from source'
-  apt_install build-essential libssl-dev libreadline-dev zlib1g-dev libffi-dev
+  apt_install \
+    build-essential \
+    libbz2-dev \
+    libffi-dev \
+    liblzma-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    libssl-dev \
+    zlib1g-dev \
+    ;
 
   if [[ ! -x "$(command -v python-build)" ]]; then
     git clone https://github.com/pyenv/pyenv.git
