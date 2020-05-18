@@ -18,3 +18,7 @@ echo npm: $(npm --version)
 
 # backward compatibillity
 shell_wrapper node
+
+# redirect global install
+export_env NPM_CONFIG_PREFIX "~/.npm-global"
+export_path "~/.npm-global/bin"

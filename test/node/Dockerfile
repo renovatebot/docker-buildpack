@@ -1,12 +1,16 @@
 ARG IMAGE=renovate/buildpack
-FROM ${IMAGE}
+FROM ${IMAGE} as build
 
 
 # renovate: datasource=docker versioning=docker
 RUN install-tool node 12.16.2
 
 
+RUN touch /.dummy
+
 USER ubuntu
+
+FROM build as testa
 
 SHELL [ "/bin/sh", "-c" ]
 ENTRYPOINT [ ]
@@ -20,3 +24,17 @@ RUN set -ex; \
   [ "$(command -v node)" = "/usr/local/bin/node" ] && echo "works" || exit 1;
 
 RUN node --version
+
+FROM build as testb
+
+RUN npm install -g yarn
+
+RUN yarn --version
+
+#--------------------------------------
+# final
+#--------------------------------------
+FROM build
+
+COPY --from=testa /.dummy /.dummy
+COPY --from=testb /.dummy /.dummy
