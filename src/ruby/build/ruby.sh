@@ -15,6 +15,8 @@ if [[ -d "/usr/local/ruby/${RUBY_VERSION}" ]]; then
   exit 0
 fi
 
+mkdir -p /usr/local/ruby
+
 CODENAME=$(. /etc/os-release && echo ${VERSION_ID})
 RUBY_URL="https://github.com/renovatebot/ruby/releases/download"
 
