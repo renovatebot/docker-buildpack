@@ -24,6 +24,9 @@ curl -sSfLo ruby.tar.xz ${RUBY_URL}/${RUBY_VERSION}/ruby-${RUBY_VERSION}-${CODEN
 
 if [[ -f ruby.tar.xz ]]; then
   echo "Using prebuild ruby for ${CODENAME}"
+  install-apt \
+    build-essential \
+    ;
   tar -C /usr/local/ruby -xf ruby.tar.xz
   rm ruby.tar.xz
 else
