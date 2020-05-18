@@ -16,13 +16,12 @@ if [[ -d "/usr/local/ruby/${RUBY_VERSION}" ]]; then
 fi
 
 CODENAME=$(. /etc/os-release && echo ${VERSION_ID})
-
 RUBY_URL="https://github.com/renovatebot/ruby/releases/download"
 
 curl -sSfLo ruby.tar.xz ${RUBY_URL}/${RUBY_VERSION}/ruby-${RUBY_VERSION}-${CODENAME}.tar.xz || echo 'Ignore download error'
 
-if [[ -f python.tar.xz ]]; then
-  echo 'Using prebuild ruby'
+if [[ -f ruby.tar.xz ]]; then
+  echo "Using prebuild ruby for ${CODENAME}"
   tar -C /usr/local/ruby -xf ruby.tar.xz
   rm ruby.tar.xz
 else
