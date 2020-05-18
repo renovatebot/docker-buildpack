@@ -17,9 +17,9 @@ fi
 
 CODENAME=$(. /etc/os-release && echo ${VERSION_ID})
 
-RUBY_URL="https://github.com/renovatebot/ruby/releases"
+RUBY_URL="https://github.com/renovatebot/ruby/releases/download"
 
-curl -sSfLo ruby.tar.xz ${RUBY_URL}/assets/ruby-${RUBY_VERSION}-${CODENAME}.tar.xz || echo 'Ignore download error'
+curl -sSfLo ruby.tar.xz ${RUBY_URL}/${RUBY_VERSION}/ruby-${RUBY_VERSION}-${CODENAME}.tar.xz || echo 'Ignore download error'
 
 if [[ -f python.tar.xz ]]; then
   echo 'Using prebuild ruby'
