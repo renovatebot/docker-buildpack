@@ -20,5 +20,5 @@ echo npm: $(npm --version)
 shell_wrapper node
 
 # redirect user install
-su -c "npm config set prefix '~/.npm-global'" ubuntu
+export_env NPM_CONFIG_PREFIX "/home/ubuntu/.npm-global"
 export_path "/home/ubuntu/.npm-global/bin"
