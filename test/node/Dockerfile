@@ -29,7 +29,21 @@ FROM build as testb
 
 RUN npm install -g yarn
 
-RUN yarn --version
+RUN set -ex; \
+  yarn --version; \
+  command -v yarn;
+
+FROM build as testc
+
+USER root
+
+RUN install-tool pnpm 4.14.2
+
+USER ubuntu
+
+RUN set -ex; \
+  pnpm --version; \
+  command -v pnpm;
 
 #--------------------------------------
 # final
@@ -38,3 +52,4 @@ FROM build
 
 COPY --from=testa /.dummy /.dummy
 COPY --from=testb /.dummy /.dummy
+COPY --from=testc /.dummy /.dummy
