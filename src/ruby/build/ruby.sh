@@ -47,8 +47,8 @@ else
   ruby-build $RUBY_VERSION /usr/local/ruby/${RUBY_VERSION}
 fi
 
-export_path "\$HOME/.gem/ruby/${MAJOR}.${MINOR}.0/bin:/usr/local/ruby/${RUBY_VERSION}/bin"
-
+export_env GEM_HOME "/home/ubuntu/.gem-global"
+export_path "/home/ubuntu/.gem-global/bin:\$HOME/.gem/ruby/${MAJOR}.${MINOR}.0/bin:/usr/local/ruby/${RUBY_VERSION}/bin"
 
 # System settings
 mkdir -p /usr/local/ruby/${RUBY_VERSION}/etc
@@ -61,10 +61,8 @@ gem: --no-document
 EOM
 
 
-# User settings
-cat > /home/ubuntu/.gemrc <<- EOM
-gem: --no-document --user-install
-EOM
 
 ruby --version
 echo "gem $(gem --version)"
+
+gem env

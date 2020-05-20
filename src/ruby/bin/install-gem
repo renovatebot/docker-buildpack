@@ -2,6 +2,11 @@
 
 set -e
 
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root"
+   exit 1
+fi
+
 . /usr/local/build/util.sh
 
 TOOLNAME=${1}
@@ -22,6 +27,8 @@ fi
 
 check_version ${ENVNAME}
 check_command gem
+
+unset GEM_HOME
 
 echo "Installing gem ${TOOLNAME} v${!ENVNAME}"
 gem install ${TOOLNAME} -v ${!ENVNAME}
