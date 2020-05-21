@@ -23,5 +23,7 @@ fi
 check_version ${ENVNAME}
 check_command pip
 
+unset PIP_USER
+
 echo "Installing pip ${TOOLNAME} v${!ENVNAME}"
 pip install ${TOOLNAME}==${!ENVNAME}
