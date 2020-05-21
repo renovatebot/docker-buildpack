@@ -70,13 +70,13 @@ RUN install-apt dumb-init
 # renovate: datasource=github lookupName=viceice/python-builds
 RUN install-tool python 3.8.3
 
+RUN install-pip pipenv 2018.11.26
 
 USER ubuntu
 
 COPY --chown=ubuntu:0 test test
 
 RUN set -ex; \
-  pip install pipenv==2018.11.26; \
   cd test/a; \
   pipenv lock;
 
