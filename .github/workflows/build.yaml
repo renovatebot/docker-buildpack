@@ -9,6 +9,8 @@ on:
   pull_request:
 
 env:
+  LATEST_FLAVOR: 18.04
+  DRY_RUN: ${{ github.ref != 'refs/heads/master' }}
   # https://github.com/chalk/supports-color/issues/106
   FORCE_COLOR: true
 
@@ -44,10 +46,13 @@ jobs:
     strategy:
       matrix:
         tag: [erlang, golang, java, node, php, python, ruby, rust, latest]
+        flavor: [18.04, 20.04]
 
     env:
       IMAGE: ${{ matrix.tag }}
+      TAG_FLAVOR: ${{ matrix.tag }}-${{ matrix.flavor }}
       TAG: ${{ matrix.tag }}
+      FLAVOR: ${{ matrix.flavor }}
 
     steps:
 
@@ -64,13 +69,26 @@ jobs:
       - name: Fix latest tag
         if: ${{ env.TAG == 'latest' }}
         run: |
-          echo "::set-env name=TAG::"
+          echo "::set-env name=TAG_FLAVOR::${{ env.FLAVOR }}"
 
-      - name: Build and Publish
+      - name: Build and Publish (with flavor)
         uses: renovatebot/internal-tools@v0
         with:
           command: "docker-builder"
-          build-args: IMAGE
+          build-args: IMAGE,FLAVOR
           last-only: true
-          tag-suffix: ${{ env.TAG }}
-          dry-run: ${{github.ref != 'refs/heads/master'}}
+          tag-suffix: ${{ env.TAG_FLAVOR }}
+          major-minor: false
+          dry-run: ${{ env.DRY_RUN }}
+
+
+      - name: Build and Publish (no flavor)
+        if: ${{ env.FLAVOR == env.LATEST_FLAVOR }}
+        uses: renovatebot/internal-tools@v0
+        with:
+          command: "docker-builder"
+          build-args: IMAGE,FLAVOR
+          last-only: true
+          tag-suffix:  ${{ env.TAG }}
+          major-minor: false
+          dry-run: ${{ env.DRY_RUN }}
