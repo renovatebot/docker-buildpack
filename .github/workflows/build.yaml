@@ -27,12 +27,13 @@ jobs:
     env:
       DOCKER_BUILDKIT: 1
       IMAGE: buildpack
+      FLAVOR: ${{ env.LATEST_FLAVOR }}
 
     steps:
       - uses: actions/checkout@v2
 
       - name: build
-        run: docker build -t ${IMAGE} .
+        run: docker build -t ${IMAGE} --build-arg FLAVOR .
 
       - name: test
         run: docker build --build-arg IMAGE ./test/${{ matrix.test }}

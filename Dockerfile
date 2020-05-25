@@ -6,8 +6,7 @@ ARG IMAGE=latest
 #--------------------------------------
 # Ubuntu base image to use
 #--------------------------------------
-# renovate: datasource=docker depName=renovate/ubuntu versioning=docker
-ARG FLAVOR=18.04
+ARG FLAVOR
 
 #--------------------------------------
 # renovate rebuild trigger
