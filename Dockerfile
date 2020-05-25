@@ -4,9 +4,19 @@
 ARG IMAGE=latest
 
 #--------------------------------------
+# Ubuntu base image to use
+#--------------------------------------
+ARG FLAVOR
+
+#--------------------------------------
+# renovate rebuild trigger
+#--------------------------------------
+FROM renovate/ubuntu:18.04@sha256:b9a91b5e54d32186439ee889fe903d633e6c6f574b7f542a482cf63f2a1d9ea3
+
+#--------------------------------------
 # Image: base
 #--------------------------------------
-FROM renovate/ubuntu@sha256:b9a91b5e54d32186439ee889fe903d633e6c6f574b7f542a482cf63f2a1d9ea3 as base
+FROM renovate/ubuntu:${FLAVOR} as base
 
 LABEL org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack"
 
