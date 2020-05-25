@@ -10,6 +10,7 @@ on:
 
 env:
   LATEST_FLAVOR: 18.04
+  FLAVOR: 18.04
   DRY_RUN: ${{ github.ref != 'refs/heads/master' }}
   # https://github.com/chalk/supports-color/issues/106
   FORCE_COLOR: true
@@ -27,7 +28,6 @@ jobs:
     env:
       DOCKER_BUILDKIT: 1
       IMAGE: buildpack
-      FLAVOR: ${{ env.LATEST_FLAVOR }}
 
     steps:
       - uses: actions/checkout@v2
