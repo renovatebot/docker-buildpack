@@ -18,7 +18,9 @@ FROM renovate/ubuntu:18.04@sha256:bf00c6c489ad9c769e3fb7948a06957d7fd8df4fbf64cb
 #--------------------------------------
 FROM renovate/ubuntu:${FLAVOR} as base
 
-LABEL org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack"
+ARG BUILDPACK_VERSION
+LABEL org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack" \
+      org.opencontainers.image.version="${BUILDPACK_VERSION}"
 
 USER root
 
