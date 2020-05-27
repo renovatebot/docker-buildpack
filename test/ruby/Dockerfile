@@ -13,12 +13,21 @@ FROM build as testa
 
 USER 1000
 
-ENV GEM_HOME=/tmp/.gem
 RUN ruby --version
 
 RUN gem install bundler -v 1.17.2
 
-RUN bundler env
+RUN set -ex; \
+  [ "$(command -v bundle)" = "/home/ubuntu/.gem-global/bin/bundle" ] && echo "works" || exit 1; \
+  bundler env
+
+ENV GEM_HOME=/tmp/.gem
+
+RUN gem install bundler -v 1.17.2
+
+RUN set -ex; \
+  [ "$(command -v bundle)" = "/tmp/.gem/bin/bundle" ] && echo "works" || exit 1; \
+  bundler env
 
 RUN set -ex; \
     git clone --depth=1 https://github.com/renovate-tests/bundler8; \
