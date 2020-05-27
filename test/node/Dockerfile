@@ -27,11 +27,12 @@ RUN node --version
 
 FROM build as testb
 
+ENV NPM_CONFIG_PREFIX=/tmp/.npm
 RUN npm install -g yarn
 
 RUN set -ex; \
-  yarn --version; \
-  command -v yarn;
+  command -v yarn; \
+  yarn --version;
 
 FROM build as testc
 

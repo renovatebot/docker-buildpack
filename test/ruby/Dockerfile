@@ -13,6 +13,7 @@ FROM build as testa
 
 USER 1000
 
+ENV GEM_HOME=/tmp/.gem
 RUN ruby --version
 
 RUN gem install bundler -v 1.17.2
