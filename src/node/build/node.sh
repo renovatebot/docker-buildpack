@@ -21,4 +21,4 @@ shell_wrapper node
 
 # redirect user install
 export_env NPM_CONFIG_PREFIX "/home/ubuntu/.npm-global"
-export_path "/home/ubuntu/.npm-global/bin"
+export_path "\$NPM_CONFIG_PREFIX/bin"

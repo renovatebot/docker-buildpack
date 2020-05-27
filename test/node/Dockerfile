@@ -10,6 +10,10 @@ RUN touch /.dummy
 
 USER ubuntu
 
+
+#--------------------------------------
+# test: node
+#--------------------------------------
 FROM build as testa
 
 SHELL [ "/bin/sh", "-c" ]
@@ -25,13 +29,30 @@ RUN set -ex; \
 
 RUN node --version
 
+
+#--------------------------------------
+# test: yarn
+#--------------------------------------
 FROM build as testb
 
 RUN npm install -g yarn
 
 RUN set -ex; \
-  yarn --version; \
-  command -v yarn;
+  [ "$(command -v yarn)" = "/home/ubuntu/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
+  yarn --version;
+
+
+ENV NPM_CONFIG_PREFIX=/tmp/.npm
+RUN npm install -g yarn
+
+RUN set -ex; \
+  [ "$(command -v yarn)" = "/tmp/.npm/bin/yarn" ] && echo "works" || exit 1; \
+  yarn --version;
+
+
+#--------------------------------------
+# test: pnpm
+#--------------------------------------
 
 FROM build as testc
 
@@ -44,6 +65,7 @@ USER ubuntu
 RUN set -ex; \
   pnpm --version; \
   command -v pnpm;
+
 
 #--------------------------------------
 # final

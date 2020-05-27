@@ -48,7 +48,7 @@ else
 fi
 
 export_env GEM_HOME "/home/ubuntu/.gem-global"
-export_path "/home/ubuntu/.gem-global/bin:\$HOME/.gem/ruby/${MAJOR}.${MINOR}.0/bin:/usr/local/ruby/${RUBY_VERSION}/bin"
+export_path "\$GEM_HOME/bin:\$HOME/.gem/ruby/${MAJOR}.${MINOR}.0/bin:/usr/local/ruby/${RUBY_VERSION}/bin"
 
 # System settings
 mkdir -p /usr/local/ruby/${RUBY_VERSION}/etc
