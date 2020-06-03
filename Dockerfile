@@ -6,7 +6,7 @@ ARG IMAGE=latest
 #--------------------------------------
 # Ubuntu base image to use
 #--------------------------------------
-ARG FLAVOR
+ARG FLAVOR=latest
 
 #--------------------------------------
 # renovate rebuild trigger
