@@ -31,7 +31,6 @@ rm go.tgz
 
 export_env GOPATH "/go"
 export_env CGO_ENABLED 0
-export_env GOPROXY direct
 export_env GOSUMDB off
 export_path "/usr/local/go/${GOLANG_VERSION}/bin:\$GOPATH/bin"
 
