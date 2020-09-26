@@ -11,7 +11,7 @@ ARG FLAVOR=latest
 #--------------------------------------
 # renovate rebuild trigger
 #--------------------------------------
-FROM renovate/ubuntu:18.04@sha256:2ed98c8ca4a5e3422e363390d7013ed56c5a03ef0b7f0c82fc0790abdbc87d1c
+FROM renovate/ubuntu:18.04@sha256:bfefa9d90e8df66278ed6745efcf259bd04df21239c10e78baa191d6930d026f
 
 #--------------------------------------
 # Image: base
