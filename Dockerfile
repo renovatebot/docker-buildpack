@@ -103,6 +103,13 @@ COPY src/rust/ /usr/local/
 
 
 #--------------------------------------
+# Image: dotnet
+#--------------------------------------
+FROM base as dotnet
+
+COPY src/dotnet/ /usr/local/
+
+#--------------------------------------
 # Image: full (latest)
 #--------------------------------------
 FROM base as latest
@@ -116,6 +123,7 @@ COPY src/php/ /usr/local/
 COPY src/python/ /usr/local/
 COPY src/ruby/ /usr/local/
 COPY src/rust/ /usr/local/
+COPY src/dotnet/ /usr/local/
 
 
 #--------------------------------------
