@@ -2,6 +2,8 @@
 
 set -e
 
+check_semver $DOTNET_VERSION
+
 apt-get update \
     && apt-get install -y --no-install-recommends \
         libc6 \
@@ -13,8 +15,8 @@ apt-get update \
         zlib1g \
     && rm -rf /var/lib/apt/lists/*
 
-curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh
-
-bash dotnet-install.sh
+curl -sSL -o dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh --version $DOTNET_VERSION
 
 dotnet help
