@@ -23,5 +23,6 @@ bash /usr/local/dotnet-install.sh --version $DOTNET_VERSION --install-dir ${DOTN
 
 export_path "${DOTNET_INSTALL_DIR}"
 export_env DOTNET_ROOT "${DOTNET_INSTALL_DIR}"
+export_env DOTNET_CLI_TELEMETRY_OPTOUT "1"
 
 dotnet help
