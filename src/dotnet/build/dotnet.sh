@@ -20,7 +20,7 @@ fi
 mkdir -p /usr/local/dotnet
 apt_install libc6 libgcc1 libgssapi-krb5-2 libicu60 libssl1.1 libstdc++6 zlib1g
 
-curl -sfL https://dot.net/v1/dotnet-install.sh | sh -s - --version $DOTNET_VERSION --install-dir ${DOTNET_INSTALL_DIR}
+curl -sfL https://dot.net/v1/dotnet-install.sh | bash -s - --version $DOTNET_VERSION --install-dir ${DOTNET_INSTALL_DIR}
 
 export_path "${DOTNET_INSTALL_DIR}"
 export_env DOTNET_ROOT "${DOTNET_INSTALL_DIR}"
