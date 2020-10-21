@@ -109,6 +109,14 @@ FROM base as dotnet
 
 COPY src/dotnet/ /usr/local/
 
+
+#--------------------------------------
+# Image: swift
+#--------------------------------------
+FROM base as swift
+
+COPY src/swift/ /usr/local/
+
 #--------------------------------------
 # Image: full (latest)
 #--------------------------------------
@@ -124,6 +132,7 @@ COPY src/python/ /usr/local/
 COPY src/ruby/ /usr/local/
 COPY src/rust/ /usr/local/
 COPY src/dotnet/ /usr/local/
+COPY src/swift/ /usr/local/
 
 
 #--------------------------------------
