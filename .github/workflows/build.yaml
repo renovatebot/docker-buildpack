@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        test: [poetry, pipenv, golang, mix, node, php, ruby, rust, dotnet]
+        test: [poetry, pipenv, golang, mix, node, php, ruby, rust, dotnet, swift]
 
     timeout-minutes: 10
 
@@ -46,7 +46,7 @@ jobs:
 
     strategy:
       matrix:
-        tag: [erlang, golang, java, node, php, python, ruby, rust, dotnet, latest]
+        tag: [erlang, golang, java, node, php, python, ruby, rust, dotnet, swift, latest]
         flavor: [bionic, focal]
 
     env:
