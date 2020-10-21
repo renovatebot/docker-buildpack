@@ -9,8 +9,8 @@ on:
   pull_request:
 
 env:
-  LATEST_FLAVOR: 18.04
-  FLAVOR: 18.04
+  LATEST_FLAVOR: bionic
+  FLAVOR: bionic
   DRY_RUN: ${{ github.ref != 'refs/heads/master' }}
   # https://github.com/chalk/supports-color/issues/106
   FORCE_COLOR: true
@@ -47,7 +47,7 @@ jobs:
     strategy:
       matrix:
         tag: [erlang, golang, java, node, php, python, ruby, rust, dotnet, latest]
-        flavor: [18.04, 20.04]
+        flavor: [bionic, focal]
 
     env:
       IMAGE: ${{ matrix.tag }}
