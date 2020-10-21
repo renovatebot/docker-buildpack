@@ -30,7 +30,7 @@ jobs:
       IMAGE: buildpack
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.3
 
       - name: build
         run: docker build -t ${IMAGE} --build-arg FLAVOR .
@@ -57,12 +57,7 @@ jobs:
 
     steps:
 
-      - name: docker-config
-        uses: renovatebot/internal-tools@v0
-        with:
-          command: docker-config
-
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.3.3
 
       - name: Docker registry login
         if: github.ref == 'refs/heads/master'
