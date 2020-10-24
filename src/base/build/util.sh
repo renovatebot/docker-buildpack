@@ -26,8 +26,14 @@ function shell_wrapper () {
   cat > $FILE <<- EOM
 #!/bin/bash
 
-if [[ -f \$BASH_ENV ]]; then
+if [[ -f "\$BASH_ENV" ]]; then
   . \$BASH_ENV
+fi
+
+if [[ "\$(command -v ${1})" == "$FILE" ]]; then
+  echo Could not forward ${1}, probably wrong PATH variable.
+  echo PATH=\$PATH
+  exit 1
 fi
 
 ${1} \${@}
