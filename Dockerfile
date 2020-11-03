@@ -118,6 +118,13 @@ FROM base as swift
 COPY src/swift/ /usr/local/
 
 #--------------------------------------
+# Image: helm
+#--------------------------------------
+FROM base as helm
+
+COPY src/helm/ /usr/local/
+
+#--------------------------------------
 # Image: full (latest)
 #--------------------------------------
 FROM base as latest
@@ -133,6 +140,7 @@ COPY src/ruby/ /usr/local/
 COPY src/rust/ /usr/local/
 COPY src/dotnet/ /usr/local/
 COPY src/swift/ /usr/local/
+COPY src/helm/ /usr/local/
 
 
 #--------------------------------------
