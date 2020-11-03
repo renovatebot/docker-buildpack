@@ -2,13 +2,6 @@
 
 set -e
 
-
-if [[ "${HELM_VERSION}" =~ "^v(.+)$" ]]; then
-  # trim v prefix
-  export HELM_VERSION=${BASH_REMATCH[1]}
-fi
-
-
 check_semver ${HELM_VERSION}
 
 
