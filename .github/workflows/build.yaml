@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         test:
           [
@@ -79,7 +80,6 @@ jobs:
     env:
       IMAGE: ${{ matrix.tag }}
       FLAVOR_TAG: ${{ matrix.tag }}-${{ matrix.flavor }}
-      TAG: ${{ matrix.tag }}
       FLAVOR: ${{ matrix.flavor }}
 
     steps:
@@ -102,5 +102,3 @@ jobs:
           tag-suffix: ${{ env.FLAVOR_TAG }}
           major-minor: false
           dry-run: ${{ env.DRY_RUN }}
-
-
