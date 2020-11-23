@@ -66,7 +66,7 @@ jobs:
       - name: Fix latest tag
         if: ${{ env.TAG == 'latest' }}
         run: |
-          echo "::set-env name=TAG_FLAVOR::${{ env.FLAVOR }}"
+          echo "TAG_FLAVOR=${{ env.FLAVOR }}" >> $GITHUB_ENV
 
       - name: Build and Publish (with flavor)
         uses: renovatebot/internal-tools@v1.2.2
