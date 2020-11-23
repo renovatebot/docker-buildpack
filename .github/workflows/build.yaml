@@ -92,6 +92,7 @@ jobs:
       - name: fix flavor
         run: |
           echo "FLAVOR_TAG=${FLAVOR_TAG/-latest/}" >> $GITHUB_ENV
+          echo "FLAVOR_TAG=${FLAVOR_TAG/latest-/}" >> $GITHUB_ENV
 
       - name: Build and Publish
         uses: renovatebot/internal-tools@v1.2.3
