@@ -3,7 +3,7 @@ FROM ${IMAGE}
 
 # Erlang
 
-RUN install-tool erlang 22.0.7-1
+RUN install-tool erlang 22.3.2-1
 
 # Elixir
 

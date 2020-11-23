@@ -9,8 +9,9 @@ if [[ ! "${MAJOR}" || ! "${MINOR}" ]]; then
   exit 1
 fi
 
+VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 
-echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" | tee /etc/apt/sources.list.d/ondrej-php.list
+echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu ${VERSION_CODENAME} main" | tee /etc/apt/sources.list.d/ondrej-php.list
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 14AA40EC0831756756D7F66C4F4EA0AAE5267A6C
 
 VERSION=${MAJOR}.${MINOR}

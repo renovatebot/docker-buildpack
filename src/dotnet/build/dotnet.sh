@@ -16,10 +16,15 @@ if [[ -d "${DOTNET_INSTALL_DIR}" ]]; then
   exit 0
 fi
 
+VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
+
+case "$VERSION_CODENAME" in
+  "focal") apt_install libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g;;
+  "bionic") apt_install libc6 libgcc1 libgssapi-krb5-2 libicu60 libssl1.1 libstdc++6 zlib1g;;
+esac
+
 
 mkdir -p /usr/local/dotnet
-apt_install libc6 libgcc1 libgssapi-krb5-2 libicu60 libssl1.1 libstdc++6 zlib1g
-
 curl -sfL https://dot.net/v1/dotnet-install.sh | bash -s - --version $DOTNET_VERSION --install-dir ${DOTNET_INSTALL_DIR}
 
 export_path "${DOTNET_INSTALL_DIR}"
