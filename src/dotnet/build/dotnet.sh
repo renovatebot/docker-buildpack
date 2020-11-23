@@ -18,7 +18,7 @@ fi
 
 VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 
-case "$VERSION_CODENAME" install
+case "$VERSION_CODENAME" in
   "focal") apt_install libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g;;
   "bionic") apt_install libc6 libgcc1 libgssapi-krb5-2 libicu60 libssl1.1 libstdc++6 zlib1g;;
 esac
