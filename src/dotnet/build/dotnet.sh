@@ -18,11 +18,11 @@ fi
 
 VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 
-if [[ "$VERSION_CODENAME" == "focal"]]; then
-  apt_install libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g
-elif [[ "$VERSION_CODENAME" == "focal"]]; then
-  apt_install libc6 libgcc1 libgssapi-krb5-2 libicu60 libssl1.1 libstdc++6 zlib1g
-fi
+case "$VERSION_CODENAME" install
+  "focal") apt_install libc6 libgcc1 libgssapi-krb5-2 libicu66 libssl1.1 libstdc++6 zlib1g;;
+  "bionic") apt_install libc6 libgcc1 libgssapi-krb5-2 libicu60 libssl1.1 libstdc++6 zlib1g;;
+esac
+
 
 mkdir -p /usr/local/dotnet
 curl -sfL https://dot.net/v1/dotnet-install.sh | bash -s - --version $DOTNET_VERSION --install-dir ${DOTNET_INSTALL_DIR}
