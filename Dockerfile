@@ -11,7 +11,7 @@ ARG FLAVOR=latest
 #--------------------------------------
 # renovate rebuild trigger
 #--------------------------------------
-FROM renovate/ubuntu:bionic@sha256:7ff400eec3db7237b0feb730de6f0d084fa95f0619bfc2f04388e8270f953244
+FROM renovate/ubuntu:bionic@sha256:ea3ae7c4aa991ce4d63445bbc55c28a065136fb742d1b39f4d2d6ed43545a224
 FROM renovate/ubuntu:focal@sha256:ca34cef3a78b53dc2155c062a9a13a74e1893240e318d1c774afe290fbe0e8bb
 
 #--------------------------------------
