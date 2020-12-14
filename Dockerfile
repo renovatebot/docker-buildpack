@@ -21,7 +21,7 @@ FROM renovate/ubuntu:${FLAVOR} as base
 
 ARG BUILDPACK_VERSION
 LABEL org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack" \
-      org.opencontainers.image.version="${BUILDPACK_VERSION}"
+    org.opencontainers.image.version="${BUILDPACK_VERSION}"
 
 USER root
 
@@ -126,6 +126,13 @@ FROM base as helm
 COPY src/helm/ /usr/local/
 
 #--------------------------------------
+# Image: powershell
+#--------------------------------------
+FROM base as powershell
+
+COPY src/powershell/ /usr/powershell/
+
+#--------------------------------------
 # Image: full (latest)
 #--------------------------------------
 FROM base as latest
@@ -142,7 +149,7 @@ COPY src/rust/ /usr/local/
 COPY src/dotnet/ /usr/local/
 COPY src/swift/ /usr/local/
 COPY src/helm/ /usr/local/
-
+COPY src/powershell/ /usr/local/
 
 #--------------------------------------
 # Image: final

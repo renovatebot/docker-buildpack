@@ -33,6 +33,7 @@ jobs:
             dotnet,
             swift,
             helm,
+            powershell
           ]
         flavor: [bionic, focal]
 
@@ -73,6 +74,7 @@ jobs:
             dotnet,
             swift,
             helm,
+            powershell
             latest,
           ]
         flavor: [latest, bionic, focal]
