@@ -129,6 +129,14 @@ COPY src/helm/ /usr/local/
 
 
 #--------------------------------------
+# Image: powershell
+#--------------------------------------
+FROM base as powershell
+
+COPY src/powershell/ /usr/powershell/
+
+
+#--------------------------------------
 # Image: full (latest)
 #--------------------------------------
 FROM base as latest
@@ -145,6 +153,7 @@ COPY src/rust/ /usr/local/
 COPY src/dotnet/ /usr/local/
 COPY src/swift/ /usr/local/
 COPY src/helm/ /usr/local/
+COPY src/powershell/ /usr/local/
 
 
 #--------------------------------------
