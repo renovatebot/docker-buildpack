@@ -11,24 +11,25 @@ ARG FLAVOR=latest
 #--------------------------------------
 # renovate rebuild trigger
 #--------------------------------------
-FROM renovate/ubuntu:bionic@sha256:ea3ae7c4aa991ce4d63445bbc55c28a065136fb742d1b39f4d2d6ed43545a224
-FROM renovate/ubuntu:focal@sha256:f74b369729c254115d1bbc2cd7a5be8a493953c1ee55875d41121296a41b9f66
+FROM renovate/ubuntu@sha256:ea3ae7c4aa991ce4d63445bbc55c28a065136fb742d1b39f4d2d6ed43545a224 as base-latest
+FROM renovate/ubuntu:bionic@sha256:ea3ae7c4aa991ce4d63445bbc55c28a065136fb742d1b39f4d2d6ed43545a224 as base-bionic
+FROM renovate/ubuntu:focal@sha256:f74b369729c254115d1bbc2cd7a5be8a493953c1ee55875d41121296a41b9f66 as base-focal
 
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM renovate/ubuntu:${FLAVOR} as base
+FROM base-${FLAVOR} as base
 
 ARG BUILDPACK_VERSION
 LABEL org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack" \
-      org.opencontainers.image.version="${BUILDPACK_VERSION}"
+  org.opencontainers.image.version="${BUILDPACK_VERSION}"
 
 USER root
 
 # Zombie killer: https://github.com/Yelp/dumb-init#readme
 RUN apt-get update && \
-    apt-get install -y dumb-init && \
-    rm -rf /var/lib/apt/lists/*
+  apt-get install -y dumb-init && \
+  rm -rf /var/lib/apt/lists/*
 
 # loading env
 ENV BASH_ENV=/usr/local/etc/env
@@ -118,12 +119,14 @@ FROM base as swift
 
 COPY src/swift/ /usr/local/
 
+
 #--------------------------------------
 # Image: helm
 #--------------------------------------
 FROM base as helm
 
 COPY src/helm/ /usr/local/
+
 
 #--------------------------------------
 # Image: full (latest)
