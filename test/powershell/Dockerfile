@@ -4,6 +4,9 @@ FROM ${IMAGE} as build
 # renovate: datasource=github-releases lookupName=PowerShell/PowerShell
 RUN install-tool powershell v7.1.3
 
+# renovate: datasource=github-releases lookupName=lukesampson/scoop
+RUN install-tool scoop 2020-11-26
+
 USER 1000
 
 RUN set -ex; \
