@@ -21,7 +21,7 @@ RUN set -ex; \
   gradle --version;
 
 RUN set -ex; \
-  git init . \
+  git init .; \
   gradle wrapper; \
   git diff; \
   ./gradlew --version
