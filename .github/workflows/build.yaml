@@ -26,6 +26,7 @@ jobs:
             poetry,
             pipenv,
             golang,
+            java
             node,
             php,
             ruby,
