@@ -1,5 +1,5 @@
 ![Build status](https://github.com/renovatebot/docker-buildpack/workflows/build/badge.svg)
-![Docker Image Size](https://img.shields.io/docker/image-size/renovate/buildpack/latest)
+![Docker Image Size (latest)](https://img.shields.io/docker/image-size/renovate/buildpack/latest)
 
 # docker-buildpack
 
