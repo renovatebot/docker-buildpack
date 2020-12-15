@@ -18,7 +18,13 @@ RUN install-tool gradle 6.7.1
 USER 1000
 
 RUN set -ex; \
-  gradle --version
+  gradle --version;
+
+RUN set -ex; \
+  git init . \
+  gradle wrapper; \
+  git diff; \
+  ./gradlew --version
 
 
 #--------------------------------------
