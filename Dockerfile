@@ -135,6 +135,7 @@ FROM base as powershell
 
 COPY src/powershell/ /usr/powershell/
 
+
 #--------------------------------------
 # Image: full (latest)
 #--------------------------------------
