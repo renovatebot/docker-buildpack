@@ -8,6 +8,7 @@ fi
 . /usr/local/build/util.sh
 
 TOOLNAME=${1}
+TOOLVERSION=${1//-/_}
 TOOL="/usr/local/build/${1}.sh"
 shift;
 
@@ -16,10 +17,10 @@ if [[ ! -f "$TOOL" ]]; then
   exit 1;
 fi
 
-ENVNAME=${TOOLNAME^^}_VERSION
+ENVNAME=${TOOLVERSION^^}_VERSION
 
 if [[ "${1}" ]]; then
-  export $ENVNAME=$1
+  export "$ENVNAME=$1"
   shift;
 fi
 
