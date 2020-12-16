@@ -9,8 +9,8 @@ function refreshenv () {
 refreshenv
 
 function export_env () {
-  export ${1}=${2}
-  echo export ${1}=\${${1}-${2}} >> $BASH_ENV
+  export "${1}=${2}"
+  echo export "${1}=\${${1}-${2}}" >> $BASH_ENV
 }
 
 function export_path () {

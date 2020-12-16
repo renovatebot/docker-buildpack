@@ -19,7 +19,7 @@ fi
 ENVNAME=${TOOLNAME^^}_VERSION
 
 if [[ "${1}" ]]; then
-  export $ENVNAME=$1
+  export "$ENVNAME=$1"
   shift;
 fi
 
