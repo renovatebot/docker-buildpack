@@ -99,7 +99,7 @@ jobs:
           echo "FLAVOR_TAG=${FLAVOR_TAG}" >> $GITHUB_ENV
 
       - name: Build and Publish
-        uses: renovatebot/internal-tools@v1.2.10
+        uses: renovatebot/internal-tools@v1.2.11
         with:
           command: docker-builder
           build-args: IMAGE,FLAVOR
