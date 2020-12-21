@@ -58,6 +58,8 @@ RUN set -ex; \
 #--------------------------------------
 FROM build as testc
 
+RUN install-apt libffi-dev
+
 USER 1000
 
 RUN gem install cocoapods -v 1.9.1
@@ -73,6 +75,8 @@ RUN set -ex; \
 # test: global cocoapods
 #--------------------------------------
 FROM build as testd
+
+RUN install-apt libffi-dev
 
 # renovate: datasource=rubygems versioning=ruby
 RUN install-gem cocoapods 1.9.1
