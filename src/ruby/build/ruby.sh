@@ -24,18 +24,20 @@ curl -sSfLo ruby.tar.xz ${RUBY_URL}/${RUBY_VERSION}/ruby-${RUBY_VERSION}-${CODEN
 
 if [[ -f ruby.tar.xz ]]; then
   echo "Using prebuild ruby for ${CODENAME}"
-  install-apt \
+  apt_install \
     build-essential \
+    libffi-dev \
     ;
   tar -C /usr/local/ruby -xf ruby.tar.xz
   rm ruby.tar.xz
 else
   echo 'No prebuild ruby found, building from source'
-  install-apt \
+  apt_install \
     build-essential \
     libreadline-dev \
     libssl-dev \
     zlib1g-dev \
+    libffi-dev \
     ;
 
   if [[ ! -x "$(command -v ruby-build)" ]]; then
