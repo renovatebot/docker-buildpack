@@ -10,52 +10,9 @@ on:
 
 env:
   DRY_RUN: ${{ github.ref != 'refs/heads/master' }}
-  # https://github.com/chalk/supports-color/issues/106
-  FORCE_COLOR: true
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        test:
-          [
-            erlang,
-            poetry,
-            pipenv,
-            golang,
-            java,
-            node,
-            php,
-            ruby,
-            rust,
-            dotnet,
-            swift,
-            helm,
-            powershell,
-          ]
-        flavor: [bionic, focal]
-
-    timeout-minutes: 10
-
-    env:
-      DOCKER_BUILDKIT: 1
-      IMAGE: buildpack
-      FLAVOR: ${{ matrix.flavor }}
-
-    steps:
-      - uses: actions/checkout@v2.3.4
-
-      - name: build
-        run: docker build -t ${IMAGE} --build-arg FLAVOR .
-
-      - name: test
-        run: docker build --build-arg IMAGE ./test/${{ matrix.test }}
-
-  release:
-    needs: [test]
+  build:
     runs-on: ubuntu-latest
 
     timeout-minutes: 15
@@ -64,18 +21,18 @@ jobs:
       matrix:
         tag:
           [
+            dotnet,
             erlang,
             golang,
             java,
+            helm,
             node,
             php,
+            powershell,
             python,
             ruby,
             rust,
-            dotnet,
             swift,
-            helm,
-            powershell,
             latest,
           ]
         flavor: [latest, bionic, focal]
@@ -97,6 +54,12 @@ jobs:
           FLAVOR_TAG=${FLAVOR_TAG/-latest/}
           FLAVOR_TAG=${FLAVOR_TAG/latest-/}
           echo "FLAVOR_TAG=${FLAVOR_TAG}" >> $GITHUB_ENV
+
+      - name: build
+        run: docker build -t ${IMAGE} --build-arg FLAVOR .
+
+      - name: test
+        run: docker build --build-arg IMAGE ./test/${{ matrix.test }}
 
       - name: Build and Publish
         uses: renovatebot/internal-tools@v1.2.11
