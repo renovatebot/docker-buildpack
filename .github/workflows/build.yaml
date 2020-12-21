@@ -10,6 +10,7 @@ on:
 
 env:
   DRY_RUN: ${{ github.ref != 'refs/heads/master' }}
+  DOCKER_BUILDKIT: 1
 
 jobs:
   build:
@@ -59,7 +60,7 @@ jobs:
         run: docker build -t ${IMAGE} --build-arg FLAVOR .
 
       - name: test
-        run: docker build --build-arg IMAGE ./test/${{ matrix.test }}
+        run: docker build --build-arg IMAGE ./test/${{ matrix.tag }}
 
       - name: Build and Publish
         uses: renovatebot/internal-tools@v1.2.11
