@@ -73,6 +73,13 @@ FROM base as target-java
 
 COPY src/java/ /usr/local/
 
+#--------------------------------------
+# Image: nix
+#--------------------------------------
+FROM base as target-nix
+
+COPY src/nix/ /usr/local/
+
 
 #--------------------------------------
 # Image: node
@@ -142,6 +149,7 @@ COPY src/erlang/ /usr/local/
 COPY src/golang/ /usr/local/
 COPY src/helm/ /usr/local/
 COPY src/java/ /usr/local/
+COPY src/nix/ /usr/local/
 COPY src/node/ /usr/local/
 COPY src/php/ /usr/local/
 COPY src/powershell/ /usr/local/
