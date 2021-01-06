@@ -34,13 +34,19 @@ RUN pip install poetry==1.0.5
 #--------------------------------------
 # test a: build
 #--------------------------------------
-FROM build as testa
+FROM pipenv as testa
 
 USER root
 
 # try install again, sould skip
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
+
+USER ubuntu
+
+RUN set -ex; \
+  cd test/b-pipenv; \
+  pipenv lock;
 
 
 #--------------------------------------

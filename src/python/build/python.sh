@@ -17,9 +17,14 @@ if [[ -d "/usr/local/python/${PYTHON_VERSION}" ]]; then
   exit 0
 fi
 
-. /etc/lsb-release
+DISTRIB_RELEASE=$(. /etc/os-release && echo ${VERSION_ID})
 
 mkdir -p /usr/local/python
+
+if [[ ! -x "$(command -v pyenv)" ]]; then
+  git clone --depth=1 https://github.com/pyenv/pyenv.git /usr/local/pyenv
+  export_path "/usr/local/pyenv/bin:/usr/local/pyenv/plugins/python-build/bin"
+fi
 
 curl -sSfLo python.tar.xz ${PYTHON_URL}/${DISTRIB_RELEASE}/python-${PYTHON_VERSION}.tar.xz || echo 'Ignore download error'
 
@@ -40,13 +45,6 @@ else
     zlib1g-dev \
     ;
 
-  if [[ ! -x "$(command -v python-build)" ]]; then
-    git clone https://github.com/pyenv/pyenv.git
-    pushd pyenv/plugins/python-build
-    ./install.sh
-    popd
-    rm -rf pyenv
-  fi
   python-build $PYTHON_VERSION /usr/local/python/$PYTHON_VERSION
 fi
 
