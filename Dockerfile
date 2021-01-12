@@ -43,6 +43,14 @@ COPY src/dotnet/ /usr/local/
 
 
 #--------------------------------------
+# Image: bazel
+#--------------------------------------
+FROM base as bazel
+
+COPY src/bazel/ /usr/local/
+
+
+#--------------------------------------
 # Image: erlang
 #--------------------------------------
 FROM base as target-erlang
@@ -136,6 +144,7 @@ COPY src/swift/ /usr/local/
 #--------------------------------------
 FROM base as target-latest
 
+COPY src/bazel/ /usr/bazel/
 COPY src/docker/ /usr/local/
 COPY src/dotnet/ /usr/local/
 COPY src/erlang/ /usr/local/
