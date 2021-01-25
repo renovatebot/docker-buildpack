@@ -63,7 +63,7 @@ jobs:
         run: docker build --build-arg IMAGE ./test/${{ matrix.tag }}
 
       - name: Build and Publish
-        uses: renovatebot/internal-tools@v1.2.19
+        uses: renovatebot/internal-tools@v1.2.21
         with:
           command: docker-builder
           build-args: IMAGE,FLAVOR
