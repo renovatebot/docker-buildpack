@@ -10,7 +10,7 @@ RUN touch /.dummy
 FROM base as testa
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool php 7.4.6
+RUN install-tool php 7.4.14
 
 # renovate: datasource=github-releases depName=composer/composer
 RUN install-tool composer 1.10.5
