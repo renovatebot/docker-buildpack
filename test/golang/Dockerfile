@@ -10,7 +10,7 @@ RUN touch /.dummy
 FROM build as testa
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool golang 1.14.4
+RUN install-tool golang 1.14.14
 
 USER ubuntu
 
