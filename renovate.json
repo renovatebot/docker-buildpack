@@ -25,5 +25,9 @@
     "paths": ["test/"],
     "updateTypes": ["minor", "major"],
     "automerge": false
+  }, {
+    "description": "Use node versioning to get accurate stable determination",
+    "packageNames": ["node"],
+    "versioning": "node"
   }]
 }
