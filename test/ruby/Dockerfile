@@ -1,5 +1,5 @@
-ARG IMAGE=renovate/buildpack
-FROM ${IMAGE} as build
+ARG TARGET=renovate/buildpack
+FROM ${TARGET} as build
 
 # renovate: datasource=ruby-version depName=ruby-version versioning=ruby
 RUN install-tool ruby 2.6.4

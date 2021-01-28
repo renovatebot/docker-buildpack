@@ -1,5 +1,5 @@
-ARG IMAGE=renovate/buildpack
-FROM ${IMAGE} as base
+ARG TARGET=renovate/buildpack
+FROM ${TARGET} as base
 
 
 RUN touch /.dummy

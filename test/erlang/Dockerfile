@@ -1,5 +1,5 @@
-ARG IMAGE=renovate/buildpack
-FROM ${IMAGE}
+ARG TARGET=renovate/buildpack
+FROM ${TARGET}
 
 # Erlang
 

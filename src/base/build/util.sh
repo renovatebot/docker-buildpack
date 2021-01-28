@@ -49,11 +49,14 @@ function link_wrapper () {
   ln -sf $SOURCE $TARGET
 }
 
+VERSION_PREFIX="^v?(.+)"
 
 function check_version () {
   if [[ -z ${!1+x} ]]; then
     echo "No ${1} defined - aborting: ${!1}"
     exit 1
+  elif [[ "${!1}" =~ ${VERSION_PREFIX} ]]; then
+    export "$1=${BASH_REMATCH[1]}"
   fi
 }
 
@@ -65,7 +68,7 @@ function check_command () {
 }
 
 
-SEMVER_REGEX="^(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?([a-z-].*)?$"
+SEMVER_REGEX="^?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?([a-z-].*)?$"
 
 function check_semver () {
   if [[ ! "${1}" =~ ${SEMVER_REGEX} ]]; then

@@ -1,5 +1,5 @@
-ARG IMAGE=renovate/buildpack
-FROM ${IMAGE} as build
+ARG TARGET=renovate/buildpack
+FROM ${TARGET} as build
 
 # renovate: datasource=docker versioning=docker
 RUN install-tool dotnet 3.1.403
@@ -7,7 +7,7 @@ RUN install-tool dotnet 3.1.403
 # renovate: datasource=docker versioning=docker
 RUN install-tool dotnet 3.1.403
 
-USER ubuntu 
+USER ubuntu
 
 COPY --chown=ubuntu:0 test test
 
