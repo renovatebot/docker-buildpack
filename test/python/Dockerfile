@@ -6,7 +6,7 @@ RUN touch /.dummy
 # Python
 
 # renovate: datasource=docker
-RUN install-tool python 3.8.3
+RUN install-tool python 3.8.7
 
 USER ubuntu
 
