@@ -3,7 +3,7 @@ FROM ${IMAGE} as build
 
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool node 12.16.2
+RUN install-tool node 12.16.3
 
 RUN touch /.dummy
 
