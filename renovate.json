@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>renovatebot/presets-internal:docker-images"],
+  "ignorePaths": [],
   "packageRules": [{
     "description": "Raise all PRs including major updates without approvals",
     "packagePatterns": ["*"],
