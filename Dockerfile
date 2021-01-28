@@ -182,8 +182,4 @@ COPY src/powershell/ /usr/local/
 #--------------------------------------
 FROM target-${TARGET} as final
 
-ARG USER_ID
-
-USER ${USER_ID}
-
 CMD ["bash"]
