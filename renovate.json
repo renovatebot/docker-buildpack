@@ -7,6 +7,15 @@
     "packagePatterns": ["*"],
     "dependencyDashboardApproval": false
   }, {
+    "description": "Disable all managers in test/ by default",
+    "paths": ["test/"],
+    "enabled": false
+  }, {
+    "description": "Enable the regex manager only for test/",
+    "paths": ["test/"],
+    "managers": ["regex"],
+    "enabled": true
+  }, {
     "description": "Separate patch updates in test/ so that we can automerge them",
     "paths": ["test/"],
     "separateMinorPatch": true
