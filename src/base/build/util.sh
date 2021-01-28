@@ -56,6 +56,7 @@ function check_version () {
     echo "No ${1} defined - aborting: ${!1}"
     exit 1
   elif [[ "${!1}" =~ ${VERSION_PREFIX} ]]; then
+    # trim leading v
     export "$1=${BASH_REMATCH[1]}"
   fi
 }
@@ -68,7 +69,7 @@ function check_command () {
 }
 
 
-SEMVER_REGEX="^?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?([a-z-].*)?$"
+SEMVER_REGEX="^(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))?(\.(0|[1-9][0-9]*))?([a-z-].*)?$"
 
 function check_semver () {
   if [[ ! "${1}" =~ ${SEMVER_REGEX} ]]; then
