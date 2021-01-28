@@ -7,9 +7,13 @@
     "packagePatterns": ["*"],
     "dependencyDashboardApproval": false
   }, {
-    "description": "Don't automerge test minor/major because we might want to test old versions too",
+    "description": "Separate patch updates in test/ so that we can automerge them",
     "paths": ["test/"],
-    "automerge": false,
     "separateMinorPatch": true
+  }, {
+    "description": "Don't automerge test minor/major because we might want to retain old versions in tests too",
+    "paths": ["test/"],
+    "updateTypes": ["minor", "major"],
+    "automerge": false
   }]
 }
