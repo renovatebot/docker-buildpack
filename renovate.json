@@ -1,4 +1,19 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>renovatebot/presets-internal:docker-images"]
+  "extends": ["github>renovatebot/presets-internal:docker-images"],
+  "ignorePaths": [],
+  "packageRules": [{
+    "description": "Don't hold back any PRs for approval",
+    "packagePatterns": ["*"],
+    "dependencyDashboardApproval": false
+  }, {
+    "description": "Separate patch updates in test/ so that we can automerge them",
+    "paths": ["test/"],
+    "separateMinorPatch": true
+  }, {
+    "description": "Don't automerge test minor/major because we might want to retain old versions in tests too",
+    "paths": ["test/"],
+    "updateTypes": ["minor", "major"],
+    "automerge": false
+  }]
 }
