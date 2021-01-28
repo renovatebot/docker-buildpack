@@ -8,7 +8,7 @@ RUN install-tool erlang 22.3.2-1
 # Elixir
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool elixir 1.8.2
+RUN install-tool elixir 1.11.3
 
 USER ubuntu
 
