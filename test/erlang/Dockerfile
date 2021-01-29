@@ -3,7 +3,7 @@ FROM ${IMAGE}
 
 # Erlang
 
-# renovate: datasource=docker versioning=loose
+# renovate: datasource=github-releases versioning=loose
 RUN install-tool erlang 22.3.2
 
 # Elixir
