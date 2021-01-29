@@ -24,14 +24,12 @@ FROM ubuntu:focal@sha256:703218c0465075f4425e58fac086e09e1de5c340b12976ab9eb8ad2
 #--------------------------------------
 FROM ${BASE_IMAGE} as base
 
-ARG BUILDPACK_VERSION=custom
 ARG USER_NAME
 ARG USER_ID
 ARG APP_ROOT
 
 LABEL maintainer="Rhys Arkins <rhys@arkins.net>" \
-  org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack" \
-  org.opencontainers.image.version="${BUILDPACK_VERSION}"
+  org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack"
 
 # loading env
 ENV BASH_ENV=/usr/local/etc/env
