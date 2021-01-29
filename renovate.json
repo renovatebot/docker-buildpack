@@ -29,5 +29,9 @@
     "description": "Use node versioning to get accurate stable determination",
     "packageNames": ["node"],
     "versioning": "node"
+  }, {
+    "description": "Override erlang version extraction",
+    "packageNames": ["erlang"],
+    "extractVersion": "^(?<version>\\d+\\.\\d+(?:\\.\\d+(?:\\.\\d+)?)?)$"
   }]
 }
