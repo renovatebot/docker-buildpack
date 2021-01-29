@@ -32,6 +32,6 @@
   }, {
     "description": "Override erlang version extraction",
     "packageNames": ["erlang"],
-    "extractVersion": "^(?<version>\\d+\\.\\d+(?:\\.\\d+(?:\\.\\d+)?)?)$"
+    "extractVersion": "^OTP-(?<version>.+)$"
   }]
 }
