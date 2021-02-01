@@ -27,7 +27,7 @@ ARG APP_ROOT
 LABEL maintainer="Rhys Arkins <rhys@arkins.net>" \
   org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack"
 
-# loading env
+#  autoloading buildpack env
 ENV BASH_ENV=/usr/local/etc/env
 SHELL ["bash" , "-c"]
 

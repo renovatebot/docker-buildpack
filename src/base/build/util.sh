@@ -6,7 +6,9 @@ function refreshenv () {
   fi
 }
 
-refreshenv
+if [[ -z "${BUILDPACK+x}" ]]; then
+  refreshenv
+fi
 
 function export_env () {
   export "${1}=${2}"
@@ -26,7 +28,7 @@ function shell_wrapper () {
   cat > $FILE <<- EOM
 #!/bin/bash
 
-if [[ -f "\$BASH_ENV" ]]; then
+if [[ -f "\$BASH_ENV" && -z "${BUILDPACK+x}" ]]; then
   . \$BASH_ENV
 fi
 
