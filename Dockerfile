@@ -6,10 +6,10 @@ ARG TARGET=latest
 #--------------------------------------
 # Ubuntu base image to use
 #--------------------------------------
-ARG BASE_IMAGE=ubuntu:bionic
+ARG BASE_IMAGE=ubuntu
 
 #--------------------------------------
-# Default customizable args
+# Non-root user to create
 #--------------------------------------
 ARG USER_NAME=user
 ARG USER_ID=1000
@@ -150,18 +150,18 @@ COPY src/powershell/ /usr/local/
 FROM base as target-latest
 
 COPY src/docker/ /usr/local/
+COPY src/dotnet/ /usr/local/
 COPY src/erlang/ /usr/local/
 COPY src/golang/ /usr/local/
+COPY src/helm/ /usr/local/
 COPY src/java/ /usr/local/
 COPY src/node/ /usr/local/
 COPY src/php/ /usr/local/
+COPY src/powershell/ /usr/local/
 COPY src/python/ /usr/local/
 COPY src/ruby/ /usr/local/
 COPY src/rust/ /usr/local/
-COPY src/dotnet/ /usr/local/
 COPY src/swift/ /usr/local/
-COPY src/helm/ /usr/local/
-COPY src/powershell/ /usr/local/
 
 
 #--------------------------------------
