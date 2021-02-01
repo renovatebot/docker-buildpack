@@ -27,7 +27,7 @@ rm rust.tar.gz
 rm -rf rust
 
 export_env RUST_BACKTRACE 1
-export_env CARGO_HOME "/home/${USER_NAME}/.cargo"
+export_env CARGO_HOME "/home/ubuntu/.cargo"
 export_path "\$CARGO_HOME/bin:/usr/local/rust/${RUST_VERSION}/bin"
 
 cargo --version
