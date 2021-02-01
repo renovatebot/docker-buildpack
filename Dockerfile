@@ -13,7 +13,6 @@ ARG BASE_IMAGE=ubuntu:bionic
 #--------------------------------------
 ARG USER_NAME=user
 ARG USER_ID=1000
-ARG APP_ROOT=/usr/src/app
 
 #--------------------------------------
 # Image: base
@@ -22,7 +21,6 @@ FROM ${BASE_IMAGE} as base
 
 ARG USER_NAME
 ARG USER_ID
-ARG APP_ROOT
 
 LABEL maintainer="Rhys Arkins <rhys@arkins.net>" \
   org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack"
@@ -30,14 +28,6 @@ LABEL maintainer="Rhys Arkins <rhys@arkins.net>" \
 #  autoloading buildpack env
 ENV BASH_ENV=/usr/local/etc/env
 SHELL ["bash" , "-c"]
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-
-ENV DEBIAN_FRONTEND noninteractive
-ENV LC_ALL C.UTF-8
-ENV LANG C.UTF-8
-
-WORKDIR ${APP_ROOT}
 
 COPY src/base/ /usr/local/
 
@@ -179,4 +169,5 @@ COPY src/powershell/ /usr/local/
 #--------------------------------------
 FROM target-${TARGET} as final
 
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["bash"]

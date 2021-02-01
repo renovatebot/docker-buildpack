@@ -5,11 +5,6 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
-if [[ ! -d "$APP_ROOT" ]]; then
-  echo "Missing APP_ROOT - skipping: ${APP_ROOT}"
-  exit 1;
-fi
-
 if [[ -z "${USER_ID+x}" ]]; then
   echo "No USER_ID defined - skipping: ${USER_ID}"
   exit 1;
@@ -30,11 +25,11 @@ echo "APT::Get::Install-Suggests \"false\";" | tee -a /etc/apt/apt.conf.d/buildp
 
 # Set up user and home directory with access to users in the root group (0)
 # https://docs.openshift.com/container-platform/3.6/creating_images/guidelines.html#use-uid
-groupadd --gid ${USER_ID} ${USER_NAME}; \
+groupadd --gid ${USER_ID} ${USER_NAME};
 useradd --uid ${USER_ID} --gid 0 --groups ${USER_NAME} --shell /bin/bash --create-home ${USER_NAME}
-
-chown ${USER_ID}:0 ${APP_ROOT} && chmod g=u ${APP_ROOT}
-
 
 export_env USER_NAME ${USER_NAME}
 export_env USER_ID ${USER_ID}
+export_env DEBIAN_FRONTEND "noninteractive"
+export_env ENV LC_ALL "C.UTF-8"
+export_env ENV LANG "C.UTF-8"
