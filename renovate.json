@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>renovatebot/presets-internal:docker-images"],
+  "extends": ["github>renovatebot/.github"],
   "ignorePaths": [],
   "packageRules": [{
     "description": "Don't hold back any PRs for approval",
