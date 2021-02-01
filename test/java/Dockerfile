@@ -1,5 +1,5 @@
-ARG BASE_IMAGE=renovate/buildpack
-FROM ${BASE_IMAGE} as build
+ARG IMAGE=renovate/buildpack
+FROM ${IMAGE} as build
 
 # renovate: datasource=docker depName=openjdk versioning=docker
 RUN install-tool java 11

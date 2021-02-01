@@ -1,5 +1,5 @@
-ARG BASE_IMAGE=renovate/buildpack
-FROM ${BASE_IMAGE} as build
+ARG IMAGE=renovate/buildpack
+FROM ${IMAGE} as build
 
 
 RUN install-tool helm 3.4.0

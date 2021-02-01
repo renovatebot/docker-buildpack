@@ -1,5 +1,5 @@
-ARG BASE_IMAGE=renovate/buildpack
-FROM ${BASE_IMAGE} as build
+ARG IMAGE=renovate/buildpack
+FROM ${IMAGE} as build
 
 # renovate: datasource=docker versioning=docker
 RUN install-tool rust 1.49.0
