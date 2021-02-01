@@ -1,5 +1,5 @@
-ARG TARGET=renovate/buildpack
-FROM ${TARGET} as build
+ARG BASE_IMAGE=renovate/buildpack
+FROM ${BASE_IMAGE} as build
 
 # renovate: datasource=docker versioning=docker
 RUN install-tool dotnet 3.1.403

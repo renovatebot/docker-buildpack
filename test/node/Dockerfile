@@ -1,5 +1,5 @@
-ARG TARGET=renovate/buildpack
-FROM ${TARGET} as build
+ARG BASE_IMAGE=renovate/buildpack
+FROM ${BASE_IMAGE} as build
 
 
 # renovate: datasource=docker versioning=docker
@@ -77,7 +77,7 @@ RUN set -ex; cd test/a; pnpm i
 # test: node 15
 #--------------------------------------
 
-FROM ${TARGET} as testd
+FROM ${BASE_IMAGE} as testd
 
 RUN install-tool node 15.0.1
 
@@ -112,7 +112,7 @@ RUN set -ex; \
 #--------------------------------------
 # final
 #--------------------------------------
-FROM ${TARGET}
+FROM ${BASE_IMAGE}
 
 COPY --from=testa /.dummy /.dummy
 COPY --from=testb /.dummy /.dummy

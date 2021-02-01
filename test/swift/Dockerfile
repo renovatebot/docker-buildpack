@@ -1,5 +1,5 @@
-ARG TARGET=renovate/buildpack
-FROM ${TARGET} as build
+ARG BASE_IMAGE=renovate/buildpack
+FROM ${BASE_IMAGE} as build
 
 RUN install-tool swift 5.3.0
 

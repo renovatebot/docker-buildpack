@@ -42,6 +42,7 @@ jobs:
       TARGET: ${{ matrix.tag }}
       TARGET_TAG: ${{ matrix.tag }}-${{ matrix.image }}
       IMAGE: ${{ matrix.image }}
+      TEST_IMAGE: renovate/buildpack-test:${{ matrix.tag }}
 
     steps:
       - uses: actions/checkout@v2.3.4
@@ -54,10 +55,10 @@ jobs:
         run: .github/bin/env.sh
 
       - name: build
-        run: docker build -t ${TARGET} --build-arg TARGET --build-arg BASE_VERSION .
+        run: docker build -t ${{ env.TEST_IMAGE }}} --build-arg TARGET --build-arg BASE_VERSION .
 
       - name: test
-        run: docker build --build-arg TARGET ./test/${{ matrix.tag }}
+        run: docker build --build-arg BASE_IMAGE=${{ env.TEST_IMAGE }} ./test/${{ matrix.tag }}
 
       - name: Build and Publish
         uses: renovatebot/internal-tools@v1.2.23
