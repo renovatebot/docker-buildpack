@@ -52,7 +52,7 @@ RUN install-apt \
   xz-utils \
   openssh-client
 
-# renovate: datasource=github-tags
+# renovate: datasource=github-tags lookupName=git/git
 RUN install-tool git v2.29.2
 
 # BEGIN: sidecar buildpacks
