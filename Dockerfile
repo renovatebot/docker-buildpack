@@ -11,16 +11,16 @@ ARG BASE_IMAGE=ubuntu
 #--------------------------------------
 # Non-root user to create
 #--------------------------------------
-ARG USER_NAME=user
 ARG USER_ID=1000
+ARG USER_NAME=user
 
 #--------------------------------------
 # Image: base
 #--------------------------------------
 FROM ${BASE_IMAGE} as base
 
-ARG USER_NAME
 ARG USER_ID
+ARG USER_NAME
 
 LABEL maintainer="Rhys Arkins <rhys@arkins.net>" \
   org.opencontainers.image.source="https://github.com/renovatebot/docker-buildpack"
@@ -34,18 +34,27 @@ COPY src/base/ /usr/local/
 RUN install-buildpack
 
 RUN install-apt \
+  ca-certificates \
+  curl \
   dumb-init \
   gnupg \
-  curl \
-  ca-certificates \
+  openssh-client \
   unzip \
   xz-utils \
-  openssh-client
+  ;
 
 # renovate: datasource=github-tags lookupName=git/git
 RUN install-tool git v2.29.2
 
 # BEGIN: sidecar buildpacks
+
+#--------------------------------------
+# Image: dotnet
+#--------------------------------------
+FROM base as target-dotnet
+
+COPY src/dotnet/ /usr/local/
+
 
 #--------------------------------------
 # Image: erlang
@@ -61,6 +70,14 @@ COPY src/erlang/ /usr/local/
 FROM base as target-golang
 
 COPY src/golang/ /usr/local/
+
+
+#--------------------------------------
+# Image: helm
+#--------------------------------------
+FROM base as target-helm
+
+COPY src/helm/ /usr/local/
 
 
 #--------------------------------------
@@ -88,6 +105,14 @@ COPY src/php/ /usr/local/
 
 
 #--------------------------------------
+# Image: powershell
+#--------------------------------------
+FROM base as target-powershell
+
+COPY src/powershell/ /usr/local/
+
+
+#--------------------------------------
 # Image: python
 #--------------------------------------
 FROM base as target-python
@@ -112,35 +137,11 @@ COPY src/rust/ /usr/local/
 
 
 #--------------------------------------
-# Image: dotnet
-#--------------------------------------
-FROM base as target-dotnet
-
-COPY src/dotnet/ /usr/local/
-
-
-#--------------------------------------
 # Image: swift
 #--------------------------------------
 FROM base as target-swift
 
 COPY src/swift/ /usr/local/
-
-
-#--------------------------------------
-# Image: helm
-#--------------------------------------
-FROM base as target-helm
-
-COPY src/helm/ /usr/local/
-
-
-#--------------------------------------
-# Image: powershell
-#--------------------------------------
-FROM base as target-powershell
-
-COPY src/powershell/ /usr/local/
 
 # END: sidecar buildpacks
 
