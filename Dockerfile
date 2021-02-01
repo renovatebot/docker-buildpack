@@ -6,23 +6,16 @@ ARG TARGET=latest
 #--------------------------------------
 # Ubuntu base image to use
 #--------------------------------------
-ARG FLAVOR=bionic
-ARG BASE_IMAGE=${FLAVOR}
+# renovate: datasource=docker
+ARG BASE_VERSION=ubuntu:bionic@sha256:ea188fdc5be9b25ca048f1e882b33f1bc763fb976a8a4fea446b38ed0efcbeba
 ARG USER_NAME=ubuntu
 ARG USER_ID=1000
 ARG APP_ROOT=/usr/src/app
 
 #--------------------------------------
-# renovate rebuild trigger
-#--------------------------------------
-FROM ubuntu:bionic@sha256:ea188fdc5be9b25ca048f1e882b33f1bc763fb976a8a4fea446b38ed0efcbeba as latest
-FROM ubuntu:bionic@sha256:ea188fdc5be9b25ca048f1e882b33f1bc763fb976a8a4fea446b38ed0efcbeba as bionic
-FROM ubuntu:focal@sha256:703218c0465075f4425e58fac086e09e1de5c340b12976ab9eb8ad26615c3715 as focal
-
-#--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ${BASE_IMAGE} as base
+FROM ${BASE_VERSION} as base
 
 ARG USER_NAME
 ARG USER_ID
