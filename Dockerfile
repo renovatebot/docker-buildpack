@@ -145,7 +145,7 @@ COPY src/helm/ /usr/local/
 #--------------------------------------
 FROM base as target-powershell
 
-COPY src/powershell/ /usr/powershell/
+COPY src/powershell/ /usr/local/
 
 
 #--------------------------------------
