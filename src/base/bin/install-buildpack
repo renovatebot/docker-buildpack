@@ -31,5 +31,5 @@ useradd --uid ${USER_ID} --gid 0 --groups ${USER_NAME} --shell /bin/bash --creat
 export_env USER_NAME ${USER_NAME}
 export_env USER_ID ${USER_ID}
 export_env DEBIAN_FRONTEND "noninteractive"
-export_env ENV LC_ALL "C.UTF-8"
-export_env ENV LANG "C.UTF-8"
+export_env LC_ALL "C.UTF-8"
+export_env LANG "C.UTF-8"
