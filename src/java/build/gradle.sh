@@ -28,6 +28,6 @@ org.gradle.daemon=false
 org.gradle.caching=false
 EOM
 
-chown -R /home/${USER_NAME}/.m2 /home/${USER_NAME}/.gradle
+chown -R ${USER_ID} /home/${USER_NAME}/.m2 /home/${USER_NAME}/.gradle
 
 gradle --version

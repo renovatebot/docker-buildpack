@@ -7,6 +7,10 @@ ARG TARGET=latest
 # Ubuntu base image to use
 #--------------------------------------
 ARG BASE_IMAGE=ubuntu:bionic
+
+#--------------------------------------
+# Default customizable args
+#--------------------------------------
 ARG USER_NAME=user
 ARG USER_ID=1000
 ARG APP_ROOT=/usr/src/app
@@ -25,9 +29,9 @@ LABEL maintainer="Rhys Arkins <rhys@arkins.net>" \
 
 # loading env
 ENV BASH_ENV=/usr/local/etc/env
-SHELL ["/bin/bash" , "-c"]
+SHELL ["bash" , "-c"]
 
-ENTRYPOINT ["/bin/bash" , "-c", "docker-entrypoint.sh" ]
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8

@@ -38,12 +38,11 @@ FROM build as testb
 RUN npm install -g yarn
 
 RUN set -ex; \
-  [ "$(command -v yarn)" = "/home/user/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
+  [ "$(command -v yarn)" = "/home/${USER_NAME}/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
   yarn --version;
 
 
 RUN set -ex; cd test/a; yarn
-
 
 ENV NPM_CONFIG_PREFIX=/tmp/.npm
 RUN npm install -g yarn
@@ -98,7 +97,7 @@ RUN set -ex; cd test/a; npm i
 
 RUN npm install -g yarn
 RUN set -ex; \
-  [ "$(command -v yarn)" = "/home/user/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
+  [ "$(command -v yarn)" = "/home/${USER_NAME}/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
   yarn --version;
 
 RUN mkdir -p /tmp/.npm/{bin,lib}

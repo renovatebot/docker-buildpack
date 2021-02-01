@@ -35,3 +35,4 @@ chown ${USER_ID}:0 ${APP_ROOT} && chmod g=u ${APP_ROOT}
 
 
 export_env USER_NAME ${USER_NAME}
+export_env USER_ID ${USER_ID}

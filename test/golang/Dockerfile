@@ -31,8 +31,10 @@ RUN set -ex; \
     go mod tidy; \
     git status -s;
 
-ENV GOPATH=/home/user/.go
+USER root
+RUN echo export "GOPATH=/home/${USER_NAME}/.go" | tee -a $BASH_ENV
 
+USER 1000
 RUN go env
 RUN set -ex; cd test/c; go get -d ./...; cat go.sum
 
