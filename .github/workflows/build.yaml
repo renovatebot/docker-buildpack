@@ -55,7 +55,7 @@ jobs:
         run: .github/bin/env.sh
 
       - name: build
-        run: docker build -t ${{ env.TEST_IMAGE }} --build-arg TARGET --build-arg BASE_VERSION .
+        run: docker build -t ${{ env.TEST_IMAGE }} --build-arg TARGET --build-arg BASE_IMAGE .
 
       - name: test
         run: docker build --build-arg IMAGE=${{ env.TEST_IMAGE }} ./test/${{ matrix.tag }}
@@ -64,7 +64,7 @@ jobs:
         uses: renovatebot/internal-tools@v1.2.23
         with:
           command: docker-builder
-          build-args: TARGET,BASE_VERSION
+          build-args: TARGET,BASE_IMAGE
           last-only: true
           tag-suffix: ${{ env.TARGET_TAG }}
           major-minor: false

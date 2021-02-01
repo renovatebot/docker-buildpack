@@ -6,8 +6,7 @@ ARG TARGET=latest
 #--------------------------------------
 # Ubuntu base image to use
 #--------------------------------------
-# renovate: datasource=docker
-ARG BASE_VERSION=ubuntu:bionic@sha256:ea188fdc5be9b25ca048f1e882b33f1bc763fb976a8a4fea446b38ed0efcbeba
+ARG BASE_IMAGE=ubuntu:bionic
 ARG USER_NAME=ubuntu
 ARG USER_ID=1000
 ARG APP_ROOT=/usr/src/app
@@ -15,7 +14,7 @@ ARG APP_ROOT=/usr/src/app
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ${BASE_VERSION} as base
+FROM ${BASE_IMAGE} as base
 
 ARG USER_NAME
 ARG USER_ID

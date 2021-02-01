@@ -14,4 +14,4 @@ if [[ ! "${line}" =~ $re ]]; then
   exit 1
 fi
 
-echo "BASE_VERSION=${BASH_REMATCH[1]}" | tee -a $GITHUB_ENV
+echo "BASE_IMAGE=${BASH_REMATCH[1]}" | tee -a $GITHUB_ENV
