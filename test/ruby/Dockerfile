@@ -1,10 +1,12 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
-# renovate: datasource=ruby-version depName=ruby-version versioning=ruby
+# renovate: datasource=ruby-version lookupName=ruby-version versioning=ruby
 RUN install-tool ruby 2.6.4
 
 RUN touch /.dummy
+
+WORKDIR /tmp
 
 #--------------------------------------
 # test: bundler
@@ -40,6 +42,7 @@ RUN set -ex; \
 #--------------------------------------
 FROM build as testb
 
+# renovate: datasource=rubygems versioning=ruby
 RUN install-gem bundler 1.17.2
 
 USER 1000

@@ -2,6 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 
+# renovate: datasource=github-releases lookupName=helm/helm
 RUN install-tool helm 3.4.0
 
 USER 1000

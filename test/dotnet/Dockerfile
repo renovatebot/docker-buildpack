@@ -7,6 +7,8 @@ RUN install-tool dotnet 3.1.403
 # renovate: datasource=docker versioning=docker
 RUN install-tool dotnet 3.1.403
 
+WORKDIR /tmp
+
 USER 1000
 
 COPY --chown=1000:0 test test

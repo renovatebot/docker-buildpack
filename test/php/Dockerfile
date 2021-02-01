@@ -1,8 +1,9 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as base
 
-
 RUN touch /.dummy
+
+WORKDIR /tmp
 
 #--------------------------------------
 # test: php 7.4
@@ -12,7 +13,7 @@ FROM base as testa
 # renovate: datasource=docker versioning=docker
 RUN install-tool php 7.4.14
 
-# renovate: datasource=github-releases depName=composer/composer
+# renovate: datasource=github-releases lookupName=composer/composer
 RUN install-tool composer 1.10.5
 
 USER 1000
@@ -51,7 +52,7 @@ FROM base as testb
 # renovate: datasource=docker versioning=docker
 RUN install-tool php 5.6.40
 
-# renovate: datasource=github-releases depName=composer/composer
+# renovate: datasource=github-releases lookupName=composer/composer
 RUN install-tool composer 1.10.5
 
 USER 1000

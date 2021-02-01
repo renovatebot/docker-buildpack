@@ -1,12 +1,14 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
-RUN touch /.dummy
-
 # Python
 
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
+
+RUN touch /.dummy
+
+WORKDIR /tmp
 
 USER 1000
 
@@ -37,7 +39,8 @@ FROM build as testa
 USER root
 
 # try install again, sould skip
-RUN install-tool python 3.8.3
+# renovate: datasource=docker
+RUN install-tool python 3.9.1
 
 
 #--------------------------------------
