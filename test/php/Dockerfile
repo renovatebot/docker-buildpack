@@ -15,7 +15,7 @@ RUN install-tool php 7.4.14
 # renovate: datasource=github-releases depName=composer/composer
 RUN install-tool composer 1.10.5
 
-USER ubuntu
+USER 1000
 
 RUN set -ex; \
   [ ! -z "$(command -v php)" ] && echo "php installed" || exit 1;
@@ -54,7 +54,7 @@ RUN install-tool php 5.6.40
 # renovate: datasource=github-releases depName=composer/composer
 RUN install-tool composer 1.10.5
 
-USER ubuntu
+USER 1000
 
 RUN set -ex; \
   [ ! -z "$(command -v php)" ] && echo "php installed" || exit 1;

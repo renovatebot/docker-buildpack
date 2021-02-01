@@ -4,7 +4,7 @@ FROM ${IMAGE} as build
 
 RUN install-tool helm 3.4.0
 
-USER ubuntu
+USER 1000
 
 RUN set -ex; helm version
 

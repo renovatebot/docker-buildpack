@@ -15,7 +15,7 @@ USER 1000
 
 RUN swift --version
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 RUN set -ex; \
   cd test/a; \
@@ -41,7 +41,7 @@ USER 1000
 
 RUN swift --version
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 
 RUN set -ex; \

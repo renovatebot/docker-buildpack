@@ -7,9 +7,9 @@ RUN install-tool node 14.15.4
 
 RUN touch /.dummy
 
-USER ubuntu
+USER 1000
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 #--------------------------------------
 # test: node
@@ -38,7 +38,7 @@ FROM build as testb
 RUN npm install -g yarn
 
 RUN set -ex; \
-  [ "$(command -v yarn)" = "/home/ubuntu/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
+  [ "$(command -v yarn)" = "/home/user/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
   yarn --version;
 
 
@@ -63,7 +63,7 @@ USER root
 
 RUN install-tool pnpm 4.14.2
 
-USER ubuntu
+USER 1000
 
 
 RUN set -ex; \
@@ -85,9 +85,9 @@ RUN touch /.dummy
 
 RUN install-tool yarn 1.22.5
 
-USER ubuntu
+USER 1000
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 RUN set -ex; \
   npm --version; \
@@ -98,7 +98,7 @@ RUN set -ex; cd test/a; npm i
 
 RUN npm install -g yarn
 RUN set -ex; \
-  [ "$(command -v yarn)" = "/home/ubuntu/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
+  [ "$(command -v yarn)" = "/home/user/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
   yarn --version;
 
 RUN mkdir -p /tmp/.npm/{bin,lib}

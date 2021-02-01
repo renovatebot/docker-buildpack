@@ -8,9 +8,9 @@ RUN touch /.dummy
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
 
-USER ubuntu
+USER 1000
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 
 #--------------------------------------

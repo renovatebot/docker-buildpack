@@ -11,7 +11,7 @@ RUN install-tool erlang 22.3.2
 # renovate: datasource=docker versioning=docker
 RUN install-tool elixir 1.11.3
 
-USER ubuntu
+USER 1000
 
 RUN set -ex; \
     git clone --depth=1 https://github.com/renovate-tests/swarm.git; \

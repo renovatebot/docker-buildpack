@@ -12,9 +12,9 @@ FROM build as testa
 # renovate: datasource=docker versioning=docker
 RUN install-tool golang 1.15.7
 
-USER ubuntu
+USER 1000
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 
 RUN set -ex; cd test/a; go get -d ./...; cat go.sum; go mod tidy; cat go.sum
@@ -31,7 +31,7 @@ RUN set -ex; \
     go mod tidy; \
     git status -s;
 
-ENV GOPATH=/home/ubuntu/.go
+ENV GOPATH=/home/user/.go
 
 RUN go env
 RUN set -ex; cd test/c; go get -d ./...; cat go.sum

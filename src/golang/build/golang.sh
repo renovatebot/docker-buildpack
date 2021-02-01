@@ -36,7 +36,7 @@ export_path "/usr/local/go/${GOLANG_VERSION}/bin:\$GOPATH/bin"
 
 mkdir -p "$GOPATH/src" "$GOPATH/bin" "$GOPATH/pkg"
 
-chown -R ubuntu $GOPATH
+chown -R $GOPATH
 chmod -R g+w $GOPATH
 
 go version

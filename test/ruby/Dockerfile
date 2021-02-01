@@ -18,7 +18,7 @@ RUN ruby --version
 RUN gem install bundler -v 1.17.2
 
 RUN set -ex; \
-  [ "$(command -v bundle)" = "/home/ubuntu/.gem-global/bin/bundle" ] && echo "works" || exit 1; \
+  [ "$(command -v bundle)" = "/home/user/.gem-global/bin/bundle" ] && echo "works" || exit 1; \
   bundler env
 
 ENV GEM_HOME=/tmp/.gem

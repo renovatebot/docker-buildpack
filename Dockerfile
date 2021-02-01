@@ -7,7 +7,7 @@ ARG TARGET=latest
 # Ubuntu base image to use
 #--------------------------------------
 ARG BASE_IMAGE=ubuntu:bionic
-ARG USER_NAME=ubuntu
+ARG USER_NAME=user
 ARG USER_ID=1000
 ARG APP_ROOT=/usr/src/app
 

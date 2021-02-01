@@ -5,6 +5,11 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+if [[ -z "${USER_NAME+x}" ]]; then
+  echo "No USER_NAME defined - skipping: ${USER_NAME}"
+  exit 1;
+fi
+
 . /usr/local/build/util.sh
 
 TOOLNAME=${1}
