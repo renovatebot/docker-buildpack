@@ -20,6 +20,8 @@ if [[ -z "${USER_NAME+x}" ]]; then
   exit 1;
 fi
 
+. /usr/local/build/util.sh
+
 echo "APT::Install-Recommends \"false\";" | tee -a /etc/apt/apt.conf.d/buildpack.conf
 echo "APT::Get::Upgrade \"false\";" | tee -a /etc/apt/apt.conf.d/buildpack.conf
 echo "APT::Get::Install-Suggests \"false\";" | tee -a /etc/apt/apt.conf.d/buildpack.conf
@@ -30,3 +32,6 @@ groupadd --gid ${USER_ID} ${USER_NAME}; \
 useradd --uid ${USER_ID} --gid 0 --groups ${USER_NAME} --shell /bin/bash --create-home ${USER_NAME}
 
 chown ${USER_ID}:0 ${APP_ROOT} && chmod g=u ${APP_ROOT}
+
+
+export_env USER_NAME ${USER_NAME}
