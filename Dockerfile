@@ -51,6 +51,8 @@ RUN install-apt \
 # renovate: datasource=github-tags
 RUN install-tool git v2.29.2
 
+# BEGIN: sidecar buildpacks
+
 #--------------------------------------
 # Image: erlang
 #--------------------------------------
@@ -146,6 +148,7 @@ FROM base as target-powershell
 
 COPY src/powershell/ /usr/local/
 
+# END: sidecar buildpacks
 
 #--------------------------------------
 # Image: full (latest)
