@@ -39,7 +39,7 @@ RUN set -ex; \
 FROM build as testb
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool swift 5.2.5
+RUN install-tool swift 5.3.3
 
 USER 1000
 
