@@ -15,7 +15,13 @@ echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu ${VERSION_CODENAME} main" |
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 14AA40EC0831756756D7F66C4F4EA0AAE5267A6C
 
 VERSION=${MAJOR}.${MINOR}
-apt_install php${VERSION}-cli php${VERSION}-mbstring php${VERSION}-curl php${VERSION}-xml php${VERSION}-json
+packages="php${VERSION}-cli php${VERSION}-mbstring php${VERSION}-curl php${VERSION}-xml"
+
+if [ "${MAJOR}" -lt "8" ]; then
+  packages="${packages} php${VERSION}-json"
+fi
+
+apt_install $packages
 
 
 php -v
