@@ -1,8 +1,17 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
-# renovate: datasource=ruby-version lookupName=ruby-version versioning=ruby
+# Do not renovate ruby 2.x
 RUN install-tool ruby 2.6.4
+
+RUN touch /.dummy
+
+WORKDIR /tmp
+
+FROM ${IMAGE} as build3
+
+# renovate: datasource=ruby-version lookupName=ruby-version versioning=ruby
+RUN install-tool ruby 3.0.0
 
 RUN touch /.dummy
 
@@ -75,7 +84,7 @@ RUN set -ex; \
 #--------------------------------------
 # test: global cocoapods
 #--------------------------------------
-FROM build as testd
+FROM build3 as testd
 
 # renovate: datasource=rubygems versioning=ruby
 RUN install-gem cocoapods 1.10.1
