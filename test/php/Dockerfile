@@ -14,7 +14,7 @@ FROM base as testa
 RUN install-tool php 7.4.14
 
 # renovate: datasource=github-releases lookupName=composer/composer
-RUN install-tool composer 1.10.5
+RUN install-tool composer 2.0.9
 
 USER 1000
 
@@ -53,7 +53,7 @@ FROM base as testb
 RUN install-tool php 5.6.40
 
 # renovate: datasource=github-releases lookupName=composer/composer
-RUN install-tool composer 1.10.5
+RUN install-tool composer 2.0.9
 
 USER 1000
 
