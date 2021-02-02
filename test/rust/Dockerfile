@@ -7,6 +7,8 @@ RUN install-tool rust 1.49.0
 # renovate: datasource=docker versioning=docker
 RUN install-tool rust 1.49.0
 
+WORKDIR /tmp
+
 USER 1000
 
 

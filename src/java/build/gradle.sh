@@ -10,9 +10,9 @@ rm gradle.zip
 
 export_path "/usr/local/gradle-${GRADLE_VERSION}/bin"
 
-mkdir -p /home/ubuntu/.m2 /home/ubuntu/.gradle
+mkdir -p /home/${USER_NAME}/.m2 /home/${USER_NAME}/.gradle
 
-cat > /home/ubuntu/.m2/settings.xml <<- EOM
+cat > /home/${USER_NAME}/.m2/settings.xml <<- EOM
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
@@ -21,13 +21,13 @@ cat > /home/ubuntu/.m2/settings.xml <<- EOM
 </settings>
 EOM
 
-cat > /home/ubuntu/.gradle/gradle.properties <<- EOM
+cat > /home/${USER_NAME}/.gradle/gradle.properties <<- EOM
 org.gradle.parallel=true
 org.gradle.configureondemand=true
 org.gradle.daemon=false
 org.gradle.caching=false
 EOM
 
-chown -R ubuntu /home/ubuntu/.m2 /home/ubuntu/.gradle
+chown -R ${USER_ID} /home/${USER_NAME}/.m2 /home/${USER_NAME}/.gradle
 
 gradle --version

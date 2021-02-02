@@ -40,11 +40,11 @@ if [[ ${MAJOR} < 15 ]]; then
   shell_wrapper node
 fi
 
-NPM_CONFIG_PREFIX="/home/ubuntu/.npm-global"
+NPM_CONFIG_PREFIX="/home/${USER_NAME}/.npm-global"
 
 # npm 7 bug
 mkdir -p $NPM_CONFIG_PREFIX/{bin,lib}
-chown -R ubuntu $NPM_CONFIG_PREFIX
+chown -R ${USER_ID} $NPM_CONFIG_PREFIX
 chmod -R g+w $NPM_CONFIG_PREFIX
 
 # redirect user install

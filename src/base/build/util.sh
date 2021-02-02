@@ -6,7 +6,9 @@ function refreshenv () {
   fi
 }
 
-refreshenv
+if [[ -z "${BUILDPACK+x}" ]]; then
+  refreshenv
+fi
 
 function export_env () {
   export "${1}=${2}"
@@ -26,7 +28,7 @@ function shell_wrapper () {
   cat > $FILE <<- EOM
 #!/bin/bash
 
-if [[ -f "\$BASH_ENV" ]]; then
+if [[ -f "\$BASH_ENV" && -z "${BUILDPACK+x}" ]]; then
   . \$BASH_ENV
 fi
 
@@ -49,11 +51,15 @@ function link_wrapper () {
   ln -sf $SOURCE $TARGET
 }
 
+VERSION_PREFIX="^v?(.+)"
 
 function check_version () {
   if [[ -z ${!1+x} ]]; then
     echo "No ${1} defined - aborting: ${!1}"
     exit 1
+  elif [[ "${!1}" =~ ${VERSION_PREFIX} ]]; then
+    # trim leading v
+    export "$1=${BASH_REMATCH[1]}"
   fi
 }
 

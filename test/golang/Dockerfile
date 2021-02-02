@@ -4,6 +4,8 @@ FROM ${IMAGE} as build
 
 RUN touch /.dummy
 
+WORKDIR /tmp
+
 #--------------------------------------
 # test: golang
 #--------------------------------------
@@ -12,9 +14,9 @@ FROM build as testa
 # renovate: datasource=docker versioning=docker
 RUN install-tool golang 1.15.7
 
-USER ubuntu
+USER 1000
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 
 RUN set -ex; cd test/a; go get -d ./...; cat go.sum; go mod tidy; cat go.sum
@@ -31,8 +33,10 @@ RUN set -ex; \
     go mod tidy; \
     git status -s;
 
-ENV GOPATH=/home/ubuntu/.go
+USER root
+RUN echo export "GOPATH=/home/${USER_NAME}/.go" | tee -a $BASH_ENV
 
+USER 1000
 RUN go env
 RUN set -ex; cd test/c; go get -d ./...; cat go.sum
 

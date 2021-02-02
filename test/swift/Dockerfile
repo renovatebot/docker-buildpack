@@ -1,9 +1,12 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
+# renovate: datasource=docker versioning=docker
 RUN install-tool swift 5.3.0
 
 RUN touch /.dummy
+
+WORKDIR /tmp
 
 
 #--------------------------------------
@@ -15,7 +18,7 @@ USER 1000
 
 RUN swift --version
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 RUN set -ex; \
   cd test/a; \
@@ -35,13 +38,14 @@ RUN set -ex; \
 #--------------------------------------
 FROM build as testb
 
+# renovate: datasource=docker versioning=docker
 RUN install-tool swift 5.2.5
 
 USER 1000
 
 RUN swift --version
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 
 RUN set -ex; \
