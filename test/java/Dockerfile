@@ -1,7 +1,7 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
-# renovate: datasource=docker lookupName=openjdk versioning=docker
+# renovate: datasource=docker lookupName=openjdk versioning=java
 RUN install-tool java 11
 
 RUN touch /.dummy
