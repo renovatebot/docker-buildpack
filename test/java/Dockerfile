@@ -1,10 +1,12 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
-# renovate: datasource=docker depName=openjdk versioning=docker
+# renovate: datasource=docker lookupName=openjdk versioning=docker
 RUN install-tool java 11
 
 RUN touch /.dummy
+
+WORKDIR /tmp
 
 
 #--------------------------------------
@@ -12,7 +14,7 @@ RUN touch /.dummy
 #--------------------------------------
 FROM build as testa
 
-# renovate: datasource=gradle-version depName=gradle versioning=gradle
+# renovate: datasource=gradle-version lookupName=gradle versioning=gradle
 RUN install-tool gradle 6.7.1
 
 USER 1000

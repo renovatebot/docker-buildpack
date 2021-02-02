@@ -49,7 +49,7 @@ else
   ruby-build $RUBY_VERSION /usr/local/ruby/${RUBY_VERSION}
 fi
 
-export_env GEM_HOME "/home/ubuntu/.gem-global"
+export_env GEM_HOME "/home/${USER_NAME}/.gem-global"
 export_path "\$GEM_HOME/bin:\$HOME/.gem/ruby/${MAJOR}.${MINOR}.0/bin:/usr/local/ruby/${RUBY_VERSION}/bin"
 
 # System settings

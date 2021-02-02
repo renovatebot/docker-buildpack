@@ -1,10 +1,12 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
-# renovate: datasource=ruby-version depName=ruby-version versioning=ruby
+# renovate: datasource=ruby-version lookupName=ruby-version versioning=ruby
 RUN install-tool ruby 2.6.4
 
 RUN touch /.dummy
+
+WORKDIR /tmp
 
 #--------------------------------------
 # test: bundler
@@ -18,7 +20,7 @@ RUN ruby --version
 RUN gem install bundler -v 1.17.2
 
 RUN set -ex; \
-  [ "$(command -v bundle)" = "/home/ubuntu/.gem-global/bin/bundle" ] && echo "works" || exit 1; \
+  [ "$(command -v bundle)" = "/home/${USER_NAME}/.gem-global/bin/bundle" ] && echo "works" || exit 1; \
   bundler env
 
 ENV GEM_HOME=/tmp/.gem
@@ -40,6 +42,7 @@ RUN set -ex; \
 #--------------------------------------
 FROM build as testb
 
+# renovate: datasource=rubygems versioning=ruby
 RUN install-gem bundler 1.17.2
 
 USER 1000
@@ -75,7 +78,7 @@ RUN set -ex; \
 FROM build as testd
 
 # renovate: datasource=rubygems versioning=ruby
-RUN install-gem cocoapods 1.9.1
+RUN install-gem cocoapods 1.10.1
 
 USER 1000
 
