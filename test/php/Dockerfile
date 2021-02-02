@@ -10,10 +10,10 @@ WORKDIR /tmp
 #--------------------------------------
 FROM base as testa
 
-# renovate: datasource=docker versioning=docker
+# old php version, not for renovating
 RUN install-tool php 7.4.14
 
-# renovate: datasource=github-releases lookupName=composer/composer
+# old composer version, not for renovating
 RUN install-tool composer 1.10.20
 
 USER 1000
@@ -49,10 +49,10 @@ RUN set -ex; \
 #--------------------------------------
 FROM base as testb
 
-# renovate: datasource=docker versioning=docker
+# old php version, not for renovating
 RUN install-tool php 5.6.40
 
-# renovate: datasource=github-releases lookupName=composer/composer
+# old composer version, not for renovating
 RUN install-tool composer 1.10.20
 
 USER 1000
