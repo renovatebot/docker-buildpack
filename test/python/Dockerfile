@@ -42,9 +42,10 @@ USER root
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
 
-USER ubuntu
+USER 1000
 
 RUN set -ex; \
+  pip install -U pipenv; \
   cd test/b-pipenv; \
   pipenv lock;
 
