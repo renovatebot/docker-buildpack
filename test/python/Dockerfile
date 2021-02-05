@@ -20,7 +20,8 @@ COPY --chown=1000:0 test test
 #--------------------------------------
 FROM build as pipenv
 
-RUN pip install pipenv==2018.11.26
+# renovate: datasource=pypi
+RUN install-pip pipenv 2018.11.26
 
 
 #--------------------------------------
@@ -28,7 +29,8 @@ RUN pip install pipenv==2018.11.26
 #--------------------------------------
 FROM build as poetry
 
-RUN pip install poetry==1.0.5
+# renovate: datasource=pypi
+RUN install-pip poetry 1.0.5
 
 
 #--------------------------------------
@@ -42,6 +44,9 @@ USER root
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
 
+USER 1000
+
+RUN pip install poetry
 
 #--------------------------------------
 # test b: pipenv
@@ -58,7 +63,10 @@ RUN set -ex; \
 #--------------------------------------
 FROM poetry as testc
 
-RUN RUN set -ex; cd test/c-poetry && poetry update --lock --no-interaction
+RUN set -ex; cd test/c-poetry && poetry update --lock --no-interaction
+
+
+RUN set -ex; cd test/c-poetry && poetry add h3py
 
 
 #--------------------------------------
@@ -84,6 +92,18 @@ RUN set -ex; \
   poetry update --lock --no-interaction; \
   git status -s;
 
+#--------------------------------------
+# test f: pip_requirements
+#--------------------------------------
+FROM build as testf
+
+RUN pip install hashin
+
+RUN set -ex; \
+  cd test/f; \
+  hashin distribute==0.6.27; \
+  cat requirements.txt
+
 
 #--------------------------------------
 # final
@@ -95,3 +115,4 @@ COPY --from=testb /.dummy /.dummy
 COPY --from=testc /.dummy /.dummy
 COPY --from=testd /.dummy /.dummy
 COPY --from=teste /.dummy /.dummy
+COPY --from=testf /.dummy /.dummy

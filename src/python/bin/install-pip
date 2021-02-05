@@ -23,7 +23,8 @@ fi
 check_version ${ENVNAME}
 check_command pip
 
-unset PIP_USER
-
 echo "Installing pip ${TOOLNAME} v${!ENVNAME}"
-pip install ${TOOLNAME}==${!ENVNAME}
+pip install --upgrade ${TOOLNAME}==${!ENVNAME}
+
+# clean cache https://pip.pypa.io/en/stable/reference/pip_cache/#pip-cache
+pip cache purge
