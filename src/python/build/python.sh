@@ -52,8 +52,9 @@ fi
 
 export_path "\$HOME/.local/bin:/usr/local/python/$PYTHON_VERSION/bin"
 
-pip install -U pip
+pip install --upgrade pip
 
-export_env PIP_USER yes
+# clean cache https://pip.pypa.io/en/stable/reference/pip_cache/#pip-cache
+pip cache purge
 
 python --version
