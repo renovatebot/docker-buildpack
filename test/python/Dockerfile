@@ -30,7 +30,7 @@ RUN install-pip pipenv 2018.11.26
 FROM build as poetry
 
 # renovate: datasource=pypi
-RUN install-pip poetry 1.0.5
+RUN install-pip poetry 1.0.10
 
 
 #--------------------------------------
