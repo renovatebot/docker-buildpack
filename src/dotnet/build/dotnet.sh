@@ -24,11 +24,18 @@ case "$VERSION_CODENAME" in
 esac
 
 
-mkdir -p /usr/local/dotnet
-curl -sfL https://dot.net/v1/dotnet-install.sh | bash -s - --version $DOTNET_VERSION --install-dir ${DOTNET_INSTALL_DIR}
+mkdir -p $DOTNET_INSTALL_DIR
+arch=linux-x64
+url=https://dotnetcli.azureedge.net/dotnet/Sdk/${DOTNET_VERSION}/dotnet-sdk-${DOTNET_VERSION}-${arch}.tar.gz
+curl -sfL  --output dotnet.tgz $url
+tar --strip 1 -C $DOTNET_INSTALL_DIR -xzf dotnet.tgz
 
 export_path "${DOTNET_INSTALL_DIR}"
 export_env DOTNET_ROOT "${DOTNET_INSTALL_DIR}"
 export_env DOTNET_CLI_TELEMETRY_OPTOUT "1"
 
-dotnet help
+# first time experience
+dotnet help > /dev/null
+su $USER_NAME -c 'dotnet help' > /dev/null
+
+dotnet --info
