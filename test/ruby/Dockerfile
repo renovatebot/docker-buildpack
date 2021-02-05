@@ -52,7 +52,7 @@ RUN set -ex; \
 FROM build as testb
 
 # renovate: datasource=rubygems versioning=ruby
-RUN install-gem bundler 1.17.3
+RUN install-gem bundler 2.2.8
 
 USER 1000
 
