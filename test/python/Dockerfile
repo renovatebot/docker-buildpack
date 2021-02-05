@@ -47,7 +47,8 @@ USER 1000
 RUN set -ex; \
   pip install -U pipenv; \
   cd test/b-pipenv; \
-  pipenv lock;
+  pipenv lock; \
+  cat Pipfile.lock
 
 
 #--------------------------------------
