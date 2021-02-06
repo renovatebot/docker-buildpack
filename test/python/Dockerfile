@@ -21,7 +21,7 @@ COPY --chown=1000:0 test test
 FROM build as pipenv
 
 # renovate: datasource=pypi
-RUN install-pip pipenv 2018.11.26
+RUN install-pip pipenv 2020.11.15
 
 
 #--------------------------------------
