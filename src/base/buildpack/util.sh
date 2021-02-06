@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function refreshenv () {
-  if [[ -f $BASH_ENV ]]; then
+  if [[ -r $BASH_ENV ]]; then
     . $BASH_ENV
   fi
 }
@@ -20,6 +20,38 @@ function export_path () {
   echo export PATH="$1:\$PATH" >> $BASH_ENV
 }
 
+function reset_tool_env () {
+  local install_dir=$(get_install_dir)
+  if [[ -z "${TOOL_NAME+x}" ]]; then
+    echo "No TOOL_NAME defined - skipping: ${TOOL_NAME}" >&2
+    exit 1;
+  fi
+  if [[ -f "$install_dir/env.d/${TOOL_NAME}.sh" ]];then
+    rm "$install_dir/env.d/${TOOL_NAME}.sh"
+  fi
+}
+
+
+function export_tool_env () {
+  local install_dir=$(get_install_dir)
+  if [[ -z "${TOOL_NAME+x}" ]]; then
+    echo "No TOOL_NAME defined - skipping: ${TOOL_NAME}" >&2
+    exit 1;
+  fi
+  export "${1}=${2}"
+  echo export "${1}=\${${1}-${2}}" >> $install_dir/env.d/${TOOL_NAME}.sh
+}
+
+function export_tool_path () {
+  local install_dir=$(get_install_dir)
+  if [[ -z "${TOOL_NAME+x}" ]]; then
+    echo "No TOOL_NAME defined - skipping: ${TOOL_NAME}" >&2
+    exit 1;
+  fi
+  export PATH="$1:$PATH"
+  echo export PATH="$1:\$PATH" >> $install_dir/env.d/${TOOL_NAME}.sh
+}
+
 
 # use this if custom env is required, creates a shell wrapper to /usr/local/bin
 function shell_wrapper () {
@@ -33,7 +65,7 @@ if [[ -f "\$BASH_ENV" && -z "${BUILDPACK+x}" ]]; then
 fi
 
 if [[ "\$(command -v ${1})" == "$FILE" ]]; then
-  echo Could not forward ${1}, probably wrong PATH variable. >2
+  echo Could not forward ${1}, probably wrong PATH variable. >&2
   echo PATH=\$PATH
   exit 1
 fi
@@ -53,7 +85,7 @@ function link_wrapper () {
 
 
 function check_version () {
-  echo "Function 'check_version' is deprecated, use 'require_tool' instead." >2
+  echo "Function 'check_version' is deprecated, use 'require_tool' instead." >&2
   local VERSION_PREFIX="^v?(.+)"
   if [[ -z ${!1+x} ]]; then
     echo "No ${1} defined - aborting: ${!1}"
@@ -66,7 +98,7 @@ function check_version () {
 
 function check_command () {
   if [[ ! -x "$(command -v ${1})" ]]; then
-    echo "No ${1} defined - aborting" >2
+    echo "No ${1} defined - aborting" >&2
     exit 1
   fi
 }
@@ -94,14 +126,14 @@ function apt_install () {
 
 function require_root () {
   if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root" >2
+    echo "This script must be run as root" >&2
     exit 1
   fi
 }
 
 function require_user () {
   if [[ -z "${USER_NAME+x}" ]]; then
-    echo "No USER_NAME defined - skipping: ${USER_NAME}" >2
+    echo "No USER_NAME defined - skipping: ${USER_NAME}" >&2
     exit 1;
   fi
 }
@@ -112,12 +144,12 @@ function require_tool () {
   local version=${2-$tool_env}
 
   if [[ -z "${1+x}" ]]; then
-    echo "No tool defined - skipping: ${tool}" >2
+    echo "No tool defined - skipping: ${tool}" >&2
     exit 1;
   fi
 
   if [[ -z ${version+x} ]]; then
-    echo "No version defined - aborting: ${version}" >2
+    echo "No version defined - aborting: ${version}" >&2
     exit 1
   fi
 
@@ -131,4 +163,21 @@ function require_tool () {
 
   # compability fallback
   export "${tool_env}=${version}"
+}
+
+
+function get_install_dir () {
+  if [[ $EUID -eq 0 ]]; then
+    echo /usr/local
+  else
+    echo ${HOME}/.local
+  fi
+}
+
+function find_tool_path () {
+  if [[ -d "/usr/local/${TOOL_NAME}/${TOOL_VERSION}" ]]; then
+    echo /usr/local/${TOOL_NAME}/${TOOL_VERSION}
+  elif [[ -d "$HOME/.local/${TOOL_NAME}/${TOOL_VERSION}" ]]; then
+    echo $HOME/.local/${TOOL_NAME}/${TOOL_VERSION}
+  fi
 }

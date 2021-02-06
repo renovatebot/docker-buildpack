@@ -7,7 +7,7 @@ set -e
 require_tool $@
 check_command pip
 
-echo "Installing pip ${TOOL_NAME} v${TOOL_VERSION}"
+echo "Installing pip tool ${TOOL_NAME} v${TOOL_VERSION}"
 pip install --upgrade ${TOOL_NAME}==${TOOL_VERSION}
 
 # clean cache https://pip.pypa.io/en/stable/reference/pip_cache/#pip-cache

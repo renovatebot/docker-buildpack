@@ -2,60 +2,90 @@
 
 set -e
 
-require_root
 check_semver ${TOOL_VERSION}
 
 PYTHON_URL="https://raw.githubusercontent.com/renovatebot/python/releases"
-
 
 if [[ ! "${MAJOR}" || ! "${MINOR}" || ! "${PATCH}" ]]; then
   echo Invalid version: ${TOOL_VERSION}
   exit 1
 fi
 
-if [[ -d "/usr/local/python/${TOOL_VERSION}" ]]; then
-  echo "Skipping, already installed"
-  exit 0
-fi
+tool_path=$(find_tool_path)
 
-. /etc/lsb-release
+function update_env () {
+  reset_tool_env
+  export_tool_path "\$HOME/.local/bin:${1}/bin"
+}
 
-mkdir -p /usr/local/python
+if [[ -z "${tool_path}" ]]; then
+  INSTALL_DIR=$(get_install_dir)
+  base_path=${INSTALL_DIR}/${TOOL_NAME}
+  tool_path=${base_path}/${TOOL_VERSION}
 
-curl -sSfLo python.tar.xz ${PYTHON_URL}/${DISTRIB_RELEASE}/python-${TOOL_VERSION}.tar.xz || echo 'Ignore download error'
+  VERSION_ID=$(. /etc/os-release && echo ${VERSION_ID})
 
-if [[ -f python.tar.xz ]]; then
-  echo 'Using prebuild python'
-  tar -C /usr/local/python -xf python.tar.xz
-  rm python.tar.xz
-else
-  echo 'No prebuild python found, building from source'
-  apt_install \
-    build-essential \
-    libbz2-dev \
-    libffi-dev \
-    liblzma-dev \
-    libreadline-dev \
-    libsqlite3-dev \
-    libssl-dev \
-    zlib1g-dev \
-    ;
+  mkdir -p ${base_path}
 
-  if [[ ! -x "$(command -v python-build)" ]]; then
-    git clone https://github.com/pyenv/pyenv.git
-    pushd pyenv/plugins/python-build
-    ./install.sh
-    popd
-    rm -rf pyenv
+  file=/tmp/python.tar.xz
+
+  curl -sSfLo ${file} ${PYTHON_URL}/${VERSION_ID}/python-${TOOL_VERSION}.tar.xz || echo 'Ignore download error'
+
+  if [[ -f ${file} ]]; then
+    echo 'Using prebuild python'
+    tar -C ${base_path} -xf ${file}
+    rm ${file}
+  else
+    echo 'No prebuild python found, building from source'
+    require_root
+    apt_install \
+      build-essential \
+      libbz2-dev \
+      libffi-dev \
+      liblzma-dev \
+      libreadline-dev \
+      libsqlite3-dev \
+      libssl-dev \
+      zlib1g-dev \
+      ;
+
+    if [[ ! -x "$(command -v python-build)" ]]; then
+      git clone https://github.com/pyenv/pyenv.git
+      pushd pyenv/plugins/python-build
+      ./install.sh
+      popd
+      rm -rf pyenv
+    fi
+    python-build $TOOL_VERSION ${base_path}/$TOOL_VERSION
   fi
-  python-build $TOOL_VERSION /usr/local/python/$TOOL_VERSION
+
+  update_env ${tool_path}
+
+  fix_python_shebangs() {
+    for file in $(find ${tool_path}/bin -type f -exec grep -Iq . {} \; -print); do
+      case "$(head -1 "${file}")" in
+      "#!"*"/bin/python" )
+        sed -i "1 s:.*:#\!${tool_path}\/bin\/python:" "${file}"
+        ;;
+      "#!"*"/bin/python${MAJOR}" )
+        sed -i "1 s:.*:#\!${tool_path}\/bin\/python${MAJOR}:" "${file}"
+        ;;
+      "#!"*"/bin/python${MAJOR}.${MINOR}" )
+        sed -i "1 s:.*:#\!${tool_path}\/bin\/python${MAJOR}.${MINOR}:" "${file}"
+        ;;
+      esac
+    done
+  }
+
+  fix_python_shebangs
+
+  pip install --upgrade pip
+
+  # clean cache https://pip.pypa.io/en/stable/reference/pip_cache/#pip-cache
+  pip cache purge
+else
+  echo "Already installed, resetting env"
+  update_env ${tool_path}
 fi
-
-export_path "\$HOME/.local/bin:/usr/local/python/$TOOL_VERSION/bin"
-
-pip install --upgrade pip
-
-# clean cache https://pip.pypa.io/en/stable/reference/pip_cache/#pip-cache
-pip cache purge
 
 python --version
