@@ -1,38 +1,29 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root"
-   exit 1
-fi
+set -e
 
-if [[ -z "${USER_NAME+x}" ]]; then
-  echo "No USER_NAME defined - skipping: ${USER_NAME}"
-  exit 1;
-fi
+. /usr/local/buildpack/util.sh
 
-. /usr/local/build/util.sh
 
-TOOLNAME=${1}
-TOOLVERSION=${1//-/_}
-TOOL="/usr/local/build/${1}.sh"
-shift;
+require_user
+require_tool $@
 
+TOOL="/usr/local/buildpack/tools/${TOOL_NAME}.sh"
 if [[ ! -f "$TOOL" ]]; then
-  echo "No tool defined - skipping: ${TOOLNAME}"
-  exit 1;
+  # compability fallback
+  TOOL="/usr/local/build/${TOOL_NAME}.sh"
+  if [[ ! -f "$TOOL" ]]; then
+    echo "No tool defined - skipping: ${TOOL_NAME}" >2
+    exit 1;
+  fi
+  require_root
 fi
 
-ENVNAME=${TOOLVERSION^^}_VERSION
 
-if [[ "${1}" ]]; then
-  export "$ENVNAME=$1"
-  shift;
-fi
-
-check_version ${ENVNAME}
-
-echo "Installing tool ${TOOLNAME} v${!ENVNAME}"
-. $TOOL $@
+echo "Installing tool ${TOOL_NAME} v${TOOL_VERSION}"
+. $TOOL
 
 # cleanup
-rm -rf /var/lib/apt/lists/*
+if [[ $EUID -eq 0 ]]; then
+  rm -rf /var/lib/apt/lists/*
+fi
