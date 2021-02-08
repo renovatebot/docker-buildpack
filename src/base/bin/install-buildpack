@@ -3,7 +3,7 @@
 set -e
 
 # no duplicate installs
-if [[ -z "${BUILDPACK+x}" ]]; then
+if [[ ! -z "${BUILDPACK+x}" ]]; then
   echo "BUILDPACK defined - skipping: ${BUILDPACK}"
   exit 1;
 fi
