@@ -10,13 +10,8 @@ require_tool $@
 
 TOOL="/usr/local/buildpack/tools/${TOOL_NAME}.sh"
 if [[ ! -f "$TOOL" ]]; then
-  # compability fallback
-  TOOL="/usr/local/build/${TOOL_NAME}.sh"
-  if [[ ! -f "$TOOL" ]]; then
-    echo "No tool defined - skipping: ${TOOL_NAME}" >&2
-    exit 1;
-  fi
-  require_root
+  echo "No tool defined - skipping: ${TOOL_NAME}" >&2
+  exit 1;
 fi
 
 
