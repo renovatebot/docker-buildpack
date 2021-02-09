@@ -148,15 +148,22 @@ function require_user () {
   fi
 }
 
+function get_tool_version_env () {
+  local tool=${1//-/_}
+  tool=${tool^^}_VERSION
+  echo ${tool}
+}
+
 function require_tool () {
   local tool=$1
-  local tool_env=$(t=${tool//-/_} echo ${t^^}_VERSION)
-  local version=${2-$tool_env}
 
   if [[ -z "${1+x}" ]]; then
     echo "No tool defined - skipping: ${tool}" >&2
     exit 1;
   fi
+
+  local tool_env=$(get_tool_version_env $tool)
+  local version=${2-${!tool_env}}
 
   if [[ -z ${version+x} ]]; then
     echo "No version defined - aborting: ${version}" >&2
