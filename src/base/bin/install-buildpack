@@ -10,6 +10,7 @@ if [[ ! -z "${BUILDPACK+x}" ]]; then
   exit 1;
 fi
 
+require_distro
 require_root
 require_user
 

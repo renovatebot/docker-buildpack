@@ -123,6 +123,16 @@ function apt_install () {
   apt-get install -y $@
 }
 
+function require_distro () {
+  local VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
+  case "$VERSION_CODENAME" in
+  "focal") ;; #supported
+  *)
+    echo "Distro not supported: ${VERSION_CODENAME}! Please use 'ubuntu focal'." >&2
+    exit 1
+   ;;
+  esac
+}
 
 function require_root () {
   if [[ $EUID -ne 0 ]]; then

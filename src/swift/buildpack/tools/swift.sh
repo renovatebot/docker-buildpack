@@ -18,49 +18,34 @@ if [[ -d "${SWIFT_INSTALL_DIR}" ]]; then
 fi
 
 
+VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 VERSION_ID=$(. /etc/os-release && echo ${VERSION_ID})
 
 # https://swift.org/getting-started/#on-linux
 
-if [[ "${VERSION_ID}" = "18.04" ]]; then
-  apt_install \
-    binutils \
-    git \
-    libc6-dev \
-    libcurl4 \
-    libedit2 \
-    libgcc-5-dev \
-    libpython2.7 \
-    libsqlite3-0 \
-    libstdc++-5-dev \
-    libxml2 \
-    pkg-config \
-    tzdata \
-    zlib1g-dev
-elif [[ "${VERSION_ID}" = "20.04" ]]; then
-  apt_install \
-    binutils \
-    git \
-    gnupg2 \
-    libc6-dev \
-    libcurl4 \
-    libedit2 \
-    libgcc-9-dev \
-    libpython2.7 \
-    libsqlite3-0 \
-    libstdc++-9-dev \
-    libxml2 \
-    libz3-dev \
-    pkg-config \
-    tzdata \
-    zlib1g-dev
-else
-  echo "Ubuntu version not supported: ${VERSION_ID}"
-  exit 1
-fi
+case "$VERSION_CODENAME" in
+  "focal")
+    apt_install \
+      binutils \
+      git \
+      gnupg2 \
+      libc6-dev \
+      libcurl4 \
+      libedit2 \
+      libgcc-9-dev \
+      libpython2.7 \
+      libsqlite3-0 \
+      libstdc++-9-dev \
+      libxml2 \
+      libz3-dev \
+      pkg-config \
+      tzdata \
+      zlib1g-dev \
+    ;;
+esac
 
 
-# https://swift.org/builds/swift-5.3-release/ubuntu1804/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu18.04.tar.gz
+# https://swift.org/builds/swift-5.3-release/ubuntu1804/swift-5.3-RELEASE/swift-5.3-RELEASE-ubuntu20.04.tar.gz
 if [[ "${PATCH}" = "0" ]]; then
   TOOL_VERSION=${MAJOR}.${MINOR}
 fi

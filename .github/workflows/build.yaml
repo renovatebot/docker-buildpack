@@ -37,12 +37,9 @@ jobs:
             swift,
             latest,
           ]
-        image: [latest, bionic, focal]
 
     env:
       TARGET: ${{ matrix.tag }}
-      TARGET_TAG: ${{ matrix.tag }}-${{ matrix.image }}
-      IMAGE: ${{ matrix.image }}
       TEST_IMAGE: renovate/buildpack-test:${{ matrix.tag }}
 
     steps:
@@ -67,6 +64,6 @@ jobs:
           command: docker-builder
           build-args: TARGET,BASE_IMAGE,USER_NAME
           last-only: true
-          tag-suffix: ${{ env.TARGET_TAG }}
+          tag-suffix: ${{ env.TARGET }}
           major-minor: false
           dry-run: ${{ env.DRY_RUN }}

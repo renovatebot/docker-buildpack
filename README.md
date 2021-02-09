@@ -9,14 +9,11 @@ This repository is the source for the Docker Hub image `renovate/buildpack`. Com
 ### Custom base image
 
 ```dockerfile
-# This is tested against ubuntu focal but should work with bionic too
-ARG UBUNTU_FLAVOR=focal
-ARG BASE_IMAGE=ubuntu:${UBUNTU_FLAVOR}
-
 # This buildpack is used for tool intallation and user/directory setup
-FROM renovate/buildpack:4-${UBUNTU_FLAVOR} AS buildpack
+FROM renovate/buildpack:4 AS buildpack
 
-FROM ${BASE_IMAGE} as base
+# currently only ubuntu focal based distro suported
+FROM ubuntu:focal as base
 
 # The buildpack supports custom user but Renovate requires ubuntu
 ARG USER_NAME=ubuntu
