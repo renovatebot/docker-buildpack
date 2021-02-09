@@ -2,7 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool node 14.15.4
+RUN install-tool node 14.15.5
 
 RUN touch /.dummy
 
