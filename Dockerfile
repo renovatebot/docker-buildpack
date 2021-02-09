@@ -4,11 +4,6 @@
 ARG TARGET=latest
 
 #--------------------------------------
-# Ubuntu base image to use
-#--------------------------------------
-ARG BASE_IMAGE=ubuntu
-
-#--------------------------------------
 # Non-root user to create
 #--------------------------------------
 ARG USER_ID=1000
@@ -17,7 +12,7 @@ ARG USER_NAME=user
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ${BASE_IMAGE} as base
+FROM ubuntu:focal@sha256:703218c0465075f4425e58fac086e09e1de5c340b12976ab9eb8ad26615c3715 as base
 
 ARG USER_ID
 ARG USER_NAME

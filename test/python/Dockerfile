@@ -1,16 +1,27 @@
 ARG IMAGE=renovate/buildpack
-FROM ${IMAGE} as build
+FROM ${IMAGE} as base
 
-# Python
-
-# renovate: datasource=docker
-RUN install-tool python 3.9.1
 
 RUN touch /.dummy
 
 WORKDIR /tmp
 
+FROM base as build
+
+# Python
+# renovate: datasource=docker
+RUN install-tool python 3.9.1
+
 USER 1000
+
+COPY --chown=1000:0 test test
+
+FROM base as build-rootless
+
+USER 1000
+
+# renovate: datasource=docker
+RUN install-tool python 3.9.1
 
 COPY --chown=1000:0 test test
 
@@ -38,15 +49,12 @@ RUN install-pip poetry 1.1.4
 #--------------------------------------
 FROM build as testa
 
-USER root
-
 # try install again, sould skip
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
 
-USER 1000
-
-RUN pip install poetry
+# renovate: datasource=pypi
+RUN install-tool poetry 1.1.4
 
 #--------------------------------------
 # test b: pipenv
@@ -104,6 +112,36 @@ RUN set -ex; \
   hashin distribute==0.6.27; \
   cat requirements.txt
 
+#--------------------------------------
+# test g: non-root
+#--------------------------------------
+FROM build-rootless as testg
+
+# renovate: datasource=pypi
+RUN install-pip pipenv 2020.11.15
+
+RUN set -ex; \
+  cd test/a; \
+  pipenv lock;
+
+# renovate: datasource=pypi
+RUN install-tool poetry 1.1.4
+
+RUN set -ex \
+  && cd test/c-poetry \
+  && poetry update --lock --no-interaction \
+  && poetry add h3py \
+  ;
+
+# renovate: datasource=pypi
+RUN install-pip hashin 0.15.0
+
+RUN set -ex \
+  && cd test/f \
+  && hashin distribute==0.6.27 \
+  && cat requirements.txt \
+  ;
+
 
 #--------------------------------------
 # final
@@ -116,3 +154,4 @@ COPY --from=testc /.dummy /.dummy
 COPY --from=testd /.dummy /.dummy
 COPY --from=teste /.dummy /.dummy
 COPY --from=testf /.dummy /.dummy
+COPY --from=testg /.dummy /.dummy

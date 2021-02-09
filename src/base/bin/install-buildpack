@@ -1,23 +1,51 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root"
-   exit 1
+set -e
+
+. /usr/local/buildpack/util.sh
+
+# no duplicate installs
+if [[ ! -z "${BUILDPACK+x}" ]]; then
+  echo "BUILDPACK defined - skipping: ${BUILDPACK}"
+  exit 1;
 fi
+
+require_distro
+require_root
+require_user
 
 if [[ -z "${USER_ID+x}" ]]; then
   echo "No USER_ID defined - skipping: ${USER_ID}"
   exit 1;
 fi
 
-if [[ -z "${USER_NAME+x}" ]]; then
-  echo "No USER_NAME defined - skipping: ${USER_NAME}"
+if [[ -z "${BASH_ENV+x}" ]]; then
+  echo "No BASH_ENV defined - skipping: ${BASH_ENV}"
   exit 1;
 fi
 
-. /usr/local/build/util.sh
 
 export_env BUILDPACK 1
+
+# env helper, loads tool specific env
+cat >> $BASH_ENV <<- EOM
+if [ -d /usr/local/env.d ]; then
+  for i in /usr/local/env.d/*.sh; do
+    if [ -r \$i ]; then
+      . \$i
+    fi
+  done
+  unset i
+fi
+if [ -d \$HOME/.local/env.d ]; then
+  for i in \$HOME/.local/env.d/*.sh; do
+    if [ -r \$i ]; then
+      . \$i
+    fi
+  done
+  unset i
+fi
+EOM
 
 echo "APT::Install-Recommends \"false\";" | tee -a /etc/apt/apt.conf.d/buildpack.conf
 echo "APT::Get::Upgrade \"false\";" | tee -a /etc/apt/apt.conf.d/buildpack.conf
@@ -27,6 +55,10 @@ echo "APT::Get::Install-Suggests \"false\";" | tee -a /etc/apt/apt.conf.d/buildp
 # https://docs.openshift.com/container-platform/3.6/creating_images/guidelines.html#use-uid
 groupadd --gid ${USER_ID} ${USER_NAME};
 useradd --uid ${USER_ID} --gid 0 --groups ${USER_NAME} --shell /bin/bash --create-home ${USER_NAME}
+
+# create env helper paths
+mkdir /usr/local/env.d
+su ${USER_NAME} -c 'mkdir -p /home/${USER_NAME}/.local/env.d'
 
 export_env USER_NAME ${USER_NAME}
 export_env USER_ID ${USER_ID}

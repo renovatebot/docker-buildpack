@@ -2,33 +2,14 @@
 
 set -e
 
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root"
-   exit 1
-fi
+. /usr/local/buildpack/util.sh
 
-. /usr/local/build/util.sh
-
-TOOLNAME=${1}
-shift;
-
-if [[ ! "$TOOLNAME" ]]; then
-  echo "No gem defined - skipping: ${TOOLNAME}"
-  exit 1;
-fi
-
-ENVNAME=${TOOLNAME^^}_VERSION
-
-if [[ "${1}" ]]; then
-  export $ENVNAME=$1
-  shift;
-fi
-
-
-check_version ${ENVNAME}
+require_tool $@
 check_command gem
 
-unset GEM_HOME
+if [[ $EUID -eq 0 ]]; then
+  unset GEM_HOME
+fi
 
-echo "Installing gem ${TOOLNAME} v${!ENVNAME}"
-gem install ${TOOLNAME} -v ${!ENVNAME}
+echo "Installing gem ${TOOL_NAME} v${TOOL_VERSION}"
+gem install ${TOOL_NAME} -v ${TOOL_VERSION}

@@ -2,29 +2,13 @@
 
 set -e
 
-. /usr/local/build/util.sh
+. /usr/local/buildpack/util.sh
 
-TOOLNAME=${1}
-shift;
-
-if [[ ! "$TOOLNAME" ]]; then
-  echo "No gem defined - skipping: ${TOOLNAME}"
-  exit 1;
-fi
-
-ENVNAME=${TOOLNAME^^}_VERSION
-
-if [[ "${1}" ]]; then
-  export $ENVNAME=$1
-  shift;
-fi
-
-
-check_version ${ENVNAME}
+require_tool $@
 check_command pip
 
-echo "Installing pip ${TOOLNAME} v${!ENVNAME}"
-pip install --upgrade ${TOOLNAME}==${!ENVNAME}
+echo "Installing pip tool ${TOOL_NAME} v${TOOL_VERSION}"
+pip install --upgrade ${TOOL_NAME}==${TOOL_VERSION}
 
 # clean cache https://pip.pypa.io/en/stable/reference/pip_cache/#pip-cache
 pip cache purge
