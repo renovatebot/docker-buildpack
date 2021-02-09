@@ -49,9 +49,6 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
-      - name: fix env
-        run: .github/bin/env.sh
-
       - name: build
         run: docker build -t ${{ env.TEST_IMAGE }} --build-arg TARGET --build-arg BASE_IMAGE --build-arg USER_NAME .
 
