@@ -27,6 +27,9 @@ if [[ -z "${tool_path}" ]]; then
 
   curl -sSL $POETRY_URL | python - --version ${TOOL_VERSION} --no-modify-path
   unset POETRY_HOME
+
+  # fix execute for all [#150]
+  chmod +x ${tool_path}/bin/poetry
 fi
 
 update_env ${tool_path}
