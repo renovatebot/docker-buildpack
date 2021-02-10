@@ -5,6 +5,7 @@ FROM ${IMAGE} as base
 RUN touch /.dummy
 
 WORKDIR /tmp
+COPY --chown=1000:0 test test
 
 FROM base as build
 
@@ -12,9 +13,6 @@ FROM base as build
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
 
-USER 1000
-
-COPY --chown=1000:0 test test
 
 FROM base as build-rootless
 
@@ -22,9 +20,6 @@ USER 1000
 
 # renovate: datasource=docker
 RUN install-tool python 3.9.1
-
-COPY --chown=1000:0 test test
-
 
 #--------------------------------------
 # build: pipenv
@@ -35,14 +30,17 @@ FROM build as pipenv
 RUN install-pip pipenv 2020.11.15
 
 
+USER 1000
+
 #--------------------------------------
 # build: poetry
 #--------------------------------------
 FROM build as poetry
 
 # renovate: datasource=pypi
-RUN install-pip poetry 1.1.4
+RUN install-tool poetry 1.1.4
 
+USER 1000
 
 #--------------------------------------
 # test a: build
