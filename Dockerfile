@@ -22,7 +22,7 @@ LABEL maintainer="Rhys Arkins <rhys@arkins.net>" \
 
 #  autoloading buildpack env
 ENV BASH_ENV=/usr/local/etc/env
-SHELL ["bash" , "-c"]
+SHELL ["/bin/bash" , "-c"]
 
 COPY src/base/ /usr/local/
 
