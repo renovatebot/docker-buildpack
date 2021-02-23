@@ -18,7 +18,7 @@ fi
 
 mkdir -p /usr/local/ruby
 
-CODENAME=$(. /etc/os-release && echo ${VERSION_ID})
+CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 RUBY_URL="https://github.com/renovatebot/ruby/releases/download"
 
 curl -sSfLo ruby.tar.xz ${RUBY_URL}/${TOOL_VERSION}/ruby-${TOOL_VERSION}-${CODENAME}.tar.xz || echo 'Ignore download error'
