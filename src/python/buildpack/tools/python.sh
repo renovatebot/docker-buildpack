@@ -27,7 +27,7 @@ if [[ -z "${tool_path}" ]]; then
   file=/tmp/python.tar.xz
 
   CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
-  PYTHON_URL="https://github.com/renovatebot/ruby/releases/download"
+  PYTHON_URL="https://github.com/renovatebot/python/releases/download"
 
   curl -sSfLo ${file} ${PYTHON_URL}/${TOOL_VERSION}/python-${TOOL_VERSION}-${CODENAME}.tar.xz || echo 'Ignore download error'
 
