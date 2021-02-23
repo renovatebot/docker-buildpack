@@ -10,7 +10,7 @@ WORKDIR /tmp
 
 FROM ${IMAGE} as build3
 
-# renovate: datasource=ruby-version lookupName=ruby-version versioning=ruby
+# renovate: datasource=github-releases lookupName=renovatebot/ruby versioning=ruby
 RUN install-tool ruby 3.0.0
 
 RUN touch /.dummy

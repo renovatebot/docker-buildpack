@@ -4,7 +4,6 @@ set -e
 
 check_semver ${TOOL_VERSION}
 
-PYTHON_URL="https://raw.githubusercontent.com/renovatebot/python/releases"
 
 if [[ ! "${MAJOR}" || ! "${MINOR}" || ! "${PATCH}" ]]; then
   echo Invalid version: ${TOOL_VERSION}
@@ -23,13 +22,14 @@ if [[ -z "${tool_path}" ]]; then
   base_path=${INSTALL_DIR}/${TOOL_NAME}
   tool_path=${base_path}/${TOOL_VERSION}
 
-  VERSION_ID=$(. /etc/os-release && echo ${VERSION_ID})
-
   mkdir -p ${base_path}
 
   file=/tmp/python.tar.xz
 
-  curl -sSfLo ${file} ${PYTHON_URL}/${VERSION_ID}/python-${TOOL_VERSION}.tar.xz || echo 'Ignore download error'
+  CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
+  PYTHON_URL="https://github.com/renovatebot/ruby/releases/download"
+
+  curl -sSfLo ${file} ${PYTHON_URL}/${TOOL_VERSION}/python-${TOOL_VERSION}-${CODENAME}.tar.xz || echo 'Ignore download error'
 
   if [[ -f ${file} ]]; then
     echo 'Using prebuild python'
