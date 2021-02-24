@@ -1,0 +1,13 @@
+ARG IMAGE=renovate/buildpack
+FROM ${IMAGE} as build
+
+# renovate: datasource=github-releases lookupName=PowerShell/PowerShell
+RUN install-tool powershell v7.1.2
+
+USER 1000
+
+RUN set -ex; \
+  pwsh -Version
+
+RUN set -ex; \
+  pwsh -Command Write-Host Hello, World!

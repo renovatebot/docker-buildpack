@@ -1,17 +1,22 @@
 ARG IMAGE=renovate/buildpack
-FROM ${IMAGE}
+FROM ${IMAGE} as build
 
-# Golang
 
-# go suggests: git svn bzr mercurial
-# git already installed
+RUN touch /.dummy
+
+WORKDIR /tmp
+
+#--------------------------------------
+# test: golang
+#--------------------------------------
+FROM build as testa
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool golang 1.14.2
+RUN install-tool golang 1.16.0
 
-USER ubuntu
+USER 1000
 
-COPY --chown=ubuntu:0 test test
+COPY --chown=1000:0 test test
 
 
 RUN set -ex; cd test/a; go get -d ./...; cat go.sum; go mod tidy; cat go.sum
@@ -28,7 +33,35 @@ RUN set -ex; \
     go mod tidy; \
     git status -s;
 
-ENV GOPATH=/home/ubuntu/.go
+USER root
+RUN echo export "GOPATH=/home/${USER_NAME}/.go" | tee -a $BASH_ENV
 
+USER 1000
 RUN go env
 RUN set -ex; cd test/c; go get -d ./...; cat go.sum
+
+#--------------------------------------
+# test: check first patch version eg v1.11.0
+#--------------------------------------
+FROM build as testb
+
+# do not update patch version
+RUN install-tool golang 1.11.0
+
+RUN set -ex; \
+    git clone --depth=1 https://github.com/renovate-tests/gomod1; \
+    cd gomod1; \
+    go get -d ./...; \
+    git status -s; \
+    git checkout -f; \
+    git clean -fdx; \
+    go mod tidy; \
+    git status -s;
+
+#--------------------------------------
+# final
+#--------------------------------------
+FROM build
+
+COPY --from=testa /.dummy /.dummy
+COPY --from=testb /.dummy /.dummy
