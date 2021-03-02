@@ -43,7 +43,7 @@ RUN set -ex;  \
 FROM base as testb
 
 # renovate: datasource=docker lookupName=mcr.microsoft.com/dotnet/sdk versioning=docker
-RUN install-tool dotnet 5.0.103
+RUN install-tool dotnet 5.0.200
 
 USER 1000
 
