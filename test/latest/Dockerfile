@@ -40,6 +40,15 @@ RUN set -ex; \
   && su -c 'SSL_CERT_FILE=/test/ca.pem curl -svo /dev/null https://localhost' ${USER_NAME} \
   && su -c 'SSL_CERT_FILE=/test/ca.pem curl -svo /dev/null https://buildkitsandbox' ${USER_NAME}
 
+# install root ca
+RUN  set -ex \
+  && cp ca.pem /usr/local/share/ca-certificates/renovate-ca.crt \
+  && update-ca-certificates
+
+# use global root certs
+RUN set -ex; \
+  nginx \
+  && su -c 'curl -svo /dev/null https://buildkitsandbox' ${USER_NAME}
 
 #--------------------------------------
 # test: python
