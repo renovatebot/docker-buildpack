@@ -6,8 +6,8 @@ server {
   listen 443 ssl default_server;
   listen [::]:443 ssl default_server;
 
-  ssl_certificate /etc/ssl/certs/renovate.pem;
-  ssl_certificate_key /etc/ssl/private/renovate.key;
+  ssl_certificate /test/renovate-chain.pem;
+  ssl_certificate_key /test/renovate.key;
 
   root /var/www/html;
 

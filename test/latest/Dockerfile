@@ -15,19 +15,15 @@ RUN set -ex; \
   openssl genrsa 2048 > ca.key; \
   openssl genrsa 2048 > renovate.key; \
   openssl req -config ca.conf -x509 -new -nodes -key ca.key -out ca.pem; \
-  openssl req -config cert.conf -new -nodes -key renovate.key -out renovate.req; \
-  openssl x509 -req -in renovate.req -CA ca.pem -CAkey ca.key -out renovate.pem; \
-  rm ca.key
+  openssl req -config cert.conf -new -nodes -key renovate.key -out renovate.csr; \
+  openssl x509 -req -in renovate.csr -CA ca.pem -CAkey ca.key -out renovate.pem -extfile cert.conf -extensions v3_req; \
+  rm ca.key; \
+  cat renovate.pem ca.pem > renovate-chain.pem;
 
 # install root ca
 # RUN  set -ex \
 #   && cp ca.pem /usr/local/share/ca-certificates/renovate-ca.crt \
 #   && update-ca-certificates
-
-# install nginx cert
-RUN set -ex; \
-  cat renovate.pem ca.pem > /etc/ssl/certs/renovate.pem; \
-  cp renovate.key /etc/ssl/private/renovate.key;
 
 
 #--------------------------------------
@@ -40,7 +36,9 @@ RUN set -ex; \
   openssl x509 -noout -text -in renovate.pem;
 
 RUN set -ex; \
-  nginx && su -c 'SSL_CERT_FILE=/test/ca.pem curl -svo /dev/null https://localhost' ${USER_NAME}
+  nginx \
+  && su -c 'SSL_CERT_FILE=/test/ca.pem curl -svo /dev/null https://localhost' ${USER_NAME} \
+  && su -c 'SSL_CERT_FILE=/test/ca.pem curl -svo /dev/null https://buildkitsandbox' ${USER_NAME}
 
 
 #--------------------------------------
@@ -91,6 +89,17 @@ RUN set -ex; \
 
 
 #--------------------------------------
+# test: powershell
+#--------------------------------------
+FROM build as testf
+
+# renovate: datasource=github-releases lookupName=PowerShell/PowerShell
+RUN install-tool powershell v7.1.2
+
+RUN set -ex; cat /etc/hosts; \
+  nginx && SSL_CERT_FILE=/test/ca.pem pwsh -c "&{ \$ErrorActionPreference='Stop'; invoke-webrequest https://buildkitsandbox }"
+
+#--------------------------------------
 # final
 #--------------------------------------
 FROM ${IMAGE}
@@ -100,3 +109,4 @@ COPY --from=testb /.dummy /.dummy
 COPY --from=testc /.dummy /.dummy
 COPY --from=testd /.dummy /.dummy
 COPY --from=teste /.dummy /.dummy
+COPY --from=testf /.dummy /.dummy
