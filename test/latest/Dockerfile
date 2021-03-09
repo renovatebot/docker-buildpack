@@ -20,13 +20,15 @@ RUN set -ex; \
   rm ca.key
 
 # install root ca
-RUN  set -ex \
-  && cp ca.pem /usr/local/share/ca-certificates/renovate-ca.crt \
-  && update-ca-certificates
+# RUN  set -ex \
+#   && cp ca.pem /usr/local/share/ca-certificates/renovate-ca.crt \
+#   && update-ca-certificates
+ENV SSL_CERT_FILE=/test/ca.pem
+ENV NODE_EXTRA_CA_CERTS=/test/ca.pem
 
 # install nginx cert
 RUN set -ex; \
-  cp renovate.pem /etc/ssl/certs/renovate.pem; \
+  cat renovate.pem ca.pem > /etc/ssl/certs/renovate.pem; \
   cp renovate.key /etc/ssl/private/renovate.key;
 
 
@@ -63,7 +65,6 @@ FROM build as testc
 # renovate: datasource=docker versioning=docker
 RUN install-tool node 14.16.0
 
-ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 RUN set -ex; \
   nginx && su -c 'node request.mjs' ${USER_NAME}
 
