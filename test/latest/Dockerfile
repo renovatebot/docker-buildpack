@@ -23,8 +23,6 @@ RUN set -ex; \
 # RUN  set -ex \
 #   && cp ca.pem /usr/local/share/ca-certificates/renovate-ca.crt \
 #   && update-ca-certificates
-ENV SSL_CERT_FILE=/test/ca.pem
-ENV NODE_EXTRA_CA_CERTS=/test/ca.pem
 
 # install nginx cert
 RUN set -ex; \
@@ -42,7 +40,7 @@ RUN set -ex; \
   openssl x509 -noout -text -in renovate.pem;
 
 RUN set -ex; \
-  nginx && curl -svo /dev/null https://localhost
+  nginx && su -c 'SSL_CERT_FILE=/test/ca.pem curl -svo /dev/null https://localhost' ${USER_NAME}
 
 
 #--------------------------------------
@@ -55,7 +53,7 @@ ARG PYTHON_VERSION=3.9.2
 RUN install-tool python
 
 RUN set -ex; \
-  nginx && su -c 'python request.py' ${USER_NAME}
+  nginx && su -c 'SSL_CERT_FILE=/test/ca.pem python request.py' ${USER_NAME}
 
 #--------------------------------------
 # test: node
@@ -66,8 +64,18 @@ FROM build as testc
 RUN install-tool node 14.16.0
 
 RUN set -ex; \
-  nginx && su -c 'node request.mjs' ${USER_NAME}
+  nginx && su -c 'NODE_EXTRA_CA_CERTS=/test/ca.pem node request.mjs' ${USER_NAME}
 
+#--------------------------------------
+# test: php
+#--------------------------------------
+FROM build as testd
+
+# old php version, not for renovating
+RUN install-tool php 7.4.14
+
+RUN set -ex; \
+  nginx && su -c 'SSL_CERT_FILE=/test/ca.pem php request.php' ${USER_NAME}
 
 #--------------------------------------
 # final
@@ -77,3 +85,4 @@ FROM ${IMAGE}
 COPY --from=testa /.dummy /.dummy
 COPY --from=testb /.dummy /.dummy
 COPY --from=testc /.dummy /.dummy
+COPY --from=testd /.dummy /.dummy
