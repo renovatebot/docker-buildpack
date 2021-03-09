@@ -77,6 +77,19 @@ RUN install-tool php 7.4.14
 RUN set -ex; \
   nginx && su -c 'SSL_CERT_FILE=/test/ca.pem php request.php' ${USER_NAME}
 
+
+#--------------------------------------
+# test: ruby
+#--------------------------------------
+FROM build as teste
+
+# Do not renovate ruby 2.x
+RUN install-tool ruby 2.6.4
+
+RUN set -ex; \
+  nginx && su -c 'SSL_CERT_FILE=/test/ca.pem ruby request.rb' ${USER_NAME}
+
+
 #--------------------------------------
 # final
 #--------------------------------------
@@ -86,3 +99,4 @@ COPY --from=testa /.dummy /.dummy
 COPY --from=testb /.dummy /.dummy
 COPY --from=testc /.dummy /.dummy
 COPY --from=testd /.dummy /.dummy
+COPY --from=teste /.dummy /.dummy
