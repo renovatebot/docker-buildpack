@@ -9,7 +9,7 @@ RUN install-tool erlang 22.3.2
 # Elixir
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool elixir 1.11.3
+RUN install-tool elixir 1.11.4
 
 WORKDIR /tmp
 
