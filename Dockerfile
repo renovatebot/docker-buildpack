@@ -28,15 +28,6 @@ COPY src/base/ /usr/local/
 
 RUN install-buildpack
 
-RUN install-apt \
-  ca-certificates \
-  curl \
-  dumb-init \
-  gnupg \
-  openssh-client \
-  unzip \
-  xz-utils \
-  ;
 
 # renovate: datasource=github-tags lookupName=git/git
 RUN install-tool git v2.31.0
