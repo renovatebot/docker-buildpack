@@ -39,6 +39,7 @@ case "$VERSION_CODENAME" in
       pkg-config \
       tzdata \
       zlib1g-dev \
+    ;;
   "focal")
     apt_install \
       binutils \
