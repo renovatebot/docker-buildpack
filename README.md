@@ -2,11 +2,9 @@
 ![Docker Image Size (latest)](https://img.shields.io/docker/image-size/renovate/buildpack/latest)
 ![GitHub](https://img.shields.io/github/license/renovatebot/docker-buildpack)
 
-
 # docker-buildpack
 
-This repository is the source for the Docker Hub image `renovate/buildpack`. Commits to `master` branch are automatically built and published.
-
+This repository is the source for the Docker Hub image `renovate/buildpack`. Commits to `main` branch are automatically built and published.
 
 ### Custom base image
 
