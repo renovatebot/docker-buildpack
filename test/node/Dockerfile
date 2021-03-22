@@ -81,15 +81,16 @@ USER 1000
 
 
 RUN set -ex; \
-  pnpm --version; \
-  command -v pnpm;
+  pnpm --version;
 
 
 RUN set -ex; cd test/a; pnpm i
 
 
 SHELL [ "/bin/sh", "-c" ]
-RUN pnpm --version
+RUN set -ex; \
+  pnpm --version \
+  [ "$(command -v pnpm)" = "/usr/local/bin/pnpm" ] && echo "works" || exit 1;
 
 #--------------------------------------
 # test: node 15
