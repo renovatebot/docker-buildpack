@@ -54,7 +54,17 @@ RUN set -ex; \
 
 
 SHELL [ "/bin/sh", "-c" ]
-RUN yarn --version
+
+USER root
+
+# renovate: datasource=npm
+RUN install-tool yarn 1.22.5
+
+USER 1000
+
+RUN set -ex; \
+  [ "$(command -v yarn)" = "/usr/local/bin/yarn" ] && echo "works" || exit 1; \
+  yarn --version
 
 #--------------------------------------
 # test: pnpm
@@ -64,6 +74,7 @@ FROM build as testc
 
 USER root
 
+# renovate: datasource=npm
 RUN install-tool pnpm 4.14.2
 
 USER 1000
@@ -86,10 +97,12 @@ RUN pnpm --version
 
 FROM ${IMAGE} as testd
 
+# renovate: datasource=npm
 RUN install-tool node 15.0.1
 
 RUN touch /.dummy
 
+# renovate: datasource=npm
 RUN install-tool yarn 1.22.5
 
 USER 1000
