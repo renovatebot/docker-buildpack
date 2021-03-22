@@ -12,4 +12,6 @@ npm install -g yarn@${TOOL_VERSION}
 
 yarn --version
 
-shell_wrapper yarn
+if [[ $EUID -eq 0 ]]; then
+  shell_wrapper yarn
+fi

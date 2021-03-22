@@ -12,4 +12,6 @@ npm install -g pnpm@${TOOL_VERSION}
 
 pnpm --version
 
-shell_wrapper pnpm
+if [[ $EUID -eq 0 ]]; then
+  shell_wrapper pnpm
+fi
