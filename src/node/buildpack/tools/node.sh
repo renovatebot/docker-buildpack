@@ -48,3 +48,4 @@ export_env NPM_CONFIG_PREFIX $NPM_CONFIG_PREFIX
 export_path "\$NPM_CONFIG_PREFIX/bin"
 
 shell_wrapper node
+shell_wrapper npm
