@@ -22,12 +22,27 @@ VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 VERSION_ID=$(. /etc/os-release && echo ${VERSION_ID})
 
 # https://swift.org/getting-started/#on-linux
+# already installed: git
 
 case "$VERSION_CODENAME" in
+  "bionic")
+    apt_install \
+      binutils \
+      libc6-dev \
+      libcurl4 \
+      libedit2 \
+      libgcc-5-dev \
+      libpython2.7 \
+      libsqlite3-0 \
+      libstdc++-5-dev \
+      libxml2 \
+      pkg-config \
+      tzdata \
+      zlib1g-dev \
+    ;;
   "focal")
     apt_install \
       binutils \
-      git \
       gnupg2 \
       libc6-dev \
       libcurl4 \

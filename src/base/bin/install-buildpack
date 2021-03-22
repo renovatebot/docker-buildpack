@@ -65,3 +65,17 @@ export_env USER_ID ${USER_ID}
 export_env DEBIAN_FRONTEND "noninteractive"
 export_env LC_ALL "C.UTF-8"
 export_env LANG "C.UTF-8"
+
+# install basic required packages
+apt_install \
+  ca-certificates \
+  curl \
+  dumb-init \
+  gnupg \
+  openssh-client \
+  unzip \
+  xz-utils \
+  ;
+
+# cleanup
+rm -rf /var/lib/apt/lists/*

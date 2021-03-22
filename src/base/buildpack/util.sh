@@ -126,9 +126,10 @@ function apt_install () {
 function require_distro () {
   local VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
   case "$VERSION_CODENAME" in
+  "bionic") ;; #supported
   "focal") ;; #supported
   *)
-    echo "Distro not supported: ${VERSION_CODENAME}! Please use 'ubuntu focal'." >&2
+    echo "Distro not supported: ${VERSION_CODENAME}! Please use 'ubuntu bionic or focal'." >&2
     exit 1
    ;;
   esac
