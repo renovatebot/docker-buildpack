@@ -18,9 +18,11 @@ RUN install-tool dotnet 3.1.407
 
 USER 1000
 
-RUN set -ex; \
-    dotnet --info
+RUN dotnet --info
 
+SHELL [ "/bin/sh", "-c" ]
+
+RUN dotnet --info
 
 #--------------------------------------
 # test: dotnet 3.1

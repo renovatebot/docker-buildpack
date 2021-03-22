@@ -65,6 +65,9 @@ RUN set -ex; \
     bundle lock; \
     git status -s
 
+SHELL [ "/bin/sh", "-c" ]
+RUN ruby --version
+
 #--------------------------------------
 # test: cocoapods
 #--------------------------------------

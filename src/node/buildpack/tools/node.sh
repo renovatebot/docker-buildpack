@@ -36,10 +36,7 @@ fi
 echo node: $(node --version) $(command -v node)
 echo npm: $(npm --version)  $(command -v npm)
 
-if [[ ${MAJOR} < 15 ]]; then
-  # backward compatibillity
-  shell_wrapper node
-fi
+shell_wrapper node
 
 NPM_CONFIG_PREFIX="/home/${USER_NAME}/.npm-global"
 

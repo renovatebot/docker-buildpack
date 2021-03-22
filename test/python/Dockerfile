@@ -54,6 +54,12 @@ RUN install-tool python 3.9.2
 # renovate: datasource=pypi
 RUN install-tool poetry 1.1.5
 
+USER 1000
+
+SHELL [ "/bin/sh", "-c" ]
+RUN python --version
+RUN poetry --version
+
 #--------------------------------------
 # test b: pipenv
 #--------------------------------------

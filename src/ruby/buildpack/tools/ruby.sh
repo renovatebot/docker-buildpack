@@ -69,3 +69,7 @@ ruby --version
 echo "gem $(gem --version)"
 
 gem env
+
+
+shell_wrapper ruby
+shell_wrapper gem

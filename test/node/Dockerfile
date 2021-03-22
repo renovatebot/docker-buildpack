@@ -29,12 +29,12 @@ RUN set -ex; \
   [ "$(command -v node)" = "/usr/local/bin/node" ] && echo "works" || exit 1;
 
 RUN node --version
+RUN npm --version
 
 #--------------------------------------
 # test: yarn
 #--------------------------------------
 FROM build as testb
-
 
 RUN npm install -g yarn
 
@@ -52,6 +52,9 @@ RUN set -ex; \
   [ "$(command -v yarn)" = "/tmp/.npm/bin/yarn" ] && echo "works" || exit 1; \
   yarn --version;
 
+
+SHELL [ "/bin/sh", "-c" ]
+RUN yarn --version
 
 #--------------------------------------
 # test: pnpm
@@ -72,6 +75,11 @@ RUN set -ex; \
 
 
 RUN set -ex; cd test/a; pnpm i
+
+
+SHELL [ "/bin/sh", "-c" ]
+
+RUN pnpm --version
 
 #--------------------------------------
 # test: node 15

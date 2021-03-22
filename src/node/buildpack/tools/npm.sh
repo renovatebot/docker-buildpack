@@ -11,3 +11,5 @@ fi
 npm install -g npm@${TOOL_VERSION}
 
 npm --version
+
+shell_wrapper npm

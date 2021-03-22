@@ -11,3 +11,5 @@ fi
 npm install -g pnpm@${TOOL_VERSION}
 
 pnpm --version
+
+shell_wrapper pnpm

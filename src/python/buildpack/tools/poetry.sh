@@ -35,3 +35,6 @@ fi
 update_env ${tool_path}
 
 poetry --version
+
+
+shell_wrapper poetry

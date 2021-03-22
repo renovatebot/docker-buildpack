@@ -24,3 +24,5 @@ rm helm.tgz
 export_path "/usr/local/helm/${TOOL_VERSION}"
 
 helm version
+
+shell_wrapper helm

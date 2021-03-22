@@ -33,3 +33,7 @@ export_path "\$CARGO_HOME/bin:/usr/local/rust/${TOOL_VERSION}/bin"
 
 cargo --version
 rustc --version
+
+
+shell_wrapper cargo
+shell_wrapper rustc

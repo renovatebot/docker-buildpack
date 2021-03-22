@@ -11,3 +11,5 @@ fi
 npm install -g yarn@${TOOL_VERSION}
 
 yarn --version
+
+shell_wrapper yarn

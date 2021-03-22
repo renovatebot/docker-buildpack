@@ -58,6 +58,12 @@ RUN set -ex; \
     go mod tidy; \
     git status -s;
 
+USER 1000
+
+SHELL [ "/bin/sh", "-c" ]
+
+RUN go env
+
 #--------------------------------------
 # final
 #--------------------------------------
