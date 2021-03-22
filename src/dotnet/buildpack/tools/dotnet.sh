@@ -41,5 +41,4 @@ su $USER_NAME -c 'dotnet help' > /dev/null
 
 dotnet --info
 
-
 shell_wrapper dotnet

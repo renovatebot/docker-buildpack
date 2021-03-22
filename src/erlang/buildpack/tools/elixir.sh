@@ -17,3 +17,6 @@ mix --version
 
 su -c 'mix local.hex --force' ${USER_NAME}
 su -c 'mix local.rebar --force' ${USER_NAME}
+
+shell_wrapper elixir
+shell_wrapper mix

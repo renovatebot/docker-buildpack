@@ -21,7 +21,6 @@ USER 1000
 RUN dotnet --info
 
 SHELL [ "/bin/sh", "-c" ]
-
 RUN dotnet --info
 
 #--------------------------------------

@@ -32,3 +32,5 @@ EOM
 chown -R ${USER_ID} /home/${USER_NAME}/.m2 /home/${USER_NAME}/.gradle
 
 gradle --version
+
+shell_wrapper gradle

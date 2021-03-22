@@ -61,7 +61,6 @@ RUN set -ex; \
 USER 1000
 
 SHELL [ "/bin/sh", "-c" ]
-
 RUN go env
 
 #--------------------------------------

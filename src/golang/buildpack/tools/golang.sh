@@ -43,5 +43,4 @@ chmod -R g+w $GOPATH
 go version
 go env
 
-
 shell_wrapper go

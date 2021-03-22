@@ -15,5 +15,4 @@ RUN set -ex; \
 
 
 SHELL [ "/bin/sh", "-c" ]
-
 RUN helm version

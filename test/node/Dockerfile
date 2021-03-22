@@ -78,7 +78,6 @@ RUN set -ex; cd test/a; pnpm i
 
 
 SHELL [ "/bin/sh", "-c" ]
-
 RUN pnpm --version
 
 #--------------------------------------
