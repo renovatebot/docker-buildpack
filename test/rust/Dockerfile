@@ -23,3 +23,7 @@ RUN set -ex; \
     cd tikv; \
     cargo update --manifest-path Cargo.toml --package fail; \
     git status -s
+
+SHELL [ "/bin/sh", "-c" ]
+RUN rustc --version
+RUN cargo --version

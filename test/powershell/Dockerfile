@@ -11,3 +11,6 @@ RUN set -ex; \
 
 RUN set -ex; \
   pwsh -Command Write-Host Hello, World!
+
+SHELL [ "/bin/sh", "-c" ]
+RUN pwsh --version

@@ -30,3 +30,5 @@ rm powershell.tgz
 export_path "/usr/local/powershell/${TOOL_VERSION}"
 
 pwsh -Version
+
+shell_wrapper pwsh

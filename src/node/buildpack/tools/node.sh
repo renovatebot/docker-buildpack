@@ -36,11 +36,6 @@ fi
 echo node: $(node --version) $(command -v node)
 echo npm: $(npm --version)  $(command -v npm)
 
-if [[ ${MAJOR} < 15 ]]; then
-  # backward compatibillity
-  shell_wrapper node
-fi
-
 NPM_CONFIG_PREFIX="/home/${USER_NAME}/.npm-global"
 
 # npm 7 bug
@@ -51,3 +46,6 @@ chmod -R g+w $NPM_CONFIG_PREFIX
 # redirect user install
 export_env NPM_CONFIG_PREFIX $NPM_CONFIG_PREFIX
 export_path "\$NPM_CONFIG_PREFIX/bin"
+
+shell_wrapper node
+shell_wrapper npm

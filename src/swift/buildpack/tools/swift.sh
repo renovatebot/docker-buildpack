@@ -83,3 +83,5 @@ rm swift.tar.gz
 export_path "${SWIFT_INSTALL_DIR}/bin"
 
 swift --version
+
+shell_wrapper swift

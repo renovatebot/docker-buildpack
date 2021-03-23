@@ -29,12 +29,12 @@ RUN set -ex; \
   [ "$(command -v node)" = "/usr/local/bin/node" ] && echo "works" || exit 1;
 
 RUN node --version
+RUN npm --version
 
 #--------------------------------------
 # test: yarn
 #--------------------------------------
 FROM build as testb
-
 
 RUN npm install -g yarn
 
@@ -53,6 +53,19 @@ RUN set -ex; \
   yarn --version;
 
 
+SHELL [ "/bin/sh", "-c" ]
+
+USER root
+
+# renovate: datasource=npm
+RUN install-tool yarn 1.22.5
+
+USER 1000
+
+RUN set -ex; \
+  [ "$(command -v yarn)" = "/usr/local/bin/yarn" ] && echo "works" || exit 1; \
+  yarn --version
+
 #--------------------------------------
 # test: pnpm
 #--------------------------------------
@@ -61,17 +74,23 @@ FROM build as testc
 
 USER root
 
+# renovate: datasource=npm
 RUN install-tool pnpm 4.14.2
 
 USER 1000
 
 
 RUN set -ex; \
-  pnpm --version; \
-  command -v pnpm;
+  pnpm --version;
 
 
 RUN set -ex; cd test/a; pnpm i
+
+
+SHELL [ "/bin/sh", "-c" ]
+RUN set -ex; \
+  pnpm --version \
+  [ "$(command -v pnpm)" = "/usr/local/bin/pnpm" ] && echo "works" || exit 1;
 
 #--------------------------------------
 # test: node 15
@@ -79,10 +98,12 @@ RUN set -ex; cd test/a; pnpm i
 
 FROM ${IMAGE} as testd
 
+# renovate: datasource=npm
 RUN install-tool node 15.0.1
 
 RUN touch /.dummy
 
+# renovate: datasource=npm
 RUN install-tool yarn 1.22.5
 
 USER 1000

@@ -89,3 +89,7 @@ else
 fi
 
 python --version
+
+if [[ $EUID -eq 0 ]]; then
+  shell_wrapper python
+fi

@@ -32,6 +32,8 @@ RUN set -ex; \
   cd test/c; \
   swift package resolve
 
+SHELL [ "/bin/sh", "-c" ]
+RUN swift --version
 
 #--------------------------------------
 # testb: swift 5.2.5
