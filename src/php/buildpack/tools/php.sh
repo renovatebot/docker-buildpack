@@ -15,7 +15,7 @@ VERSION_CODENAME=$(. /etc/os-release && echo ${VERSION_CODENAME})
 echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu ${VERSION_CODENAME} main" | tee /etc/apt/sources.list.d/ondrej-php.list
 curl -sSL \
 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14AA40EC0831756756D7F66C4F4EA0AAE5267A6C' \
-| sudo apt-key add -
+| apt-key add -
 
 VERSION=${MAJOR}.${MINOR}
 packages="php${VERSION}-cli php${VERSION}-mbstring php${VERSION}-curl php${VERSION}-xml"
