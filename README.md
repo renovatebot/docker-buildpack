@@ -6,6 +6,11 @@
 
 This repository is the source for the Docker Hub image `renovate/buildpack`. Commits to `main` branch are automatically built and published.
 
+## Notice: Intention to Relocate
+
+We are currently in the process of removing all buildpack-related repository content to its new home at <https://github.com/containerbase>.
+Please create an issue to check first before starting any major work on bugs or features.
+
 ## Custom base image
 
 To use a custom base image with `renovate/buildpack` checkout [custom-base-image](./docs/custom-base-image.md) docs.
