@@ -12,7 +12,7 @@ ARG USER_NAME=user
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ubuntu:focal@sha256:9e4c8d043d4374276195ccb5a76a6704b8ce229332fe8a4aa12bbb47ecb09226 as base
+FROM ubuntu:focal@sha256:3c9c713e0979e9bd6061ed52ac1e9e1f246c9495aa063619d9d695fb8039aa1f as base
 
 ARG USER_ID
 ARG USER_NAME
