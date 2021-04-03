@@ -11,7 +11,7 @@ FROM base as build
 
 # Python
 # renovate: datasource=github-releases lookupName=renovatebot/python
-RUN install-tool python 3.9.2
+RUN install-tool python 3.9.3
 
 
 FROM base as build-rootless
@@ -19,7 +19,7 @@ FROM base as build-rootless
 USER 1000
 
 # renovate: datasource=github-releases lookupName=renovatebot/python
-RUN install-tool python 3.9.2
+RUN install-tool python 3.9.3
 
 #--------------------------------------
 # build: pipenv
@@ -49,7 +49,7 @@ FROM build as testa
 
 # try install again, sould skip
 # renovate: datasource=github-releases lookupName=renovatebot/python
-RUN install-tool python 3.9.2
+RUN install-tool python 3.9.3
 
 # renovate: datasource=pypi
 RUN install-tool poetry 1.1.5
