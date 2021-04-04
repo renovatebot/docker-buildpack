@@ -56,7 +56,7 @@ RUN set -ex; \
 FROM build as testb
 
 # renovate: datasource=github-releases depName=renovatebot/python
-ARG PYTHON_VERSION=3.9.2
+ARG PYTHON_VERSION=3.9.3
 RUN install-tool python
 
 RUN set -ex; \
