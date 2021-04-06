@@ -10,7 +10,7 @@ COPY --chown=1000:0 test test
 FROM base as build
 
 # Python
-# renovate: datasource=github-releases lookupName=renovatebot/python
+# renovate: datasource=github-releases lookupName=containerbase/python-prebuild
 RUN install-tool python 3.9.3
 
 
@@ -18,7 +18,7 @@ FROM base as build-rootless
 
 USER 1000
 
-# renovate: datasource=github-releases lookupName=renovatebot/python
+# renovate: datasource=github-releases lookupName=containerbase/python-prebuild
 RUN install-tool python 3.9.3
 
 #--------------------------------------
@@ -48,7 +48,7 @@ USER 1000
 FROM build as testa
 
 # try install again, sould skip
-# renovate: datasource=github-releases lookupName=renovatebot/python
+# renovate: datasource=github-releases lookupName=containerbase/python-prebuild
 RUN install-tool python 3.9.3
 
 # renovate: datasource=pypi
