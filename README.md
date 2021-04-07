@@ -13,8 +13,8 @@ Please create an issue to check first before starting any major work on bugs or 
 
 ## Custom base image
 
-To use a custom base image with `renovate/buildpack` checkout [custom-base-image](./docs/custom-base-image.md) docs.
+To use a custom base image with `renovate/buildpack` checkout [custom-base-image](https://github.com/containerbase/buildpack/blob/main/docs/custom-base-image.md) docs.
 
 ### Custom Root CA Certificates
 
-To add custom root certifactes to the `renovate/buildpack` base image checkout [custom-root-ca](./docs/custom-root-ca.md) docs.
+To add custom root certifactes to the `renovate/buildpack` base image checkout [custom-root-ca](https://github.com/containerbase/buildpack/blob/main/docs/custom-root-ca.md) docs.
