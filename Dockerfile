@@ -12,7 +12,7 @@ ARG USER_NAME=ubuntu
 #--------------------------------------
 # Image: containerbase/buildpack
 #--------------------------------------
-FROM containerbase/buildpack AS buildpack
+FROM containerbase/buildpack:1.2.0 AS buildpack
 
 #--------------------------------------
 # Image: base
