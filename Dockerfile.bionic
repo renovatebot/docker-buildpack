@@ -74,7 +74,7 @@ RUN install-tool pnpm 6.2.4
 RUN install-tool yarn 1.22.10
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool php 8.0.5
+RUN install-tool php 8.0.6
 # renovate: datasource=github-releases depName=composer/composer
 RUN install-tool composer 2.0.9
 
