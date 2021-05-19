@@ -7,7 +7,7 @@ ARG USER_NAME=ubuntu
 #--------------------------------------
 # Image: containerbase/buildpack
 #--------------------------------------
-FROM containerbase/buildpack:1.6.1@sha256:65d2813db50ca95c578cb1fe8726ee4debbbfedefc14278167d9261ca1e5c3cc AS buildpack
+FROM containerbase/buildpack:1.9.0@sha256:7a445e77431e8acb20c48b91727f5509ff94f8019d31635218d4d6e22fd9b2ac AS buildpack
 
 
 #--------------------------------------
