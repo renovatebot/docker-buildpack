@@ -13,7 +13,7 @@ FROM containerbase/buildpack:1.10.0@sha256:b7630c77e29bbfada900a74df043e6e9a49b6
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ubuntu:bionic@sha256:04919776d30640ce4ed24442d5f7c1a8e4bd0e4793ed9469843cedaecb0d72fb as base
+FROM ubuntu:bionic@sha256:3badff71342d281e7b268f86c1cf870d9e480adba4c5da1b8fb8dc4eb76ed110 as base
 
 ARG USER_ID
 ARG USER_NAME
