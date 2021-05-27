@@ -17,7 +17,7 @@ FROM containerbase/buildpack:1.10.0@sha256:b7630c77e29bbfada900a74df043e6e9a49b6
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ubuntu:focal@sha256:b4aa552dd3f2ed84f3214b0e8add3648aee0205ef58295c92fe0899f96ad8755 as base
+FROM ubuntu:focal@sha256:adf73ca014822ad8237623d388cedf4d5346aa72c270c5acc01431cc93e18e2d as base
 
 ARG USER_ID
 ARG USER_NAME
