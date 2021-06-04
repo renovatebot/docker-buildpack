@@ -12,7 +12,7 @@ WORKDIR /tmp
 FROM build as testa
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool golang 1.16.4
+RUN install-tool golang 1.16.5
 
 USER 1000
 
