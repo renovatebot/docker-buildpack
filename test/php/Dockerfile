@@ -80,7 +80,7 @@ RUN composer --version
 #--------------------------------------
 FROM base as testc
 
-# renovate: datasource=docker versioning=docker
+# renovate: datasource=github-releases lookupName=containerbase/php-prebuild
 RUN install-tool php 8.0.6
 
 # renovate: datasource=github-releases depName=composer/composer
