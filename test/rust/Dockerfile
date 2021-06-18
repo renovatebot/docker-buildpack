@@ -2,10 +2,10 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool rust 1.52.1
+RUN install-tool rust 1.53.0
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool rust 1.52.1
+RUN install-tool rust 1.53.0
 
 WORKDIR /tmp
 
