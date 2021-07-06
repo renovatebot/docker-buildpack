@@ -74,7 +74,7 @@ RUN install-tool pnpm 6.9.1
 RUN install-tool yarn 1.22.10
 
 # renovate: datasource=github-releases lookupName=containerbase/php-prebuild
-RUN install-tool php 8.0.7
+RUN install-tool php 8.0.8
 # renovate: datasource=github-releases depName=composer/composer
 RUN install-tool composer 2.0.9
 
