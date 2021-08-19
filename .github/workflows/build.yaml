@@ -57,7 +57,7 @@ jobs:
         run: docker build --build-arg IMAGE=${{ env.TEST_IMAGE }} ./test/${{ matrix.tag }}
 
       - name: Build and Publish
-        uses: renovatebot/internal-tools@047612fed0c48a57d68522587ad2b36c4783a260 # renovate: tag=v1.8.0
+        uses: renovatebot/internal-tools@33e60b22c4c7b4537d2ec41f565471bc14862eb5 # renovate: tag=v1.8.1
         with:
           command: docker-builder
           build-args: TARGET,USER_NAME
