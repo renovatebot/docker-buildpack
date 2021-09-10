@@ -67,7 +67,7 @@ RUN set -ex; \
 #--------------------------------------
 FROM build as testc
 
-# renovate: datasource=docker versioning=docker
+# renovate: datasource=node
 RUN install-tool node 14.17.6
 
 RUN set -ex; \

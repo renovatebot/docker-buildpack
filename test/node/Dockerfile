@@ -1,7 +1,7 @@
 ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
-# renovate: datasource=docker versioning=docker
+# renovate: datasource=node
 RUN install-tool node 14.17.6
 
 RUN touch /.dummy
@@ -98,7 +98,7 @@ RUN set -ex; \
 
 FROM ${IMAGE} as testd
 
-# renovate: datasource=npm
+# renovate: datasource=node versioning=semver
 RUN install-tool node 15.0.1
 
 RUN touch /.dummy
