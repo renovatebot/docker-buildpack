@@ -1,37 +1,51 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>renovatebot/.github"],
+  "extends": ["github>containerbase/.github"],
   "ignorePaths": [],
-  "packageRules": [{
-    "description": "Don't hold back any PRs for approval",
-    "packagePatterns": ["*"],
-    "dependencyDashboardApproval": false
-  }, {
-    "description": "Disable all managers in test/ by default",
-    "paths": ["test/"],
-    "enabled": false
-  }, {
-    "description": "Enable the regex manager only for test/",
-    "paths": ["test/"],
-    "managers": ["regex"],
-    "enabled": true
-  }, {
-    "description": "Separate patch updates in test/ so that we can automerge them",
-    "paths": ["test/"],
-    "automergeType": "branch",
-    "separateMinorPatch": true
-  }, {
-    "description": "Don't automerge test minor/major because we might want to retain old versions in tests too",
-    "paths": ["test/"],
-    "updateTypes": ["minor", "major"],
-    "automerge": false
-  }, {
-    "description": "Use node versioning to get accurate stable determination",
-    "packageNames": ["node"],
-    "versioning": "node"
-  }, {
-    "description": "Override erlang version extraction",
-    "packageNames": ["erlang"],
-    "extractVersion": "^OTP-(?<version>.+)$"
-  }]
+  "packageRules": [
+    {
+      "description": "Don't hold back any PRs for approval",
+      "matchPackagePatterns": ["*"],
+      "dependencyDashboardApproval": false
+    },
+    {
+      "description": "Disable all managers in test/ by default",
+      "matchPaths": ["test/"],
+      "enabled": false
+    },
+    {
+      "description": "Enable the regex manager only for test/",
+      "matchPaths": ["test/"],
+      "matchManagers": ["regex"],
+      "enabled": true
+    },
+    {
+      "description": "Separate patch updates in test/ so that we can automerge them",
+      "matchPaths": ["test/"],
+      "automergeType": "branch",
+      "separateMinorPatch": true
+    },
+    {
+      "description": "Don't automerge test minor/major because we might want to retain old versions in tests too",
+      "matchPaths": ["test/"],
+      "matchUpdateTypes": ["minor", "major"],
+      "automerge": false
+    },
+    {
+      "description": "Use `test` semantic commit scope for test/",
+      "matchPaths": ["test/"],
+      "semanticCommitType": "test"
+    },
+    {
+      "description": "Override erlang version extraction",
+      "matchPackageNames": ["erlang"],
+      "extractVersion": "^OTP-(?<version>.+)$"
+    },
+    {
+      "description": "Trigger fix release for ubuntu digest updates",
+      "matchPackageNames": ["ubuntu"],
+      "matchUpdateTypes": ["digest"],
+      "semanticCommitType": "fix"
+    }
+  ]
 }

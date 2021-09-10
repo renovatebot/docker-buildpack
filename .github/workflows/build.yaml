@@ -83,4 +83,4 @@ jobs:
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2.3.4
 
       - name: build
-        run: docker build --build-arg USER_NAME -f Dockerfile.${{ matrix.distro }} .
+        run: docker build --build-arg USER_NAME -f test/Dockerfile.${{ matrix.distro }} .
