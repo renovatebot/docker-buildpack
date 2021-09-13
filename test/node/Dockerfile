@@ -75,7 +75,7 @@ FROM build as testc
 USER root
 
 # renovate: datasource=npm
-RUN install-tool pnpm 6.14.6
+RUN install-tool pnpm 6.14.7
 
 USER 1000
 
