@@ -45,7 +45,7 @@ RUN install-tool git v2.33.0
 FROM base as test
 
 # renovate: datasource=docker lookupName=mcr.microsoft.com/dotnet/sdk versioning=docker
-RUN install-tool dotnet 3.1.412
+RUN install-tool dotnet 3.1.413
 
 #disable renovate: datasource=github-releases lookupName=erlang/otp versioning=loose
 RUN install-tool erlang 22.3.2
