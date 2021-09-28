@@ -2,7 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=node
-RUN install-tool node 14.17.6
+RUN install-tool node v14.18.0
 
 RUN touch /.dummy
 
