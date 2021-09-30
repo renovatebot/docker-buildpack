@@ -33,6 +33,11 @@ SHELL ["/bin/bash" , "-c"]
 ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD [ "bash" ]
 
+# update packages
+RUN apt-get update && \
+  apt-get upgrade -y && \
+  rm -rf /tmp/* /var/lib/apt/lists/* /var/cache/apt/*
+
 # Set up buildpack
 COPY --from=buildpack /usr/local/bin/ /usr/local/bin/
 COPY --from=buildpack /usr/local/buildpack/ /usr/local/buildpack/
