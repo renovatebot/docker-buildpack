@@ -71,7 +71,7 @@ RUN install-tool node v14.18.0
 # renovate: datasource=npm
 RUN install-tool pnpm 6.16.0
 # renovate: datasource=npm
-RUN install-tool yarn 1.22.11
+RUN install-tool yarn 1.22.15
 
 # renovate: datasource=github-releases lookupName=containerbase/php-prebuild
 RUN install-tool php 8.0.11
