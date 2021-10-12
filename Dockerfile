@@ -44,7 +44,7 @@ RUN install-buildpack
 
 
 # renovate: datasource=github-tags lookupName=git/git
-RUN install-tool git v2.33.0
+RUN install-tool git v2.33.1
 
 # BEGIN: sidecar buildpacks
 
