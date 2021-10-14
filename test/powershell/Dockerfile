@@ -2,7 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=github-releases lookupName=PowerShell/PowerShell
-RUN install-tool powershell v7.1.4
+RUN install-tool powershell v7.1.5
 
 USER 1000
 
