@@ -6,7 +6,7 @@
 
 This repository is the source for the Docker Hub image `renovate/buildpack`. Commits to `main` branch are automatically built and published.
 
-## Notice: Do not use the laguage docker tags
+## Notice: Do not use the language docker tags
 
 Do not use the language docker tags, they are deprecated and won't be updated soon.
 
