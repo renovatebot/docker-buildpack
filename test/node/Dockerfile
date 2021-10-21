@@ -6,11 +6,11 @@ RUN install-tool node v14.18.1
 
 RUN touch /.dummy
 
-WORKDIR /tmp
+COPY --chown=1000:0 test test
+
+WORKDIR /test
 
 USER 1000
-
-COPY --chown=1000:0 test test
 
 #--------------------------------------
 # test: node
@@ -43,7 +43,7 @@ RUN set -ex; \
   yarn --version;
 
 
-RUN set -ex; cd test/a; yarn
+RUN set -ex; cd a; yarn
 
 ENV NPM_CONFIG_PREFIX=/tmp/.npm
 RUN npm install -g yarn
@@ -84,7 +84,7 @@ RUN set -ex; \
   pnpm --version;
 
 
-RUN set -ex; cd test/a; pnpm i
+RUN set -ex; cd a; pnpm i
 
 
 SHELL [ "/bin/sh", "-c" ]

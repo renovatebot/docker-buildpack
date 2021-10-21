@@ -4,8 +4,9 @@ FROM ${IMAGE} as base
 
 RUN touch /.dummy
 
-WORKDIR /tmp
 COPY --chown=1000:0 test test
+
+WORKDIR /test
 
 FROM base as build
 
@@ -66,7 +67,7 @@ RUN poetry --version
 FROM pipenv as testb
 
 RUN set -ex; \
-  cd test/a; \
+  cd a; \
   pipenv lock;
 
 
@@ -75,10 +76,10 @@ RUN set -ex; \
 #--------------------------------------
 FROM poetry as testc
 
-RUN set -ex; cd test/c-poetry && poetry update --lock --no-interaction
+RUN set -ex; cd c-poetry && poetry update --lock --no-interaction
 
 
-RUN set -ex; cd test/c-poetry && poetry add h3py
+RUN set -ex; cd c-poetry && poetry add h3py
 
 
 #--------------------------------------
@@ -86,7 +87,7 @@ RUN set -ex; cd test/c-poetry && poetry add h3py
 #--------------------------------------
 FROM poetry as testd
 
-RUN set -ex; cd test/d-poetry && poetry update --lock --no-interaction pytest
+RUN set -ex; cd d-poetry && poetry update --lock --no-interaction pytest
 
 
 #--------------------------------------
@@ -112,7 +113,7 @@ FROM build as testf
 RUN pip install hashin
 
 RUN set -ex; \
-  cd test/f; \
+  cd f; \
   hashin distribute==0.6.27; \
   cat requirements.txt
 
@@ -125,14 +126,14 @@ FROM build-rootless as testg
 RUN install-pip pipenv 2021.5.29
 
 RUN set -ex; \
-  cd test/a; \
+  cd a; \
   pipenv lock;
 
 # renovate: datasource=pypi
 RUN install-tool poetry 1.1.11
 
 RUN set -ex \
-  && cd test/c-poetry \
+  && cd c-poetry \
   && poetry update --lock --no-interaction \
   && poetry add h3py \
   ;
@@ -141,7 +142,7 @@ RUN set -ex \
 RUN install-pip hashin 0.15.0
 
 RUN set -ex \
-  && cd test/f \
+  && cd f \
   && hashin distribute==0.6.27 \
   && cat requirements.txt \
   ;
