@@ -6,6 +6,11 @@
 
 This repository is the source for the Docker Hub image `renovate/buildpack`. Commits to `main` branch are automatically built and published.
 
+## Notice: Do not use the language docker tags
+
+Do not use the language docker tags like `renovate/buildpack:ruby` or `renovate/buildpack:5-ruby`, they are deprecated and won't be updated soon.
+Use `renovate/buildpack` or `renovate/buildpack:5` images but checkout latest version.
+
 ## Notice: Intention to Relocate
 
 We are currently in the process of removing all buildpack-related repository content to its new home at <https://github.com/containerbase>.
