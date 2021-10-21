@@ -6,7 +6,9 @@ RUN install-tool swift 5.5.0
 
 RUN touch /.dummy
 
-WORKDIR /tmp
+COPY --chown=1000:0 test test
+
+WORKDIR /test
 
 
 #--------------------------------------
@@ -18,18 +20,16 @@ USER 1000
 
 RUN swift --version
 
-COPY --chown=1000:0 test test
-
 RUN set -ex; \
-  cd test/a; \
+  cd a; \
   swift package resolve
 
 RUN set -ex; \
-  cd test/b; \
+  cd b; \
   swift package resolve
 
 RUN set -ex; \
-  cd test/c; \
+  cd c; \
   swift package resolve
 
 SHELL [ "/bin/sh", "-c" ]
@@ -51,7 +51,7 @@ COPY --chown=1000:0 test test
 
 
 RUN set -ex; \
-  cd test/c; \
+  cd c; \
   swift package resolve
 
 #--------------------------------------

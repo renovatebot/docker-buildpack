@@ -3,9 +3,9 @@ FROM ${IMAGE} as base
 
 RUN touch /.dummy
 
-WORKDIR /tmp
-
 COPY --chown=1000:0 test test
+
+WORKDIR /test
 
 
 #--------------------------------------
@@ -29,11 +29,9 @@ RUN dotnet --info
 FROM net3 as testa
 
 RUN set -ex; \
-    cd test; \
     dotnet restore --use-lock-file
 
 RUN set -ex;  \
-    cd test; \
     dotnet add package Newtonsoft.Json --version 12.0.3; \
     dotnet restore --force-evaluate
 
@@ -49,11 +47,9 @@ RUN install-tool dotnet 5.0.402
 USER 1000
 
 RUN set -ex; \
-    cd test; \
     dotnet restore --use-lock-file
 
 RUN set -ex;  \
-    cd test; \
     dotnet add package Newtonsoft.Json --version 12.0.3; \
     dotnet restore --force-evaluate
 
