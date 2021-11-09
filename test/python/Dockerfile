@@ -28,7 +28,7 @@ RUN install-tool python 3.9.7
 FROM build as pipenv
 
 # renovate: datasource=pypi
-RUN install-pip pipenv 2021.11.5
+RUN install-pip pipenv 2021.11.9
 
 
 USER 1000
@@ -123,7 +123,7 @@ RUN set -ex; \
 FROM build-rootless as testg
 
 # renovate: datasource=pypi
-RUN install-pip pipenv 2021.11.5
+RUN install-pip pipenv 2021.11.9
 
 RUN set -ex; \
   cd a; \
