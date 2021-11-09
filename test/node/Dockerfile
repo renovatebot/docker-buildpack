@@ -2,7 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=node
-RUN install-tool node v14.18.1
+RUN install-tool node v16.13.0
 
 RUN touch /.dummy
 
@@ -99,7 +99,7 @@ RUN set -ex; \
 FROM ${IMAGE} as testd
 
 # renovate: datasource=node versioning=semver
-RUN install-tool node 15.0.1
+RUN install-tool node v16.13.0
 
 RUN touch /.dummy
 
