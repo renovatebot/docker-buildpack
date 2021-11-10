@@ -93,13 +93,13 @@ RUN set -ex; \
   [ "$(command -v pnpm)" = "/usr/local/bin/pnpm" ] && echo "works" || exit 1;
 
 #--------------------------------------
-# test: node 15
+# test: node 14
 #--------------------------------------
 
 FROM ${IMAGE} as testd
 
 # renovate: datasource=node versioning=semver
-RUN install-tool node v16.13.0
+RUN install-tool node v14.18.1
 
 RUN touch /.dummy
 
