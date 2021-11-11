@@ -135,7 +135,7 @@ RUN install-tool poetry 1.1.11
 RUN set -ex \
   && cd c-poetry \
   && poetry update --lock --no-interaction \
-  && poetry add h3py \
+  && poetry add h3 \
   ;
 
 # renovate: datasource=pypi
