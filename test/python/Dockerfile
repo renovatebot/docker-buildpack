@@ -12,7 +12,7 @@ FROM base as build
 
 # Python
 # renovate: datasource=github-releases lookupName=containerbase/python-prebuild
-RUN install-tool python 3.9.8
+RUN install-tool python 3.9.9
 
 
 FROM base as build-rootless
@@ -20,7 +20,7 @@ FROM base as build-rootless
 USER 1000
 
 # renovate: datasource=github-releases lookupName=containerbase/python-prebuild
-RUN install-tool python 3.9.8
+RUN install-tool python 3.9.9
 
 #--------------------------------------
 # build: pipenv
@@ -50,7 +50,7 @@ FROM build as testa
 
 # try install again, sould skip
 # renovate: datasource=github-releases lookupName=containerbase/python-prebuild
-RUN install-tool python 3.9.8
+RUN install-tool python 3.9.9
 
 # renovate: datasource=pypi
 RUN install-tool poetry 1.1.11
