@@ -45,7 +45,8 @@
       "description": "Trigger fix release for ubuntu digest updates",
       "matchPackageNames": ["ubuntu"],
       "matchUpdateTypes": ["digest"],
-      "semanticCommitType": "fix",
+      "semanticCommitType": "fix"
+    },
     {
       "description": "Trigger fix release for git updates",
       "matchPackageNames": ["git"],
