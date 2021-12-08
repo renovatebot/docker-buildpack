@@ -1,13 +1,14 @@
+
 [tool.poetry]
-name = "paranormal"
+name = "buildpack-test"
 version = "0.2.1"
-description = "Coherent management of large parameter lists in Python"
-authors = ["Schuyler Fried <schuylerfried@gmail.com>", "Steven Heidel <steven@heidel.ca"]
-license = "Apache-2.0"
+description = "Testing"
+authors = []
+license = "MIT"
 
 [tool.poetry.dependencies]
-python = ">3.7"
-numpy = "^1.16"
+python = ">3.9,<3.11"
+numpy = "^1.21.3"
 PyYAML = "^5.1"
 pampy = "^0.2.1"
 
