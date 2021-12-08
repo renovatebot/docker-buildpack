@@ -49,7 +49,7 @@ ENV NPM_CONFIG_PREFIX=/tmp/.npm
 RUN npm install -g yarn
 
 RUN set -ex; \
-  [ "$(command -v yarn)" = "/tmp/.npm/bin/yarn" ] && echo "works" || exit 1; \
+  [ "$(command -v yarn)" = "/home/ubuntu/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
   yarn --version;
 
 
@@ -127,7 +127,7 @@ ENV NPM_CONFIG_PREFIX=/tmp/.npm
 RUN npm install -g yarn
 
 RUN set -ex; \
-  [ "$(command -v yarn)" = "/tmp/.npm/bin/yarn" ] && echo "works" || exit 1; \
+  [ "$(command -v yarn)" = "/home/ubuntu/.npm-global/bin/yarn" ] && echo "works" || exit 1; \
   yarn --version;
 
 #--------------------------------------
