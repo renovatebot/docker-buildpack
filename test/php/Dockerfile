@@ -81,7 +81,7 @@ RUN composer --version
 FROM base as testc
 
 # renovate: datasource=github-releases lookupName=containerbase/php-prebuild
-RUN install-tool php 8.1.0
+RUN install-tool php 8.1.1
 
 # renovate: datasource=github-releases depName=composer/composer
 RUN install-tool composer 2.0.9
