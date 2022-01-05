@@ -139,7 +139,7 @@ RUN set -ex \
   ;
 
 # renovate: datasource=pypi
-RUN install-pip hashin 0.15.0
+RUN install-pip hashin 0.16.0
 
 RUN set -ex \
   && cd f \
