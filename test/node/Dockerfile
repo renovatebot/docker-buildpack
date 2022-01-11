@@ -99,7 +99,7 @@ RUN set -ex; \
 FROM ${IMAGE} as testd
 
 # renovate: datasource=node versioning=semver
-RUN install-tool node v14.18.2
+RUN install-tool node v14.18.3
 
 RUN touch /.dummy
 
