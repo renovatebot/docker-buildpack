@@ -56,7 +56,7 @@ RUN set -ex; \
 FROM build as testb
 
 # renovate: datasource=github-releases depName=python lookupName=containerbase/python-prebuild
-ARG PYTHON_VERSION=3.10.1
+ARG PYTHON_VERSION=3.10.2
 RUN install-tool python
 
 RUN set -ex; \
