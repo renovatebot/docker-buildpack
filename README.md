@@ -8,8 +8,8 @@ This repository is the source for the Docker Hub image `renovate/buildpack`. Com
 
 ## Notice: Do not use the language docker tags
 
-Do not use the language docker tags like `renovate/buildpack:ruby` or `renovate/buildpack:5-ruby`, they are deprecated and won't be updated soon.
-Use `renovate/buildpack` or `renovate/buildpack:5` images but checkout latest version.
+Do not use the language docker tags like `renovate/buildpack:ruby` or `renovate/buildpack:5-ruby`, they are deprecated and won't be updated.
+Use `renovate/buildpack` or `renovate/buildpack:6` images but checkout latest version.
 
 ## Notice: Intention to Relocate
 
