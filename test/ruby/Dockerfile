@@ -38,8 +38,10 @@ RUN set -ex; \
   bundler env
 
 RUN set -ex; \
-    cd a; \
-    bundle lock
+    git clone --depth=1 https://github.com/renovate-tests/bundler8; \
+    cd bundler8; \
+    bundle lock; \
+    git status -s
 
 #--------------------------------------
 # test: global bundler
