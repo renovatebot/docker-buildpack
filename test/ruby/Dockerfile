@@ -22,22 +22,19 @@ WORKDIR /tmp
 #--------------------------------------
 FROM build as testa
 
-USER 1000
+
+# openshift
+USER 1005
 
 RUN ruby --version
+RUN gem env
 
 RUN gem install bundler -v 1.17.2
 
-RUN set -ex; \
-  [ "$(command -v bundle)" = "/home/${USER_NAME}/.gem-global/bin/bundle" ] && echo "works" || exit 1; \
-  bundler env
-
-ENV GEM_HOME=/tmp/.gem
-
-RUN gem install bundler -v 1.17.2
+RUN bundle env
 
 RUN set -ex; \
-  [ "$(command -v bundle)" = "/tmp/.gem/bin/bundle" ] && echo "works" || exit 1; \
+  [ "$(command -v bundle)" = "/home/${USER_NAME}/bin/bundle" ] && echo "works" || exit 1; \
   bundler env
 
 RUN set -ex; \
