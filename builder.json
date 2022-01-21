@@ -1,9 +1,9 @@
 {
   "image": "buildpack",
   "versioning": "docker",
-  "startVersion": "5",
-  "latestVersion": "5",
+  "startVersion": "6",
+  "latestVersion": "6",
   "cache": "docker-build-cache",
-  "versions": ["1", "2", "3", "4", "5"],
+  "versions": ["1", "2", "3", "4", "5", "6"],
   "forceUnstable": true
 }
