@@ -2,7 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=adoptium-java lookupName=java-jre
-RUN install-tool java 17.0.1+12
+RUN install-tool java 17.0.2+8
 
 RUN touch /.dummy
 
