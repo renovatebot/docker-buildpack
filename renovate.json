@@ -51,8 +51,8 @@
     {
       "description": "Keep testing dotnet v3",
       "matchPackageNames": ["dotnet"],
-      "matchCurrentVersion": "^3.0.0",
-      "allowedVersions": "^3.0.0"
+      "matchCurrentVersion": "^3.0",
+      "allowedVersions": "^3.0"
     },
     {
       "description": "Trigger fix release for git updates",
