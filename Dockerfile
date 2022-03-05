@@ -1,9 +1,4 @@
 #--------------------------------------
-# Target image to build
-#--------------------------------------
-ARG TARGET=latest
-
-#--------------------------------------
 # Non-root user to create
 #--------------------------------------
 ARG USER_ID=1000
@@ -17,7 +12,7 @@ FROM containerbase/buildpack:3.8.0@sha256:76fb6e1091b34c81b1f8b1f6b6e00f2ad77316
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ubuntu:focal@sha256:8ae9bafbb64f63a50caab98fd3a5e37b3eb837a3e0780b78e5218e63193961f9 as base
+FROM ubuntu:focal@sha256:8ae9bafbb64f63a50caab98fd3a5e37b3eb837a3e0780b78e5218e63193961f9
 
 ARG USER_ID
 ARG USER_NAME
@@ -45,95 +40,3 @@ RUN install-buildpack
 
 # renovate: datasource=github-tags lookupName=git/git
 RUN install-tool git v2.35.1
-
-# BEGIN: sidecar buildpacks
-
-#--------------------------------------
-# Image: dotnet
-#--------------------------------------
-FROM base as target-dotnet
-
-
-#--------------------------------------
-# Image: erlang
-#--------------------------------------
-FROM base as target-erlang
-
-
-#--------------------------------------
-# Image: golang
-#--------------------------------------
-FROM base as target-golang
-
-
-#--------------------------------------
-# Image: helm
-#--------------------------------------
-FROM base as target-helm
-
-
-#--------------------------------------
-# Image: java
-#--------------------------------------
-FROM base as target-java
-
-#--------------------------------------
-# Image: nix
-#--------------------------------------
-FROM base as target-nix
-
-
-#--------------------------------------
-# Image: node
-#--------------------------------------
-FROM base as target-node
-
-
-#--------------------------------------
-# Image: php
-#--------------------------------------
-FROM base as target-php
-
-
-#--------------------------------------
-# Image: powershell
-#--------------------------------------
-FROM base as target-powershell
-
-
-#--------------------------------------
-# Image: python
-#--------------------------------------
-FROM base as target-python
-
-
-#--------------------------------------
-# Image: ruby
-#--------------------------------------
-FROM base as target-ruby
-
-
-#--------------------------------------
-# Image: rust
-#--------------------------------------
-FROM base as target-rust
-
-
-#--------------------------------------
-# Image: swift
-#--------------------------------------
-FROM base as target-swift
-
-
-# END: sidecar buildpacks
-
-#--------------------------------------
-# Image: full (latest)
-#--------------------------------------
-FROM base as target-latest
-
-
-#--------------------------------------
-# Image: final
-#--------------------------------------
-FROM target-${TARGET} as final
