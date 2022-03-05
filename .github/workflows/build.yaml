@@ -16,6 +16,7 @@ env:
   DRY_RUN: ${{ github.ref != 'refs/heads/main' }}
   DOCKER_BUILDKIT: 1
   USER_NAME: ubuntu
+  TEST_IMAGE: renovate/buildpack-test
 
 permissions:
   contents: read
@@ -47,10 +48,6 @@ jobs:
             latest,
           ]
 
-    env:
-      TARGET: ${{ matrix.tag }}
-      TEST_IMAGE: renovate/buildpack-test:${{ matrix.tag }}
-
     steps:
       - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # tag=v3.0.0
 
@@ -65,7 +62,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
 
       - name: build
-        run: docker build -t ${{ env.TEST_IMAGE }} --build-arg TARGET --build-arg USER_NAME .
+        run: docker build -t ${{ env.TEST_IMAGE }} --build-arg USER_NAME .
 
       - name: test
         run: docker build --build-arg IMAGE=${{ env.TEST_IMAGE }} ./test/${{ matrix.tag }}
@@ -75,9 +72,8 @@ jobs:
         uses: renovatebot/internal-tools@23eb86b8295e2cebd5ede0ba1fdd72d72089eeda # tag=v1.12.1
         with:
           command: docker-builder
-          build-args: TARGET,USER_NAME
+          build-args: USER_NAME,CACHE_WEEK
           last-only: true
-          tag-suffix: ${{ env.TARGET }}
           major-minor: false
           dry-run: ${{ env.DRY_RUN }}
 
@@ -98,4 +94,7 @@ jobs:
       - uses: actions/checkout@a12a3943b4bdde767164f792f33f40b04645d846 # tag=v3.0.0
 
       - name: build
-        run: docker build --build-arg USER_NAME -f test/Dockerfile.${{ matrix.distro }} .
+        run: docker build -t ${{ env.TEST_IMAGE }} --build-arg USER_NAME .
+
+      - name: test
+        run: docker build --build-arg USER_NAME --build-arg IMAGE=${{ env.TEST_IMAGE }} -f test/Dockerfile.${{ matrix.distro }} .

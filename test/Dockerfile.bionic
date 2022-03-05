@@ -5,15 +5,16 @@ ARG USER_ID=1000
 ARG USER_NAME=ubuntu
 
 #--------------------------------------
-# Image: containerbase/buildpack
+# Image: renovate/buildpack
 #--------------------------------------
-FROM containerbase/buildpack:3.8.0@sha256:76fb6e1091b34c81b1f8b1f6b6e00f2ad77316865648672f6299d5fc6ff6e9d8 AS buildpack
+ARG IMAGE=renovate/buildpack
+FROM ${IMAGE} AS buildpack
 
 
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ubuntu:bionic@sha256:9bc830af2bef73276515a29aa896eedfa7bdf4bdbc5c1063b4c457a4bbb8cd79 as base
+FROM ubuntu:bionic as base
 
 ARG USER_ID
 ARG USER_NAME
