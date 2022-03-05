@@ -3,8 +3,8 @@ FROM ${IMAGE}
 
 # Erlang
 
-# renovate: datasource=github-releases lookupName=containerbase/erlang-prebuild versioning=loose
-RUN install-tool erlang 22.3.4
+# renovate: datasource=github-releases lookupName=containerbase/erlang-prebuild versioning=docker
+RUN install-tool erlang 22.3.4.24
 
 # Elixir
 
