@@ -6,10 +6,10 @@
 
 This repository is the source for the Docker Hub image `renovate/buildpack`. Commits to `main` branch are automatically built and published.
 
-## Notice: Do not use the language docker tags
+## Notice: Do not use this image
 
-Do not use the language docker tags like `renovate/buildpack:ruby` or `renovate/buildpack:5-ruby`, they are deprecated and won't be updated.
-Use `renovate/buildpack` or `renovate/buildpack:6` images but checkout latest version.
+Do not use the `renovate/buildpack` docker images, they are deprecated.
+Use [`containerbase/buildpack`](https://github.com/containerbase/buildpack) image.
 
 ## Notice: Intention to Relocate
 
@@ -18,8 +18,8 @@ Please create an issue to check first before starting any major work on bugs or 
 
 ## Custom base image
 
-To use a custom base image with `renovate/buildpack` checkout [custom-base-image](https://github.com/containerbase/buildpack/blob/main/docs/custom-base-image.md) docs.
+To use a custom base image with `containerbase/buildpack` checkout [custom-base-image](https://github.com/containerbase/buildpack/blob/main/docs/custom-base-image.md) docs.
 
 ### Custom Root CA Certificates
 
-To add custom root certifactes to the `renovate/buildpack` base image checkout [custom-root-ca](https://github.com/containerbase/buildpack/blob/main/docs/custom-root-ca.md) docs.
+To add custom root certifactes to the `containerbase/buildpack` base image checkout [custom-root-ca](https://github.com/containerbase/buildpack/blob/main/docs/custom-root-ca.md) docs.
