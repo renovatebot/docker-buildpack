@@ -47,8 +47,8 @@ FROM base as test
 # renovate: datasource=docker lookupName=mcr.microsoft.com/dotnet/sdk versioning=docker
 RUN install-tool dotnet 6.0.200
 
-# renovate: datasource=github-releases lookupName=containerbase/erlang-prebuild versioning=loose
-RUN install-tool erlang 22.3.4
+# renovate: datasource=github-releases lookupName=containerbase/erlang-prebuild versioning=docker
+RUN install-tool erlang 22.3.4.24
 # renovate: datasource=docker versioning=docker
 RUN install-tool elixir 1.13.3
 
