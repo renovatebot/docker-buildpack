@@ -4,7 +4,7 @@ FROM ${IMAGE}
 # Erlang
 
 # renovate: datasource=github-releases lookupName=containerbase/erlang-prebuild versioning=docker
-RUN install-tool erlang 22.3.4.24
+RUN install-tool erlang 24.2.2.0
 
 # Elixir
 
