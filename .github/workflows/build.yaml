@@ -69,7 +69,7 @@ jobs:
 
       - name: Build and Publish
         if: ${{ matrix.tag == 'latest' }}
-        uses: renovatebot/internal-tools@954f28ddde48535316fcca14542e0f5d698e73ad # tag=v1.12.2
+        uses: renovatebot/internal-tools@d66dfce2e4fb9e4a8fb2593ec8429a1d191df125 # tag=v1.12.3
         with:
           command: docker-builder
           build-args: USER_NAME,CACHE_WEEK
