@@ -58,7 +58,7 @@ SHELL [ "/bin/sh", "-c" ]
 USER root
 
 # renovate: datasource=npm
-RUN install-tool yarn 1.22.17
+RUN install-tool yarn 1.22.18
 
 USER 1000
 
@@ -104,7 +104,7 @@ RUN install-tool node v14.19.1
 RUN touch /.dummy
 
 # renovate: datasource=npm
-RUN install-tool yarn 1.22.17
+RUN install-tool yarn 1.22.18
 
 USER 1000
 
