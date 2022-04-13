@@ -20,12 +20,15 @@ RUN install-tool gradle 7.4.2
 USER 1000
 
 RUN set -ex; \
-  gradle --version;
+  gradle --version; \
+  git --version
 
 RUN set -ex; \
   git init .; \
+  pwd;
   touch settings.gradle; \
   gradle wrapper; \
+  pwd; ls -la; \
   git diff; \
   ./gradlew --version
 
