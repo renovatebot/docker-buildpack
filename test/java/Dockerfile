@@ -27,10 +27,10 @@ RUN set -ex; \
 
 RUN set -ex; \
   git init .; \
-  pwd; \
   touch settings.gradle; \
+  git commit -A -m 'dummy'; \
   gradle wrapper; \
-  pwd; ls -la; \
+  ls -la; \
   git diff; \
   ./gradlew --version
 
