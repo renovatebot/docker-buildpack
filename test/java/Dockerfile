@@ -25,7 +25,7 @@ RUN set -ex; \
 
 RUN set -ex; \
   git init .; \
-  pwd;
+  pwd; \
   touch settings.gradle; \
   gradle wrapper; \
   pwd; ls -la; \
