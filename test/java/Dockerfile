@@ -8,7 +8,6 @@ RUN touch /.dummy
 
 WORKDIR /tmp
 
-
 #--------------------------------------
 # test: gradle
 #--------------------------------------
@@ -19,13 +18,24 @@ RUN install-tool gradle 7.4.2
 
 USER 1000
 
+RUN mkdir /tmp/src
+
+WORKDIR /tmp/src
+
 RUN set -ex; \
-  gradle --version;
+  gradle --version; \
+  git --version
+  
+RUN set -ex; \
+  git config --global user.email "renovate@whitesource.com"; \
+  git config --global user.name "Renovate Bot"
 
 RUN set -ex; \
   git init .; \
   touch settings.gradle; \
+  git add .; git commit -m 'dummy'; \
   gradle wrapper; \
+  ls -la; \
   git diff; \
   ./gradlew --version
 
