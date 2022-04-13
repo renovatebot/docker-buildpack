@@ -6,10 +6,7 @@ RUN install-tool java 17.0.2+8
 
 RUN touch /.dummy
 
-RUN mkdir -m 770 /src
-
-WORKDIR /src
-
+WORKDIR /tmp
 
 #--------------------------------------
 # test: gradle
@@ -20,6 +17,10 @@ FROM build as testa
 RUN install-tool gradle 7.4.2
 
 USER 1000
+
+RUN mkdir /tmp/src
+
+WORKDIR /tmp/src
 
 RUN set -ex; \
   gradle --version; \
