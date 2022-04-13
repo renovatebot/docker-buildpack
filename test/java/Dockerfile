@@ -25,6 +25,10 @@ WORKDIR /tmp/src
 RUN set -ex; \
   gradle --version; \
   git --version
+  
+RUN set -ex; \
+  git config --global user.email "renovate@whitesource.com"; \
+  git config --global user.name "Renovate Bot"
 
 RUN set -ex; \
   git init .; \
