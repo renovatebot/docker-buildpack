@@ -29,7 +29,7 @@ RUN set -ex; \
 RUN set -ex; \
   git init .; \
   touch settings.gradle; \
-  git commit -A -m 'dummy'; \
+  git add .; git commit -m 'dummy'; \
   gradle wrapper; \
   ls -la; \
   git diff; \
