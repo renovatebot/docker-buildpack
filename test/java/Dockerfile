@@ -6,7 +6,9 @@ RUN install-tool java 17.0.2+8
 
 RUN touch /.dummy
 
-WORKDIR /tmp
+RUN mkdir -m 770 /src
+
+WORKDIR /src
 
 
 #--------------------------------------
