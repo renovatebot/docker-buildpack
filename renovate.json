@@ -54,6 +54,11 @@
       "matchPackageNames": ["git"],
       "semanticCommitType": "fix",
       "stabilityDays": 5
+    },
+    {
+      "description": "Trigger fix release for buildpack updates",
+      "matchPackageNames": ["containerbase/buildpack"],
+      "semanticCommitType": "fix"
     }
   ]
 }
