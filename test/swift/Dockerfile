@@ -2,7 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool swift 5.6.1
+RUN install-tool swift 5.6.2
 
 RUN touch /.dummy
 
@@ -41,7 +41,7 @@ RUN swift --version
 FROM build as testb
 
 # renovate: datasource=docker versioning=docker
-RUN install-tool swift 5.6.1
+RUN install-tool swift 5.6.2
 
 USER 1000
 
