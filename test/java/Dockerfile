@@ -14,7 +14,7 @@ WORKDIR /tmp
 FROM build as testa
 
 # renovate: datasource=gradle-version lookupName=gradle versioning=gradle
-RUN install-tool gradle 7.4.2
+RUN install-tool gradle 7.5
 
 USER 1000
 
