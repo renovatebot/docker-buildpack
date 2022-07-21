@@ -3,7 +3,7 @@ FROM ${IMAGE} as build
 
 
 # renovate: datasource=github-releases lookupName=helm/helm
-RUN install-tool helm v3.9.1
+RUN install-tool helm v3.9.2
 
 USER 1000
 
