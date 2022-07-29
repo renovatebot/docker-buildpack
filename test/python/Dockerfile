@@ -17,6 +17,8 @@ RUN install-tool python 3.10.5
 
 FROM base as build-rootless
 
+RUN prepare-tool python
+
 USER 1000
 
 # renovate: datasource=github-releases lookupName=containerbase/python-prebuild
