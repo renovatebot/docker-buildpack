@@ -12,7 +12,7 @@ FROM containerbase/buildpack:4.8.1@sha256:6ebdb8f668214cd98c7aee7b92d53603edcbb3
 #--------------------------------------
 # Image: base
 #--------------------------------------
-FROM ubuntu:focal@sha256:fd92c36d3cb9b1d027c4d2a72c6bf0125da82425fc2ca37c414d4f010180dc19
+FROM ubuntu:focal@sha256:af5efa9c28de78b754777af9b4d850112cad01899a5d37d2617bb94dc63a49aa
 
 ARG USER_ID
 ARG USER_NAME
