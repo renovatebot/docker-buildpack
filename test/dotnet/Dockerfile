@@ -14,7 +14,7 @@ WORKDIR /test
 FROM base as net3
 
 # renovate: datasource=docker lookupName=mcr.microsoft.com/dotnet/sdk versioning=docker
-RUN install-tool dotnet 3.1.422
+RUN install-tool dotnet 3.1.423
 
 USER 1000
 
