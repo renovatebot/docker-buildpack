@@ -68,7 +68,7 @@ RUN set -ex; \
 FROM build as testc
 
 # renovate: datasource=node
-RUN install-tool node v16.17.1
+RUN install-tool node v16.18.0
 
 RUN set -ex; \
   nginx && su -c 'NODE_EXTRA_CA_CERTS=/test/ca.pem node request.mjs' ${USER_NAME}
