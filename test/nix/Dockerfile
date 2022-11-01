@@ -2,7 +2,7 @@ ARG IMAGE=renovate/buildpack
 FROM ${IMAGE} as build
 
 # renovate: datasource=github-tags lookupName=NixOS/nix
-RUN install-tool nix 2.3.10
+RUN install-tool nix 2.3.16
 
 USER 1000
 
